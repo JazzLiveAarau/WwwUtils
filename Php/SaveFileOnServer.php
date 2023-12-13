@@ -2,24 +2,31 @@
 
 <?php
 
-// Merges control files
-// -------------------------
-// Input data is the output file name 
+// Saves a file on the server
+// ---------------------------
+// Input data is the file name and the full content of the file
 // Please note that escape characters like \n not is allowed in the string
 //
 // This function is called from another HTML (or PHP) page this way:
 // $.post("SaveFileOnServer.php", {file_content: content_string, file_name: file_name_str},function(data,status){alert(data);});
+// A relative file name with ../ may be used but also a full file name may be used, like for instance:
+// '$.post(https://www.jazzliveaarau.ch/WwwUtils/Php/SaveFileOnServer.php', .......
 //
 // $.post():               Method requesting data from the server using an HTTP POST request. 
 //                         Hier actually only requesting an execution, i.e. create a file 
-// "MergeXml.php":         URL parameter specifies the URL you wish to request
+// "SaveFileOnServer.php": URL parameter specifies the URL you wish to request
 //                         Please note that the whole file will be executed. Not a normal function call
+// file_content:           Input PHP parameter for the execution (content_string is the JavaScript parameter) 
 // file_name:              Input PHP parameter for the execution (file_name_str is the JavaScript parameter) 
 // function:               The callback function, i.e. defining what to do with the PHP result
 //                         In this case nothing needs to be done in the calling JavaScript function
 // data:                   The result of the execution. In this case only a message.
 //                         The data is a string that is created from calls of PHP function echo
+//                         or from the exit() function below
 // status:                 Status from the execution. The value is success for a succesfull execution
+//                         Please note that for a file open error the returned status will be success.
+//                         Therefore the returnde data string Unable_to_open_file can be used for an open error
+// 
 //
 // The function $.post is defined in a jQuery library that has to be included on calling web page
 // The library may be downloaded, but also a CDN (Content Delivery Network) library can be referenced with
@@ -29,31 +36,26 @@
 // https://www.w3schools.com/jquery/jquery_ajax_get_post.asp
 // https://www.w3schools.com/jquery/jquery_get_started.asp
 // https://www.youtube.com/watch?v=jVAaxkbmCts
-//
-// Merging is described in
-// https://www.wikicoode.com/php/merge-text-files-using-php-code
 
 
 // Passed data from the calling function
+$file_content = $_POST['file_content'];
 $file_name = $_POST['file_name'];
 
-$file_content = file_get_contents('../Scripts/UtilSearch.js');
-$file_content .= "\n" . file_get_contents('../Scripts/UtilDate.js');
-$file_content .= "\n" . file_get_contents('../Scripts/UtilString.js');
-$file_content .= "\n" . file_get_contents('../Scripts/UtilServer.js');
+// Open file. If the file already exists it will be overwritten
+// For open failure the script will stop and Unable_to_open_file will be
+// added to data that is returned to the calling function 
+$file_object = fopen($file_name, "w") or exit("Unable_to_open_file");
 
-$dir_name= '../../JazzScripts/';
+// Write the input string with the file content to the file.
+fwrite($file_object, $file_content); 
 
-$file_name_full = $dir_name . $file_name;
+// Close the file
+fclose($file_object); 
 
-$fp = fopen($file_name_full, 'w');
-if(!$fp)
-    die('Could not create / open js file for writing.');
-if(fwrite($fp, $file_content) === false)
-    die('Could not write to js file.');
-
-echo 'JavaScript files have been merged. ';
-echo $file_content;
-
+// File name is created will be added to data and returned to the calling function.
+echo $file_name;
+echo " is created ";
+ 
 ?>
  

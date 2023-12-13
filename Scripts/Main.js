@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2023-12-12
+// Date: 2023-12-13
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -16,13 +16,49 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    testUtilDate();
+    testUtilServer();
 
-    testUtilString();
+    // testUtilDate();
 
-    testUtilSearch();
+    // testUtilString();
+
+    // testUtilSearch();
 
 } // initTestControls
+
+// Test of UtilServer
+function testUtilServer()
+{
+ 
+    var file_content_html = 'Test data for class UtilServer <br>' + 
+    'There is a directory for test data on the Server: <br>' +
+    '/www/UtilsTestData <br>' +
+    'There are subdirectories in this directory';
+
+    var path_file_name = '../../WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
+
+    var b_create = UtilServer.saveFileWithJQueryPostFunction(path_file_name, file_content_html);  
+
+    var util_date_el = getDivElementUtilServerResults();
+
+    var msg_str = 'UtilServer' + '<br>' +
+    'Filename= ' + path_file_name + '<br>' +
+    'Content' + '<br>' + file_content_html + '<br>';
+
+    if (b_create)
+    {
+        msg_str = msg_str + 'The file was created' + '<br>';
+    }
+    else
+    {
+        msg_str = msg_str + 'Failure creating the file' + '<br>';
+    }
+
+    util_date_el.innerHTML = msg_str;
+
+       
+
+} // testUtilServer
 
 // Test of UtilDate
 function testUtilDate()
@@ -61,6 +97,20 @@ function testUtilSearch()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Id And Element Functions //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Returns the element utility date results <div> element
+function getDivElementUtilServerResults()
+{
+    return document.getElementById(getIdDivElementUtilServerResults());
+
+} // getDivElementUtilServerResults
+
+// Returns the identity of the element utility date results <div> 
+function getIdDivElementUtilServerResults()
+{
+    return 'id_div_util_server_results';
+
+} // getIdDivElementUtilServerResults
 
 // Returns the element utility date results <div> element
 function getDivElementUtilDateResults()
@@ -110,10 +160,10 @@ function getIdDivElementSeasonResults()
 
 // User clicked merge files. 
 // The JavaScript files will be merged to one file and written to the server directory
-// /www/JazzScripts/. The directory name is defined in file MergeFiles.php.
+// /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
 function eventMergeFiles()
 {
-    var file_name = 'Utils_20231212.js';
+    var file_name = 'Utils_20231213.js';
 
     $.post
       ('PhpMerge/MergeFiles.php',
@@ -126,6 +176,8 @@ function eventMergeFiles()
             {
                 alert("JavaScript files merged to " + file_name + 
                 " saved to server directory /www/JavaScripts/.");
+
+                console.log(data_save);
             }
             else
             {
