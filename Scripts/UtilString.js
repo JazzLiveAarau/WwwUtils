@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2023-12-07
+// Date: 2024-01-06
 // Author: Gunnar Lidén
 
 // File content
@@ -16,7 +16,7 @@ class UtilString
         
         var string_trimmed = i_string.trim();
         
-        index_space =  string_trimmed.indexOf(" ");
+        var index_space =  string_trimmed.indexOf(" ");
         
         if (string_trimmed.length <= 2)
         {
