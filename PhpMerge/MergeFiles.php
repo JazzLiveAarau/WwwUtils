@@ -41,6 +41,7 @@ $file_content = file_get_contents('../Scripts/UtilSearch.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilDate.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilString.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilServer.js');
+$file_content .= "\n" . file_get_contents('../Scripts/UtilRandom.js');
 
 $dir_name= '../../JazzScripts/';
 

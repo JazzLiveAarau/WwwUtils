@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2023-12-13
+// Date: 2023-12-27
 // Author: Gunnar Lidén
 
 // File content
@@ -67,6 +67,30 @@ class UtilServer
         return true;	  
         
     } // saveFileWithJQueryPostFunction
+
+    // Returns true if the application is running on the server
+    // Returns false if it is running on the Visual Studio Code Live Server
+    // Please note that window.location.href can return
+    // https://jazzliveaarau.ch or
+    // https://www.jazzliveaarau.ch
+    static execApplicationOnServer()
+    {
+        var current_base = window.location.href;
+    
+        var server_url = 'jazzliveaarau.ch';
+    
+        var index_url = current_base.indexOf(server_url);
+    
+        if (index_url >= 0) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    
+    } // execApplicationOnServer
 
 
 } // UtilServer
