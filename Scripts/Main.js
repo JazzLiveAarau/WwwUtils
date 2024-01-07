@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2023-12-13
+// Date: 2024-01-07
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -16,7 +16,9 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    testUtilServer();
+    testUtilEmail();
+
+    // testUtilServer();
 
     // testUtilDate();
 
@@ -25,6 +27,29 @@ function initTestUtils()
     // testUtilSearch();
 
 } // initTestControls
+
+// test of UtilEmail
+function testUtilEmail()
+{
+    var email_from = '<guestbook@jazzliveaarau.ch>';
+
+    var email_subject = 'JAZZ live AARAU Gästebuch Xyz';
+
+    var email_message = 'JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
+                        'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
+                        'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  ';
+
+    var email_to = 'sven.gunnar.liden@gmail.com';
+    
+    var email_bcc = 'gunnar@viewsoncad.ch';
+
+    var path_php = 'Php/';
+
+    // TODO Do not call from Visual Studio Live Server 
+    
+    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc, path_php);
+
+} // testUtilEmail
 
 // Test of UtilServer
 function testUtilServer()
@@ -153,6 +178,20 @@ function getIdDivElementSeasonResults()
     return 'id_div_util_search_results';
 
 } // getIdDivElementSeasonResults
+
+// Returns the element utility email results <div> element
+function getDivElementUtilEmailResults()
+{
+    return document.getElementById(getIdDivElementUtilEmailResults());
+
+} // getDivElementUtilEmailResults
+
+// Returns the identity of the element utility email results <div> 
+function getIdDivElementUtilEmailResults()
+{
+    return 'id_div_util_email_results';
+
+} // getIdDivElementUtilEmailResults
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Id And Element Functions ////////////////////////////////
