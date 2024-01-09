@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-01-07
+// Date: 2024-01-09
 // Author: Gunnar Lidén
 
 // File content
@@ -16,10 +16,30 @@ class UtilEmail
 {
     // Sends an email with JQuery post function
     // Please refer to UtilEmailSend.php for a description
-    static send(i_from, i_subject, i_message, i_to, i_bcc, i_path_php)
+    // i_from    Sender address e.g. guestbook@jazzlivaarau.ch
+    // i_subject Email subject
+    // i_message Email text in HTML format e.g. JAZZ <i>live</i>
+    // i_to      Reciever addresses TO. Separate with ;
+    // i_bcc     Hidden addresses BCC
+    // i_n_top   Number of path levels to and icliding /www/ from the executing HTML file
+    //           Example: i_n_top=2 for jazzlivearau.ch/WwwUtils/TestUtils.htm
+    // This function is calling the PHP function UtilEmailSend.php in the directory 
+    // /www/JazzScripts/Php/
+    static send(i_from, i_subject, i_message, i_to, i_bcc, i_n_top)
     {
+        var path_php = '';
+       
+        for (var i_top=1; i_top <= i_n_top; i_top++)
+        {
+            path_php = path_php + '../';
+        }
+
+        path_php = path_php + 'JazzScripts/Php/';
+
+        var full_rel_filename = path_php + 'UtilEmailSend.php';
+
         $.post
-        (i_path_php + "UtilEmailSend.php", 
+        (full_rel_filename, 
           {
               a_from: i_from, 
               a_subject: i_subject,

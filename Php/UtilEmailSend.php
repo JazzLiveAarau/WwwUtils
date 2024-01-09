@@ -8,7 +8,7 @@
 // Please note that escape characters like \n not is allowed in the string
 //
 // This function is called from another HTML (or PHP) page this way:
-// $.post("UtilEmailSend.php", {a_from: from_str, a_subject: subject_str, a_msg: msg_str, a_to: to_str, a_cc: cc_str},function(data,status){alert(data);});
+// $.post("UtilEmailSend.php", {a_from: from_str, a_subject: subject_str, a_msg: msg_str, a_to: to_str, a_bcc: bcc_str},function(data,status){alert(data);});
 //
 // $.post():            Method requesting data from the server using an HTTP POST request. 
 //                      Hier actually only requesting an execution, i.e. send an email 
@@ -17,7 +17,9 @@
 // a_from:              Input PHP parameter from address (from_str is the JavaScript parameter) 
 // a_msg:               Input PHP parameter message (msg_str is the JavaScript parameter) 
 // a_to:                Input PHP parameter to address (to_str is the JavaScript parameter)
-// a_cc:                Input PHP parameter CC address (cc_str is the JavaScript parameter)
+// a_bcc:               Input PHP parameter BCC address (cc_str is the JavaScript parameter)
+//                      Please note that only the hidden bcc addresses can be given as input
+//                      and not cc. 
 //
 // function:            The callback function, i.e. defining what to do with the PHP result
 //                      In this case nothing needs to be done in the calling JavaScript function
@@ -57,6 +59,9 @@ $address_bcc = $_POST['a_bcc'];
 // fwrite($debug_file, "email_message= \r\n");
 // fwrite($debug_file, $email_message);
 // fwrite($debug_file, "\r\n");
+
+// There must be row ends in the message. The browsers have a limit for the number 
+// of characters of the line. The loop below uses the <br> tags to add \r\n
 
 $email_message_lines = "";
 

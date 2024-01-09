@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-01-07
+// Date: 2024-01-09
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -8,6 +8,13 @@
 // Main function for the test of utilty functions
 //
 // Server directory for WwwXml is /www/WwwUtils/
+//
+// Test function URL
+// https://www.jazzliveaarau.ch/WwwUtils/TestUtils.htm
+//
+// Please note that there is a second test function
+// https://www.jazzliveaarau.ch/WwwUtils/LevelThree/LevelFour/TestUtilsLevelFour.htm
+// 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Main Functions ////////////////////////////////////////////
@@ -39,15 +46,31 @@ function testUtilEmail()
                         'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
                         'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  ';
 
-    var email_to = 'sven.gunnar.liden@gmail.com';
+    var email_to = 'gunnar.liden@viewsoncad.ch';
     
-    var email_bcc = 'gunnar@viewsoncad.ch';
+    var email_bcc = 'guestbook@jazzliveaarau.ch';
 
-    var path_php = 'Php/';
+    //QQQ var path_php = '../../JazzScripts/Php/';
 
-    // TODO Do not call from Visual Studio Live Server 
+    var n_top = 2;
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilEmail Please upload to the server. PHP cannot execute with Visual Studio Live Server ");
+
+        return;
+    }
     
-    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc, path_php);
+    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc, n_top);
+
+    if (b_send)
+    {
+        alert("testUtilEmail Email sent ");
+    }
+    else
+    {
+        alert("testUtilEmail Error! The email was not sent ");
+    }
 
 } // testUtilEmail
 
@@ -197,6 +220,10 @@ function getIdDivElementUtilEmailResults()
 ///////////////////////// End Get Id And Element Functions ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Upload Merged JS Files and PHP files //////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
 // User clicked merge files. 
 // The JavaScript files will be merged to one file and written to the server directory
 // /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
@@ -228,4 +255,11 @@ function eventMergeFiles()
 	  
 
 } // eventMergeFiles
+
+// TODO Upload UtilEmailSend.php to /www/JazzScripts/Php/
+//      If there are changes in this file it must be uploaded manually
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Upload Merged JS Files and PHP files ////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
