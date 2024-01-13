@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2023-12-07
+// Date: 2024-01-11
 // Author: Gunnar Lidén
 
 // File content
@@ -181,5 +181,38 @@ class UtilDate
         return ret_number;
     
     } // getFormattedTenNumber
+
+    // Returns a time stamp string: yyyyymmddmmss
+    static getTimeStamp()
+    {
+        var ret_time_stamp = '';
+
+        const current_date = new Date();
+
+        var month_formatted = UtilDate.getFormattedTenNumber(current_date.getMonth() + 1);
+    
+        var day_formatted = UtilDate.getFormattedTenNumber(current_date.getDate());
+
+        var hour_formatted = UtilDate.getFormattedTenNumber(current_date.getHours());
+
+        var minute_formatted = UtilDate.getFormattedTenNumber(current_date.getMinutes());
+
+        var second_formatted = UtilDate.getFormattedTenNumber(current_date.getSeconds());
+    
+        ret_time_stamp = ret_time_stamp + current_date.getFullYear();
+    
+        ret_time_stamp = ret_time_stamp + month_formatted;
+    
+        ret_time_stamp = ret_time_stamp + day_formatted;
+
+        ret_time_stamp = ret_time_stamp + hour_formatted;
+
+        ret_time_stamp = ret_time_stamp + minute_formatted;
+
+        ret_time_stamp = ret_time_stamp + second_formatted;
+
+        return ret_time_stamp;
+
+    } // getTimeStamp
 
 } // UtilDate

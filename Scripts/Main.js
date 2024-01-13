@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-01-09
+// Date: 2024-01-13
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -23,11 +23,11 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    testUtilEmail();
+    // testUtilEmail();
 
     // testUtilServer();
 
-    // testUtilDate();
+    testUtilDate();
 
     // testUtilString();
 
@@ -49,8 +49,6 @@ function testUtilEmail()
     var email_to = 'gunnar.liden@viewsoncad.ch';
     
     var email_bcc = 'guestbook@jazzliveaarau.ch';
-
-    //QQQ var path_php = '../../JazzScripts/Php/';
 
     var n_top = 2;
 
@@ -104,17 +102,17 @@ function testUtilServer()
 
     util_date_el.innerHTML = msg_str;
 
-       
-
 } // testUtilServer
 
 // Test of UtilDate
 function testUtilDate()
 {
+    var time_stamp = UtilDate.getTimeStamp();
+
     var util_date_el = getDivElementUtilDateResults();
 
-    util_date_el.innerHTML = 'UtilDate test reults:' + '<br>' +
-                             'TODO ' + '<br>';
+    util_date_el.innerHTML = 'UtilDate time_stamp= :' + '<br>' +
+                             time_stamp + '<br>';
 
 } // testUtilDate
 
