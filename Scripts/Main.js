@@ -333,13 +333,70 @@ function eventMergeFiles()
         } // function
 
       ); // post
-	  
 
 } // eventMergeFiles
 
-// TODO Upload UtilEmailSend.php and SaveFileOnServerPhp to /www/JazzScripts/Php/
-//      with a PHP function
-//      If there are changes in these files they must now be uploaded manually
+// Copy PHP files
+function eventCopyPhpFiles()
+{
+    var path_file_input = '';
+
+    var path_file_output = '';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilServerCopy Upload code to server and test there!");
+
+        return;
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilEmailSend.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSend.php';
+
+    var b_email_send = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_email_send)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerCopyFile.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilServerCopyFile.php';
+
+    var b_file_copy = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_file_copy)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerMoveFile.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilServerMoveFile.php';
+
+    var b_file_move = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_file_move)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerSaveFile.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilServerSaveFile.php';
+
+    // Really overwriting the file that is used ????
+    var b_file_save = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_file_save)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+
+} // eventCopyPhpFiles
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Upload Merged JS Files and PHP files ////////////////////////

@@ -8,13 +8,13 @@
 // Please note that escape characters like \n not is allowed in the string
 //
 // This function is called from another HTML (or PHP) page this way:
-// $.post("SaveFileOnServer.php", {file_content: content_string, file_name: file_name_str},function(data,status){alert(data);});
+// $.post("UtilServerSaveFile.php", {file_content: content_string, file_name: file_name_str},function(data,status){alert(data);});
 // A relative file name with ../ may be used but also a full file name may be used, like for instance:
-// '$.post(https://www.jazzliveaarau.ch/WwwUtils/Php/SaveFileOnServer.php', .......
+// '$.post(https://www.jazzliveaarau.ch/WwwUtils/Php/UtilServerSaveFile.php', .......
 //
 // $.post():               Method requesting data from the server using an HTTP POST request. 
 //                         Hier actually only requesting an execution, i.e. create a file 
-// "SaveFileOnServer.php": URL parameter specifies the URL you wish to request
+// "UtilServerSaveFile.php": URL parameter specifies the URL you wish to request
 //                         Please note that the whole file will be executed. Not a normal function call
 // file_content:           Input PHP parameter for the execution (content_string is the JavaScript parameter) 
 // file_name:              Input PHP parameter for the execution (file_name_str is the JavaScript parameter) 
