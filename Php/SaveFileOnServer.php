@@ -42,10 +42,47 @@
 $file_content = $_POST['file_content'];
 $file_name = $_POST['file_name'];
 
+// $file_name_test = "../../../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Orig
+// $file_name_test = "../../../../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Test 1
+// $file_name_test = "../../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Test 2
+// $file_name_test = "../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Test 3
+
+$debug_file = fopen("debug_save_file.txt", "w") or die("Unable to open debug file");
+fwrite($debug_file, "file_name= \r\n");
+fwrite($debug_file, $file_name);
+fwrite($debug_file, "\r\n");
+
+error_reporting(E_ALL);
+ini_set('display_errors', true);
+echo 'phpversion: ', phpversion(), "\n";
+echo 'uname: ', php_uname("s r"), "\n"; // name/release of the operating system
+
+if (file_exists($file_name))
+{
+    fwrite($debug_file, "File exists \r\n");
+}
+else
+{
+    fwrite($debug_file, "File does NOT exist \r\n");
+}
+
+if (is_writable($file_name))
+{
+    fwrite($debug_file, "File is writable \r\n");
+}
+else
+{
+    fwrite($debug_file, "File is NOT writable \r\n");
+}
+
+fclose($debug_file);
+
 // Open file. If the file already exists it will be overwritten
 // For open failure the script will stop and Unable_to_open_file will be
 // added to data that is returned to the calling function 
-$file_object = fopen($file_name, "w") or exit("Unable_to_open_file");
+// error_get_last()
+// $file_object = fopen($file_name, "w") or exit("Unable_to_open_file_".$file_name);
+$file_object = fopen($file_name, "w") or exit("Unable_to_open_file_".error_get_last());
 
 // Write the input string with the file content to the file.
 fwrite($file_object, $file_content); 

@@ -1,5 +1,5 @@
 // File: MainLevelFour.js
-// Date: 2024-01-08
+// Date: 2024-01-15
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -16,32 +16,81 @@
 // Main (onload) function for the test functions
 function initTestUtilsLevelFour()
 {
-    testUtilEmail();
+    // testUtilEmailLevelFour();
+
+    testUtilServerLevelFour();
 
 } // initTestControls
 
-// test of UtilEmail
-function testUtilEmail()
+function testUtilServerLevelFour()
 {
+ 
+    var file_content_html = 'testUtilServerLevelFour: Test data for class UtilServer <br>' + 
+    'There is a directory for test data on the Server: <br>' +
+    '/www/UtilsTestData <br>' +
+    'There are subdirectories in this directory';
 
-    //QQ var path_php = '../../../../JazzScripts/Php/';
+    // var path_file_name = '../../WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
 
-    var n_top = 4;
+    // var b_create = UtilServer.saveFileWithJQueryPostFunction(path_file_name, file_content_html);  
 
+    // var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServerLevelFour.txt';
+
+    var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/TestUtilServerLevelFour.txt';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilServer Upload code to server and test there!");
+
+        return;
+    }
+
+    var b_create = UtilServer.saveFile(path_file_name, file_content_html);  
+
+    var util_date_el = getDivElementUtilServerResults();
+
+    var msg_str = 'UtilServer (testUtilServerLevelFour)' + '<br>' +
+    'Filename= ' + path_file_name + '<br>' +
+    'Content' + '<br>' + file_content_html + '<br>';
+
+    if (b_create)
+    {
+        msg_str = msg_str + 'The file was created' + '<br>';
+    }
+    else
+    {
+        msg_str = msg_str + 'Failure creating the file' + '<br>';
+    }
+
+    util_date_el.innerHTML = msg_str;
+
+} // testUtilServerLevelFour
+
+// test of UtilEmail
+function testUtilEmailLevelFour()
+{
     var email_from = 'guestbook@jazzliveaarau.ch';
 
     var email_subject = 'JAZZ live AARAU Gästebuch Xyz';
 
     var email_message = 'JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
                         'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
-                        'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' +
-                        'n_top = ' + n_top.toString();
+                        'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>';
 
     var email_to = 'gunnar.liden@viewsoncad.ch';
     
-    var email_bcc = 'guestbook@jazzliveaarau.ch';
+    // Too many emails var email_bcc = 'guestbook@jazzliveaarau.ch';
+
+    var email_bcc = '';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilEmailLevelFour Please upload to the server. PHP cannot execute with Visual Studio Live Server ");
+
+        return;
+    }
     
-    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc, n_top);
+    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc);
 
     if (b_send)
     {
@@ -63,6 +112,19 @@ function testUtilEmail()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Id And Element Functions //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+function getDivElementUtilServerResults()
+{
+    return document.getElementById(getIdDivElementUtilServerResults());
+
+} // getDivElementUtilServerResults
+
+// Returns the identity of the element utility date results <div> 
+function getIdDivElementUtilServerResults()
+{
+    return 'id_div_util_server_results';
+
+} // getIdDivElementUtilServerResults
 
 // Returns the element utility email results <div> element
 function getDivElementUtilEmailResults()

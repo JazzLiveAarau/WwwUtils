@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2023-12-27
+// Date: 2024-01-16
 // Author: Gunnar Lidén
 
 // File content
@@ -67,6 +67,252 @@ class UtilServer
         return true;	  
         
     } // saveFileWithJQueryPostFunction
+
+    // Save a file with the JQuery function "post"
+    //
+    // Input parameter i_file_name is the server file name that shall be created.
+    //
+    // The input file name (URL) can be absolute. Example
+    // https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServerLevelFour.txt
+    // The input file name (URL) can be relative. Example
+    // ../../WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServerLevelFour.txt
+    //          
+    // Input parameter i_content_string is the content of the file.
+    // Please note that escape characters like \n not is allowed in the string
+    //
+    // The function returns false for failure.
+    //
+    // Please refer to SaveFileOnServer.php for a detailed description of "post"
+    //
+    // The browser PHP function do not accept an absolute file URL. When given as
+    // input the part / https://www.jazzliveaarau.ch/ is replaced with ../../
+    //
+    // This library function may be called from any level. For instance
+    // https://www.jazzliveaarau.ch/WwwUtils/LevelThree/LevelFour/TestUtilsLevelFour.htm
+    // The function is executed by the PHP function (file) SaveFileOnServer.php
+    // This file is in the directory https://www.jazzliveaarau.ch/JazzScripts/Php
+    // The JQuery function post do not accept an absolute URL. Therefore this function
+    // dertermines the execute level and constructs the relative path to the file
+    // SaveFileOnServer.php. For the above example the relative URL is:
+    // ../../../../JazzScripts/Php/SaveFileOnServer.php
+    //
+    static saveFile(i_path_file_name, i_content_string)
+    {
+        console.log("UtilServer.saveFile i_path_file_name= " + i_path_file_name);
+
+        var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
+
+        // console.log("UtilServer.saveFile rel_path_file_name= " + rel_path_file_name);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/SaveFileOnServer.php');
+    
+        $.post
+          (rel_path_file_php,
+            {
+              file_content: i_content_string,
+              file_name: rel_path_file_name
+            },
+            function(data_save,status_save)
+            {   
+                if (status_save == "success")
+                {
+                    // The PHP function returns succed for an opening failure. Therefore the returned
+                    // string Unable_to_open_file is used to handle this error.
+                    var index_fail = data_save.indexOf('Unable_to_open_file');
+
+                    if (index_fail >= 0)
+                    {
+                        console.log(" UtilServer.SaveFileOnServer.php failure. data_save= " + data_save);
+                        alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + rel_path_file_name);
+                        return false;
+                    }
+
+                    // console.log("UtilServer.saveFileWithJQueryPostFunction " + i_path_file_name + " is saved on the server");
+                }
+                else
+                {
+                    console.log(" UtilServer.SaveFileOnServer.php failure. data_save= " + data_save);
+                    alert("Execution of UtilServer.SaveFileOnServer.php failed");
+                    return false;
+                }          
+            } // function
+          ); // post
+          
+        return true;	  
+        
+    } // saveFileWithJQueryPostFunction
+
+    // Replaces the first homepage part of an URL with a relative path, 
+    // i.e. replace https://www.jazzliveaarau.ch/ with ../../
+    // Browser do not accept https://www.jazzliveaarau.ch/
+    // If input is a relative path do nothing. Just return the path
+    static replaceAbsoluteWithRelativePath(i_path_file_name)
+    {
+        if (UtilServer.isRelativePath(i_path_file_name))
+        {
+            return i_path_file_name;
+        }
+
+        // console.log("UtilServer.replaceAbsoluteWithRelativePath i_path_file_name= " + i_path_file_name);
+        
+        var path_file_without_homepage = UtilServer.getPathWithoutHomepage(i_path_file_name);
+
+        // console.log("UtilServer.replaceAbsoluteWithRelativePath path_file_without_homepage= " + path_file_without_homepage);
+
+        var full_relative_path = '../..' + path_file_without_homepage;
+
+        console.log("UtilServer.replaceAbsoluteWithRelativePath full_relative_path= " + full_relative_path);
+
+        return full_relative_path;
+
+    } // replaceAbsoluteWithRelativePath
+
+    // Adds ../ and returns the full relative path
+    static addRelativePathSlashes(i_levels, i_path_file_without_homepage)
+    {
+        if (i_levels <= 1)
+        {
+            alert("UtilServer.addRelativePathSlashes Invalid i_levels= " + i_levels.toString());
+
+            return '';
+        }
+
+        var path_php = '';
+
+        for (var level_number=1; level_number <= i_levels; level_number++)
+        {
+            if (level_number < i_levels)
+            {
+                path_php = path_php + '../';
+            }
+            else
+            {
+                path_php = path_php + '..';
+            }
+        }
+        var full_relative_path = path_php + i_path_file_without_homepage;
+
+        // console.log("UtilServer.addRelativePathSlashes full_relative_path= " + full_relative_path);
+
+        return full_relative_path;
+
+    } // addRelativePathSlashes
+
+    // Returns the relative path (URL) to the executing HTML file 
+    // If the input URL not is an absolute path starting with 
+    // https://jazzliveaarau.ch the input URL is returned
+    static getRelativeExecuteLevelPath(i_path_file_name)
+    {
+        if (UtilServer.isRelativePath(i_path_file_name))
+        {
+            return i_path_file_name;
+        }
+
+        console.log("UtilServer.getRelativeExecuteLevelPath i_path_file_name= " + i_path_file_name);
+
+        var path_file_without_homepage = UtilServer.getPathWithoutHomepage(i_path_file_name);
+
+        console.log("UtilServer.getRelativeExecuteLevelPath path_file_without_homepage= " + path_file_without_homepage);
+
+        var current_base = window.location.href;
+
+        console.log("UtilServer.getRelativeExecuteLevelPath current_base= " + current_base);
+
+        var n_levels_base = UtilServer.getNumberOfPathLevels(current_base);
+
+        console.log("UtilServer.getRelativeExecuteLevelPath n_levels_base= " + n_levels_base.toString());
+
+        var full_relative_path = UtilServer.addRelativePathSlashes(n_levels_base, path_file_without_homepage)
+
+        console.log("UtilServer.getRelativeExecuteLevelPath full_relative_path= " + full_relative_path);
+
+        return full_relative_path;
+
+    } // getRelativeExecuteLevelPath
+
+    // Returns the end path without homepage, i.e. https://www.jazzliveaarau.ch/ is removed
+    static getPathWithoutHomepage(i_path_file_name)
+    {
+        var server_url = 'jazzliveaarau.ch';
+
+        var server_url_length = server_url.length;
+    
+        var index_url = i_path_file_name.indexOf(server_url);
+
+        // console.log("UtilServer.getPathWithoutHomepage i_path_file_name= " + i_path_file_name);
+
+        var path_file_without_homepage = i_path_file_name.substring(index_url + server_url_length);
+
+        // console.log("UtilServer.getPathWithoutHomepage path_file_without_homepage= " + path_file_without_homepage);
+
+        return path_file_without_homepage;
+
+    } // getPathWithoutHomepage
+
+    // Returns true if it is a relative part, i.e. not containing jazzliveaarau.ch
+    static isRelativePath(i_path_file_name)
+    {
+        var server_url = 'jazzliveaarau.ch';
+    
+        var index_url = i_path_file_name.indexOf(server_url);
+
+        if (index_url < 0)
+        {
+            // console.log("getRelativeExecuteLevelPath.isRelativePath Relative URL i_path_file_name= " + i_path_file_name);
+
+            return true;
+        }
+        else
+        {
+            // console.log("getRelativeExecuteLevelPath.isRelativePath Absolute URL i_path_file_name= " + i_path_file_name);
+
+            return false;
+        }
+
+    } // isRelativePath
+
+    // Returns the number of path levels from https://jazzliveaarau.ch
+    static getNumberOfPathLevels(i_url)
+    {
+        // console.log("UtilServer.getNumberOfPathLevels i_url= " + i_url);
+
+        var server_url = 'jazzliveaarau.ch';
+
+        var server_url_length = server_url.length;
+    
+        var index_url = i_url.indexOf(server_url);
+
+        // console.log("UtilServer.getNumberOfPathLevels index_url= " + index_url.toString());
+
+        if (index_url < 0)
+        {
+            console.log("UtilServer.getNumberOfPathLevels Not an absolute URL i_url= " + i_url);
+
+            return -1;
+        }
+
+        var homepage_sub_path = i_url.substring(index_url + server_url_length);
+
+        // console.log("UtilServer.getNumberOfPathLevels homepage_sub_path= " + homepage_sub_path);
+
+        var n_levels = 0;
+
+        for (var index_char=0; index_char < homepage_sub_path.length; index_char++)
+        {
+            var current_char = homepage_sub_path[index_char];
+
+            if (current_char == '/')
+            {
+                n_levels = n_levels + 1;
+            }
+
+        }
+
+        // console.log("UtilServer.getNumberOfPathLevels n_levels= " + n_levels.toString());
+
+        return n_levels;
+
+    } // getNumberOfPathLevels
 
     // Returns true if the application is running on the server
     // Returns false if it is running on the Visual Studio Code Live Server

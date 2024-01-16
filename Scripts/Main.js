@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-01-13
+// Date: 2024-01-15
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -23,11 +23,11 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    // testUtilEmail();
+    //testUtilEmail();
 
-    // testUtilServer();
+    testUtilServer();
 
-    testUtilDate();
+    //testUtilDate();
 
     // testUtilString();
 
@@ -42,15 +42,14 @@ function testUtilEmail()
 
     var email_subject = 'JAZZ live AARAU Gästebuch Xyz';
 
-    var email_message = 'JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
+    var email_message = 'testUtilEmail():   JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
                         'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
                         'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  ';
 
     var email_to = 'gunnar.liden@viewsoncad.ch';
     
-    var email_bcc = 'guestbook@jazzliveaarau.ch';
-
-    var n_top = 2;
+    // To many email copies var email_bcc = 'guestbook@jazzliveaarau.ch';
+    var email_bcc = '';
 
     if (!UtilServer.execApplicationOnServer())
     {
@@ -59,7 +58,7 @@ function testUtilEmail()
         return;
     }
     
-    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc, n_top);
+    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc);
 
     if (b_send)
     {
@@ -81,9 +80,20 @@ function testUtilServer()
     '/www/UtilsTestData <br>' +
     'There are subdirectories in this directory';
 
-    var path_file_name = '../../WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
+    // var path_file_name = '../../WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
 
-    var b_create = UtilServer.saveFileWithJQueryPostFunction(path_file_name, file_content_html);  
+    // var b_create = UtilServer.saveFileWithJQueryPostFunction(path_file_name, file_content_html);  
+
+    var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilServer Upload code to server and test there!");
+
+        return;
+    }
+
+    var b_create = UtilServer.saveFile(path_file_name, file_content_html);  
 
     var util_date_el = getDivElementUtilServerResults();
 
@@ -254,8 +264,9 @@ function eventMergeFiles()
 
 } // eventMergeFiles
 
-// TODO Upload UtilEmailSend.php to /www/JazzScripts/Php/
-//      If there are changes in this file it must be uploaded manually
+// TODO Upload UtilEmailSend.php and SaveFileOnServerPhp to /www/JazzScripts/Php/
+//      with a PHP function
+//      If there are changes in these files they must now be uploaded manually
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Upload Merged JS Files and PHP files ////////////////////////

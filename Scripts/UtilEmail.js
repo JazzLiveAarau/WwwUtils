@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-01-09
+// Date: 2024-01-15
 // Author: Gunnar Lidén
 
 // File content
@@ -21,25 +21,22 @@ class UtilEmail
     // i_message Email text in HTML format e.g. JAZZ <i>live</i>
     // i_to      Reciever addresses TO. Separate with ;
     // i_bcc     Hidden addresses BCC
-    // i_n_top   Number of path levels to and icliding /www/ from the executing HTML file
-    //           Example: i_n_top=2 for jazzlivearau.ch/WwwUtils/TestUtils.htm
     // This function is calling the PHP function UtilEmailSend.php in the directory 
     // /www/JazzScripts/Php/
-    static send(i_from, i_subject, i_message, i_to, i_bcc, i_n_top)
+    static send(i_from, i_subject, i_message, i_to, i_bcc)
     {
-        var path_php = '';
-       
-        for (var i_top=1; i_top <= i_n_top; i_top++)
+        if (i_subject.length == 0 || i_to.length == 0)
         {
-            path_php = path_php + '../';
+            alert("UtilEmail.send Subject and send to address must be set");
+
+            return false;
         }
 
-        path_php = path_php + 'JazzScripts/Php/';
-
-        var full_rel_filename = path_php + 'UtilEmailSend.php';
+        // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
+        // i.e. for mutiple addresses separated with ;
 
         $.post
-        (full_rel_filename, 
+        ('https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSend.php',
           {
               a_from: i_from, 
               a_subject: i_subject,
@@ -56,7 +53,7 @@ class UtilEmail
               else
               {
                   alert("Execution of UtilEmailSend.php failed. status_send= " + status_send);
-                  return;
+                  return false;
               }   
               
               // Additional characters in data_send ????? TODO
