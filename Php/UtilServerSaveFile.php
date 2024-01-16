@@ -42,11 +42,6 @@
 $file_content = $_POST['file_content'];
 $file_name = $_POST['file_name'];
 
-// $file_name_test = "../../../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Orig
-// $file_name_test = "../../../../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Test 1
-// $file_name_test = "../../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Test 2
-// $file_name_test = "../../WwwUtilsTestData/TestUtilServerLevelFour.txt"; // Test 3
-
 $debug_file = fopen("debug_save_file.txt", "w") or die("Unable to open debug file");
 fwrite($debug_file, "file_name= \r\n");
 fwrite($debug_file, $file_name);
@@ -54,17 +49,6 @@ fwrite($debug_file, "\r\n");
 
 error_reporting(E_ALL);
 ini_set('display_errors', true);
-echo 'phpversion: ', phpversion(), "\n";
-echo 'uname: ', php_uname("s r"), "\n"; // name/release of the operating system
-
-if (file_exists($file_name))
-{
-    fwrite($debug_file, "File exists \r\n");
-}
-else
-{
-    fwrite($debug_file, "File does NOT exist \r\n");
-}
 
 if (is_writable($file_name))
 {
@@ -73,6 +57,8 @@ if (is_writable($file_name))
 else
 {
     fwrite($debug_file, "File is NOT writable \r\n");
+
+    exit("Unable_to_write_file_".error_get_last());
 }
 
 fclose($debug_file);

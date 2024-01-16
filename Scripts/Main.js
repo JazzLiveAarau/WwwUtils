@@ -25,7 +25,11 @@ function initTestUtils()
 {
     //testUtilEmail();
 
-    testUtilServer();
+    // testUtilServerSave();
+
+    testUtilServerCopy();
+
+    testUtilServerMove();
 
     //testUtilDate();
 
@@ -71,10 +75,79 @@ function testUtilEmail()
 
 } // testUtilEmail
 
-// Test of UtilServer
-function testUtilServer()
+// Test of UtilServer move
+function testUtilServerMove()
 {
- 
+    var path_file_output = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirOne/TestUtilServerMove.txt';
+
+    var path_file_input = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirBeta/TestUtilServerCopy.txt';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilServerMove Upload code to server and test there!");
+
+        return;
+    }
+
+    var b_move = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    var util_date_el = getDivElementUtilServerResults();
+
+    var msg_str = 'UtilServer Move' + '<br>' +
+    'Input filename= ' + path_file_input + '<br>' +
+    'Moved filename=' + '<br>' + path_file_output + '<br>';
+
+    if (b_move)
+    {
+        msg_str = msg_str + 'The file was moved' + '<br>';
+    }
+    else
+    {
+        msg_str = msg_str + 'Failure moving the file' + '<br>';
+    }
+
+    util_date_el.innerHTML = msg_str;
+
+} // testUtilServerMove
+
+// Test of UtilServer copy
+function testUtilServerCopy()
+{
+    var path_file_input = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
+
+    var path_file_output = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirBeta/TestUtilServerCopy.txt';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilServerCopy Upload code to server and test there!");
+
+        return;
+    }
+
+    var b_copy = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    var util_date_el = getDivElementUtilServerResults();
+
+    var msg_str = 'UtilServer Save' + '<br>' +
+    'Input filename= ' + path_file_input + '<br>' +
+    'Output filename=' + '<br>' + path_file_output + '<br>';
+
+    if (b_copy)
+    {
+        msg_str = msg_str + 'The file was copied' + '<br>';
+    }
+    else
+    {
+        msg_str = msg_str + 'Failure copying the file' + '<br>';
+    }
+
+    util_date_el.innerHTML = msg_str;
+
+} // testUtilServerCopy
+
+// Test of UtilServer save
+function testUtilServerSave()
+{
     var file_content_html = 'Test data for class UtilServer <br>' + 
     'There is a directory for test data on the Server: <br>' +
     '/www/UtilsTestData <br>' +
@@ -88,7 +161,7 @@ function testUtilServer()
 
     if (!UtilServer.execApplicationOnServer())
     {
-        alert("testUtilServer Upload code to server and test there!");
+        alert("testUtilServerSave Upload code to server and test there!");
 
         return;
     }
@@ -97,7 +170,7 @@ function testUtilServer()
 
     var util_date_el = getDivElementUtilServerResults();
 
-    var msg_str = 'UtilServer' + '<br>' +
+    var msg_str = 'UtilServer Save' + '<br>' +
     'Filename= ' + path_file_name + '<br>' +
     'Content' + '<br>' + file_content_html + '<br>';
 
@@ -112,7 +185,7 @@ function testUtilServer()
 
     util_date_el.innerHTML = msg_str;
 
-} // testUtilServer
+} // testUtilServerSave
 
 // Test of UtilDate
 function testUtilDate()
