@@ -23,19 +23,19 @@ class UtilServer
     //
     // The function returns false for failure.
     //
-    // Please refer to SaveFileOnServer.php for a detailed description of "post"
+    // Please refer to UtilServerSaveFile.php for a detailed description of "post"
     //
     // The browser PHP function do not accept an absolute file URL. When given as
     // input the part / https://www.jazzliveaarau.ch/ is replaced with ../../
     //
     // This library function may be called from any level. For instance
     // https://www.jazzliveaarau.ch/WwwUtils/LevelThree/LevelFour/TestUtilsLevelFour.htm
-    // The function is executed by the PHP function (file) SaveFileOnServer.php
+    // The function is executed by the PHP function (file) UtilServerSaveFile.php
     // This file is in the directory https://www.jazzliveaarau.ch/JazzScripts/Php
     // The JQuery function post do not accept an absolute URL. Therefore this function
     // dertermines the execute level and constructs the relative path to the file
-    // SaveFileOnServer.php. For the above example the relative URL is:
-    // ../../../../JazzScripts/Php/SaveFileOnServer.php
+    // UtilServerSaveFile.php. For the above example the relative URL is:
+    // ../../../../JazzScripts/Php/UtilServerSaveFile.php
     //
     static saveFile(i_path_file_name, i_content_string)
     {
@@ -45,7 +45,7 @@ class UtilServer
 
         // console.log("UtilServer.saveFile rel_path_file_name= " + rel_path_file_name);
 
-        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/SaveFileOnServer.php');
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerSaveFile.php');
     
         $.post
           (rel_path_file_php,
@@ -63,7 +63,7 @@ class UtilServer
 
                     if (index_fail >= 0)
                     {
-                        console.log(" UtilServer.SaveFileOnServer.php failure. data_save= " + data_save);
+                        console.log(" UtilServer.UtilServerSaveFile.php failure. data_save= " + data_save);
                         alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + rel_path_file_name);
                         return false;
                     }
@@ -72,8 +72,8 @@ class UtilServer
                 }
                 else
                 {
-                    console.log(" UtilServer.SaveFileOnServer.php failure. data_save= " + data_save);
-                    alert("Execution of UtilServer.SaveFileOnServer.php failed");
+                    console.log(" UtilServer.UtilServerSaveFile.php failure. data_save= " + data_save);
+                    alert("Execution of UtilServer.UtilServerSaveFile.php failed");
                     return false;
                 }          
             } // function
