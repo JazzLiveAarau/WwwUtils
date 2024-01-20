@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2024-01-11
+// Date: 2024-01-20
 // Author: Gunnar Lidén
 
 // File content
@@ -155,7 +155,7 @@ class UtilDate
     
     } // getMonthName
 
-    // Get formatted number, i.e. starting with '0' for numbers 1 to 9
+    // Get formatted ten number, i.e. starting with '0' for numbers 1 to 9
     static getFormattedTenNumber(i_number)
     {
         var ret_number = '';
@@ -182,6 +182,72 @@ class UtilDate
     
     } // getFormattedTenNumber
 
+    // Get formatted hundred number, i.e. starting with '00' for 1 to 9 an '00' for numbers 99 to 999
+    static getFormattedHundredNumber(i_number)
+    {
+        var ret_number = '';
+    
+        if (i_number >= 1000)
+        {
+            //alert('getFormattedTenNumber Input number greater than or equal 1000');
+    
+            // Should not occur
+    
+            return  i_number.toString();
+        }
+     
+        if (i_number <= 9)
+        {
+            ret_number = '00' + i_number.toString();
+        }
+        else if (i_number <= 99)
+        {
+            ret_number = '0' + i_number.toString();
+        }
+        else
+        {
+            ret_number = i_number.toString();
+        }
+     
+        return ret_number;
+    
+    } // getFormattedHundredNumber
+
+    // Get formatted thousand number, i.e. starting with '000' for 1 to 9 an '00' for numbers 99 to 999 and '0'  for ....
+    static getFormattedThousandNumber(i_number)
+    {
+        var ret_number = '';
+    
+        if (i_number >= 10000)
+        {
+            //alert('getFormattedTenNumber Input number greater than or equal 10000');
+    
+            // Should not occur
+    
+            return  i_number.toString();
+        }
+     
+        if (i_number <= 9)
+        {
+            ret_number = '000' + i_number.toString();
+        }
+        else if (i_number <= 99)
+        {
+            ret_number = '00' + i_number.toString();
+        }
+        else if (i_number <= 999)
+        {
+            ret_number = '0' + i_number.toString();
+        } 
+        else
+        {
+            ret_number = i_number.toString();
+        }
+     
+        return ret_number;
+    
+    } // getFormattedThousandNumber
+
     // Returns a time stamp string: yyyyymmddmmss
     static getTimeStamp()
     {
@@ -205,9 +271,15 @@ class UtilDate
     
         ret_time_stamp = ret_time_stamp + day_formatted;
 
+        ret_time_stamp = ret_time_stamp + '_';
+
         ret_time_stamp = ret_time_stamp + hour_formatted;
 
+        ret_time_stamp = ret_time_stamp + '_';
+
         ret_time_stamp = ret_time_stamp + minute_formatted;
+
+        ret_time_stamp = ret_time_stamp + '_';
 
         ret_time_stamp = ret_time_stamp + second_formatted;
 
