@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-01-16
+// Date: 2024-01-21
 // Author: Gunnar Lidén
 
 // File content
@@ -356,6 +356,22 @@ class UtilServer
         }
 
     } // isRelativePath
+
+    // Returns the file extension
+    static getFileExtension(i_file_name)
+    {
+        var index_last_point = i_file_name.lastIndexOf('.');
+
+        if (index_last_point < 0)
+        {
+            alert("UtilServer.getFileExtension No extension i.e. point in file name " + i_file_name);
+
+            return '';
+        }
+
+        return i_file_name.substring(index_last_point);
+
+    } // getFileExtension
 
     // Returns the number of path levels from https://jazzliveaarau.ch
     static getNumberOfPathLevels(i_url)
