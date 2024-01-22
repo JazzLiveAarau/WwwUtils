@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-01-21
+// Date: 2024-01-22
 // Author: Gunnar Lidén
 
 // File content
@@ -373,6 +373,31 @@ class UtilServer
 
     } // getFileExtension
 
+    // Returns the file name
+    static getFileName(i_path_file_name)
+    {
+        var ret_file_name = '';
+
+        var index_last_slash = i_path_file_name.lastIndexOf('/');
+
+        if (index_last_slash > 0)
+        {
+
+            ret_file_name = i_path_file_name.substring(index_last_slash + 1);
+
+            // No check that it is a file name e.g. containing a point
+
+            return ret_file_name;
+        }
+        else
+        {
+            // Assume that input file name didn't have a path. No check!
+
+            return i_path_file_name;
+        }
+
+    } // getFileName
+
     // Returns the number of path levels from https://jazzliveaarau.ch
     static getNumberOfPathLevels(i_url)
     {
@@ -415,6 +440,109 @@ class UtilServer
         return n_levels;
 
     } // getNumberOfPathLevels
+
+    // Initialization (creation) of the debug file in the directory /www/JazzScripts/Php/Debug
+    static async initDebugFile(i_unigue_str)
+    {
+        var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
+
+        console.log("UtilServer.initDebugFile Input file= " + file_name + "------------------------------------------------------- 1");
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerInitDebug.php');
+    
+        await $.post
+          (rel_path_file_php,
+            {
+              file_name: file_name
+            },
+            function(data_save,status_save)
+            {   
+                if (status_save == "success")
+                {
+                    // The PHP function returns succed for an opening failure. Therefore the returned
+                    // string Unable_to_open_file is used to handle this error.
+                    var index_fail_open = data_save.indexOf('Unable_to_open_file');
+                    var index_fail_write = data_save.indexOf('Unable_to_write_file');
+
+                    if (index_fail_open >= 0 || index_fail_write >= 0)
+                    {
+                        console.log(" UtilServer.UtilServerInitDebug.php failure. data_save= " + data_save);
+
+                        alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + file_name);
+
+                        return false;
+                    }
+                    else
+                    {
+                        console.log("UtilServer.initDebugFile. File " + file_name + " is created " + "------------------------------------------------------- 2");
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    console.log(" UtilServer.UtilServerInitDebug.php failure. data_save= " + data_save);
+                    alert("Execution of UtilServer.UtilServerInitDebug.php failed");
+
+                    return false;
+                }          
+            } // function
+          ); // post
+        
+    } // initDebugFile
+
+    // Append text to the debug file in the directory /www/JazzScripts/Php/Debug
+    static async appendDebugFile(i_content_str, i_unigue_str)
+    {
+        var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
+
+        console.log("UtilServer.appendDebugFile Input file= " + file_name + "----------------------------------------------------------------- 1");
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerAppendDebug.php');
+
+        var content_str = i_content_str +  '\n';
+    
+         await $.post
+          (rel_path_file_php,
+            {
+              file_content: content_str,
+              file_name: file_name
+            },
+            function(data_save,status_save)
+            {   
+                if (status_save == "success")
+                {
+                    // The PHP function returns succed for an opening failure. Therefore the returned
+                    // string Unable_to_open_file is used to handle this error.
+                    var index_fail_open = data_save.indexOf('Unable_to_open_file');
+                    var index_fail_write = data_save.indexOf('Unable_to_write_file');
+
+                    if (index_fail_open >= 0 || index_fail_write >= 0)
+                    {
+                        console.log(" UtilServer.UtilServerAppendDebug.php failure. data_save= " + data_save);
+                        alert("UtilServer.appendDebugFile Unable to create file " + file_name);
+
+                        return false;
+                    }
+                    else
+                    {
+                        console.log("UtilServer.appendDebug. Data added to " + file_name + "----------------------------------------------------------------- 2");
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    console.log(" UtilServer.UtilServerInitDebug.php failure. data_save= " + data_save);
+                    alert("Execution of UtilServer.UtilServerAppendDebug.php failed");
+
+                    return false;
+                }          
+            } // function
+          ); // post
+          
+    } // appendDebugFile
+	
 
     // Returns true if the application is running on the server
     // Returns false if it is running on the Visual Studio Code Live Server

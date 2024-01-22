@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-01-15
+// Date: 2024-01-22
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -23,13 +23,15 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
+    testUtilServerDebug();
+
     //testUtilEmail();
 
     // testUtilServerSave();
 
-    testUtilServerCopy();
+    // testUtilServerCopy();
 
-    testUtilServerMove();
+    // testUtilServerMove();
 
     //testUtilDate();
 
@@ -144,6 +146,42 @@ function testUtilServerCopy()
     util_date_el.innerHTML = msg_str;
 
 } // testUtilServerCopy
+
+// Test of UtilServer save
+function testUtilServerDebug()
+{
+    var b_init = UtilServer.initDebugFile('WwwUtils');
+
+    if (!b_init)
+    {
+        alert("testUtilServerDebug UtilServer.initDebugFile failed");
+
+        return;
+    }
+
+    console.log('testUtilServer Debug file was created' + '----------------------------------------------------------------- 1');
+
+    setTimeout(callbackTestUtilServerDebug, 500);
+
+} // testUtilServerDebug
+
+function callbackTestUtilServerDebug()
+{
+    var debug_text = 'This text was added by the function testUtilServerDebug in the file Main.js';
+                    
+
+    var b_append = UtilServer.appendDebugFile(debug_text, 'WwwUtils');
+
+    if (!b_append)
+    {
+        alert("testUtilServerDebug UtilServer.appendDebugFile failed");
+
+        return;
+    }
+
+    console.log('testUtilServer Text was added to the debug file' + '----------------------------------------------------------------- 2');
+
+} // callbackTestUtilServerDebug
 
 // Test of UtilServer save
 function testUtilServerSave()
@@ -379,6 +417,28 @@ function eventCopyPhpFiles()
     var b_file_move = UtilServer.copyFile(path_file_input, path_file_output);  
 
     if (!b_file_move)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerInitDebug.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilServerInitDebug.php';
+
+    var b_file_debug_ini = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_file_debug_ini)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerAppendDebug.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilServerAppendDebug.php';
+
+    var b_file_debug_append = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_file_debug_append)
     {
         alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
     }
