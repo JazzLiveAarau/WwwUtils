@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-01-15
+// Date: 2024-01-31
 // Author: Gunnar Lidén
 
 // File content
@@ -23,7 +23,7 @@ class UtilEmail
     // i_bcc     Hidden addresses BCC
     // This function is calling the PHP function UtilEmailSend.php in the directory 
     // /www/JazzScripts/Php/
-    static send(i_from, i_subject, i_message, i_to, i_bcc)
+    static async send(i_from, i_subject, i_message, i_to, i_bcc)
     {
         if (i_subject.length == 0 || i_to.length == 0)
         {
@@ -35,7 +35,7 @@ class UtilEmail
         // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
         // i.e. for mutiple addresses separated with ;
 
-        $.post
+        await $.post
         ('https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSend.php',
           {
               a_from: i_from, 
@@ -48,7 +48,36 @@ class UtilEmail
           {	
               if (status_send == "success")
               {
-                  // alert("data_send= >" + data_send + "<");
+                    var b_ok = false;
+                    var b_failure = false;
+                    if (data_send.indexOf("MailIsSent"))
+                    {
+                        b_ok = true;
+                    }
+                    if (data_send.indexOf("MailIsNotSent"))
+                    {
+                        b_failure = true;
+                    }
+                    
+                    if (b_ok)			
+                    {
+                        // alert("E-Mail ist gesendet");
+
+                        console.log("UtilEmail.send Mail is sent to " + i_to);
+
+                        return true;
+                    }
+                    else if (b_failure)
+                    {
+                        alert("UtilEmail.send Mail is not sent");
+
+                        return false;
+                    }
+                    else 
+                    {
+                        alert("Fehler: data_send= " + data_send);
+                        return false;
+                    }			
               }
               else
               {
@@ -56,36 +85,7 @@ class UtilEmail
                   return false;
               }   
               
-              // Additional characters in data_send ????? TODO
-              // includes() does not work in Internet Explorer
-              var b_ok = false;
-              var b_failure = false;
-              if (data_send.indexOf("MailIsSent"))
-              {
-                  b_ok = true;
-              }
-              if (data_send.indexOf("MailIsNotSent"))
-              {
-                  b_failure = true;
-              }
-              
-              if (b_ok)			
-              {
-                 // alert("E-Mail ist gesendet");
-              }
-              else if (b_failure)
-              {
-                 alert(g_error_send_confirmation_mail);
-                 return;
-              }
-              else 
-              {
-                 alert("Fehler: data_send= " + data_send);
-                 return false;
-              }			
           });	
-      
-      return true;
 
     } // send
 

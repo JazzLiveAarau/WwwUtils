@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-01-22
+// Date: 2024-01-31
 // Author: Gunnar Lidén
 
 // File content
@@ -36,7 +36,7 @@ class UtilServer
     // ../../../../JazzScripts/Php/UtilServerSaveFile.php
     // Please refer to UtilServer.getRelativeExecuteLevelPath
     //
-    static saveFile(i_path_file_name, i_content_string)
+    static async saveFile(i_path_file_name, i_content_string)
     {
         console.log("UtilServer.saveFile i_path_file_name= " + i_path_file_name);
 
@@ -44,7 +44,7 @@ class UtilServer
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerSaveFile.php');
     
-        $.post
+        await $.post
           (rel_path_file_php,
             {
               file_content: i_content_string,
@@ -61,23 +61,25 @@ class UtilServer
 
                     if (index_fail_open >= 0 || index_fail_write >= 0)
                     {
-                        console.log(" UtilServer.UtilServerSaveFile.php failure. data_save= " + data_save);
+                        console.log(" UtilServer.saveFile failure. data_save= " + data_save);
                         alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + rel_path_file_name);
 
                         return false;
                     }
+
+                    console.log(" UtilServer.saveFile Filed is saved. data_save= " + data_save);
+
+                    return true;
                 }
                 else
                 {
-                    console.log(" UtilServer.UtilServerSaveFile.php failure. data_save= " + data_save);
-                    alert("Execution of UtilServer.UtilServerSaveFile.php failed");
+                    console.log(" UtilServer.saveFile failure. data_save= " + data_save);
+                    alert("Execution of UtilServer.saveFile failed");
 
                     return false;
                 }          
             } // function
-          ); // post
-          
-        return true;	  
+          ); // post 
         
     } // saveFileWithJQueryPostFunction
 
@@ -88,7 +90,7 @@ class UtilServer
     // File names (URLs) can be given as absolute or relative paths
     //
     // The function returns false for failure
-    static copyFile(i_url_file_input, i_url_file_copy)
+    static async copyFile(i_url_file_input, i_url_file_copy)
     {
         if (!UtilServer.execApplicationOnServer())
         {
@@ -103,7 +105,7 @@ class UtilServer
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerCopyFile.php');
 
-        $.post
+        await $.post
         (rel_path_file_php,
             {
             file_input: rel_path_file_input,
@@ -113,13 +115,12 @@ class UtilServer
             {
                 if (status_copy == "success")
                 {
-                    
                     var index_fail_copy = data_copy.indexOf('Unable_to_copy_file_');
                     var index_fail_exist = data_copy.indexOf('File_exists_not');
 
                     if (index_fail_copy >= 0 || index_fail_exist >= 0)
                     {
-                        console.log(" UtilServer.UtilServerCopyFile.php failure. data_save= " + data_copy);
+                        console.log(" UtilServer.copyFile Failure copying file. data_copy= " + data_copy);
 
                         if (index_fail_exist >= 0)
                         {
@@ -132,6 +133,10 @@ class UtilServer
 
                         return false;
                     }
+
+                    console.log(" UtilServer.copyFile File is copied data_copy= " + data_copy);
+
+                    return true;
                 }
                 else
                 {
@@ -143,8 +148,6 @@ class UtilServer
 
         ); // post
         
-        return true;	  
-        
     } // copyFile
 
     // Move a file with the JQuery function "post"
@@ -154,7 +157,7 @@ class UtilServer
     // File names (URLs) can be given as absolute or relative paths
     //
     // The function returns false for failure
-    static moveFile(i_url_file_input, i_url_file_move)
+    static async moveFile(i_url_file_input, i_url_file_move)
     {
         if (!UtilServer.execApplicationOnServer())
         {
@@ -169,7 +172,7 @@ class UtilServer
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerMoveFile.php');
 
-        $.post
+        await $.post
         (rel_path_file_php,
             {
             file_input: rel_path_file_input,
@@ -213,8 +216,6 @@ class UtilServer
             } // function
 
         ); // post
-        
-        return true;	  
         
     } // moveFile
 
