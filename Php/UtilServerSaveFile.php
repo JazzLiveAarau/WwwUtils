@@ -58,6 +58,8 @@ else
 {
     fwrite($debug_file, "File is NOT writable \r\n");
 
+    fclose($debug_file);
+
     exit("Unable_to_write_file_".error_get_last());
 }
 

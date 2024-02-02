@@ -38,24 +38,48 @@ ini_set('display_errors', true);
 $file_input = $_POST['file_input'];
 $file_move = $_POST['file_move'];
 
+$debug_file = fopen("debug_move_file.txt", "w") or die("Unable to open debug file");
+fwrite($debug_file, "file_input= \r\n");
+fwrite($debug_file, $file_input);
+fwrite($debug_file, "\r\n");
+fwrite($debug_file, "file_move= \r\n");
+fwrite($debug_file, $file_move);
+fwrite($debug_file, "\r\n");
+
 if (!file_exists($file_input))
 {
+    fwrite($debug_file, "File does not exist \r\n");
+
+    fclose($debug_file);
+
     exit("File_exists_not");
 }
 
 if (!copy($file_input, $file_move)) 
 {
+    fwrite($debug_file, "Copy file failed \r\n");
+
+    fclose($debug_file);
+
     exit("Unable_to_copy_file_".error_get_last());
 }
 
 if (!unlink($file_input))
 {
+    fwrite($debug_file, "Delete file failed \r\n");
+
+    fclose($debug_file);
+
     exit("Unable_to_delete_file_".error_get_last());
 }
 else
 {
+    fwrite($debug_file, "File was moved \r\n");
+
     echo "Success";
 }
+
+fclose($debug_file);
  
 ?>
  

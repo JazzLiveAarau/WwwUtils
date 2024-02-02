@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-01-31
+// Date: 2024-02-02
 // Author: Gunnar Lidén
 
 // File content
@@ -176,7 +176,7 @@ class UtilServer
         (rel_path_file_php,
             {
             file_input: rel_path_file_input,
-            file_copy: rel_path_file_move
+            file_move: rel_path_file_move
             },
             function(data_move,status_move)
             {
@@ -206,6 +206,8 @@ class UtilServer
 
                         return false;
                     }
+
+                    return true;
                 }
                 else
                 {

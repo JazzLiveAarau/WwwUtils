@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-01-22
+// Date: 2024-02-02
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -455,6 +455,7 @@ function eventCopyPhpFiles()
         alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
     }
 
+    alert("eventCopyPhpFiles PHP files have been copied");
 
 } // eventCopyPhpFiles
 
