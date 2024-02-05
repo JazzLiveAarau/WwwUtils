@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-02-02
+// Date: 2024-02-05
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -23,7 +23,9 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    testUtilServerDebug();
+    testUtilPayment();
+
+    // testUtilServerDebug();
 
     //testUtilEmail();
 
@@ -40,6 +42,17 @@ function initTestUtils()
     // testUtilSearch();
 
 } // initTestControls
+
+// Test of UtilPayment
+function testUtilPayment()
+{
+    var el_div_payment = getDivElementUtilPaymentResults();
+
+    var div_width = '90%';
+
+    el_div_payment.innerHTML = UtilPayment.twintAdmissionFeeString(div_width);
+
+} // testUtilPayment
 
 // test of UtilEmail
 function testUtilEmail()
@@ -264,6 +277,20 @@ function testUtilSearch()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Id And Element Functions //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Returns the element utility payment results <div> element
+function getDivElementUtilPaymentResults()
+{
+    return document.getElementById(getIdDivElementUtilPaymentResults());
+
+} // getDivElementUtilPaymentResults
+
+// Returns the identity of the element utility payment results <div> 
+function getIdDivElementUtilPaymentResults()
+{
+    return 'id_div_util_payment_results';
+
+} // getIdDivElementUtilPaymentResults
 
 // Returns the element utility date results <div> element
 function getDivElementUtilServerResults()

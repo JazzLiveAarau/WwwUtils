@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-02
+// Date: 2024-02-04
 // Author: Gunnar Lidén
 
 // File content
@@ -447,9 +447,14 @@ class UtilServer
     // Initialization (creation) of the debug file in the directory /www/JazzScripts/Php/Debug
     static async initDebugFile(i_unigue_str)
     {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            console.log("UtilServer.initDebugFile Do nothing. Not running on the server");
+        }
+
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
-        console.log("UtilServer.initDebugFile Input file= " + file_name + "------------------------------------------------------- 1");
+        console.log("UtilServer.initDebugFile Input file= " + file_name + "-------- 1");
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerInitDebug.php');
     
@@ -477,7 +482,7 @@ class UtilServer
                     }
                     else
                     {
-                        console.log("UtilServer.initDebugFile. File " + file_name + " is created " + "------------------------------------------------------- 2");
+                        console.log("UtilServer.initDebugFile. File " + file_name + " is created " + "--- 2");
 
                         return true;
                     }
@@ -497,6 +502,11 @@ class UtilServer
     // Append text to the debug file in the directory /www/JazzScripts/Php/Debug
     static async appendDebugFile(i_content_str, i_unigue_str)
     {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            console.log("UtilServer.appendDebugFile Do nothing. Not running on the server");
+        }
+
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
         console.log("UtilServer.appendDebugFile Input file= " + file_name + "----------------------------------------------------------------- 1");
