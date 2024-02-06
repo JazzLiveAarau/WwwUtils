@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-04
+// Date: 2024-02-06
 // Author: Gunnar Lidén
 
 // File content
@@ -450,6 +450,8 @@ class UtilServer
         if (!UtilServer.execApplicationOnServer())
         {
             console.log("UtilServer.initDebugFile Do nothing. Not running on the server");
+
+            return;
         }
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
@@ -505,6 +507,8 @@ class UtilServer
         if (!UtilServer.execApplicationOnServer())
         {
             console.log("UtilServer.appendDebugFile Do nothing. Not running on the server");
+
+            return;
         }
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
