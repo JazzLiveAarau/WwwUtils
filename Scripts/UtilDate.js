@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2024-01-20
+// Date: 2024-02-07
 // Author: Gunnar Lidén
 
 // File content
@@ -77,6 +77,64 @@ class UtilDate
         return ret_iso_date_str;
     
     } // getIsoDateString
+
+    // Returns the date as an array from an ISO standard date string
+    static getDateArrayFromIsoDateString(i_iso_date)
+    {
+        var ret_array = [];
+
+        var n_chars = i_iso_date.length;
+
+        if (n_chars != 10)
+        {
+            alert("UtilDate.getDateArrayFromIsoDateString Not an ISO date. n_chars= " + n_chars.toString());
+
+            return ret_array;            
+        }
+
+        var first_minus = i_iso_date.substring(4, 5);
+
+        if (first_minus != '-')
+        {
+            alert("UtilDate.getDateArrayFromIsoDateString Not an ISO date (1) string Character= " + first_minus);
+
+            return ret_array;
+        }
+
+        var second_minus = i_iso_date.substring(7, 8);
+
+        if (second_minus != '-')
+        {
+            alert("UtilDate.getDateArrayFromIsoDateString Not an ISO date (2) string Character= " + second_minus);
+
+            return ret_array;
+        }
+
+        var year_str = i_iso_date.substring(0, 4);
+
+        var month_str = i_iso_date.substring(5, 7);
+
+        if (month_str.substring(0, 1) == '0')
+        {
+            month_str = month_str.substring(1, 2);
+        }
+
+        var day_str = i_iso_date.substring(8, 10);
+
+        if (day_str.substring(0, 1) == '0')
+        {
+            day_str = day_str.substring(1, 2);
+        }
+
+        ret_array[0] = year_str;
+
+        ret_array[1] = month_str;
+
+        ret_array[2] = day_str;
+
+        return ret_array;
+
+    } // getDateArrayFromIsoDateString
 
     // Get a yyyymmdd date string
     static  getYyyyMmDdDateString(i_year, i_month, i_day)

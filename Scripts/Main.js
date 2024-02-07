@@ -23,7 +23,7 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    testUtilPayment();
+    // testUtilPayment();
 
     // testUtilServerDebug();
 
@@ -35,7 +35,7 @@ function initTestUtils()
 
     // testUtilServerMove();
 
-    //testUtilDate();
+    testUtilDate();
 
     // testUtilString();
 
@@ -243,10 +243,14 @@ function testUtilDate()
 {
     var time_stamp = UtilDate.getTimeStamp();
 
+    var date_array = UtilDate.getDateArrayFromIsoDateString("2024-02-07");
+
     var util_date_el = getDivElementUtilDateResults();
 
     util_date_el.innerHTML = 'UtilDate time_stamp= :' + '<br>' +
-                             time_stamp + '<br>';
+                             time_stamp + '<br>' + 
+                             'getDateArrayFromIsoDateString year= ' + date_array[0] +
+                             ' month= ' + date_array[1] + ' day= ' + date_array[2];
 
 } // testUtilDate
 
