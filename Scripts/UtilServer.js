@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-06
+// Date: 2024-02-13
 // Author: Gunnar Lidén
 
 // File content
@@ -38,7 +38,7 @@ class UtilServer
     //
     static async saveFile(i_path_file_name, i_content_string)
     {
-        console.log("UtilServer.saveFile i_path_file_name= " + i_path_file_name);
+        // console.log("UtilServer.saveFile i_path_file_name= " + i_path_file_name);
 
         var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
 
@@ -81,7 +81,62 @@ class UtilServer
             } // function
           ); // post 
         
-    } // saveFileWithJQueryPostFunction
+    } // saveFile
+
+    // Same as saveFile but with a callback function
+    static async saveFileCallback(i_path_file_name, i_content_string, i_callback_function)
+    {
+        // console.log("UtilServer.saveFileCallback i_path_file_name= " + i_path_file_name);
+
+        var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerSaveFile.php');
+    
+        await $.post
+          (rel_path_file_php,
+            {
+              file_content: i_content_string,
+              file_name: rel_path_file_name
+            },
+            function(data_save, status_save)
+            {   
+                if (status_save == "success")
+                {
+                    // The PHP function returns succed for an opening failure. Therefore the returned
+                    // string Unable_to_open_file is used to handle this error.
+                    var index_fail_open = data_save.indexOf('Unable_to_open_file');
+                    var index_fail_write = data_save.indexOf('Unable_to_write_file');
+
+                    if (index_fail_open >= 0 || index_fail_write >= 0)
+                    {
+ 
+                        UtilServer.saveFileError(rel_path_file_name, data_save, status_save);
+                    }
+
+                    console.log(" UtilServer.saveFileCallback Filed is saved. data_save= " + data_save.trim());
+
+                    i_callback_function();
+                }
+                else
+                {
+                    UtilServer.saveFileError(rel_path_file_name, data_save, status_save);
+                }  
+
+            } // function
+        ); // post 
+
+        // console.log("saveFileCallback The function should only come here when the file has been saved or there was a failure. Or ???");
+       
+    } // saveFileCallback
+
+    // Failure saving file
+    static saveFileError(i_rel_path_file_name, i_data_save, i_status_save)
+    {
+        console.log(" UtilServer.saveFileCallback failure. data_save= " + i_data_save + ' status_save= ' + i_status_save);
+
+        alert("UtilServer.saveFileCallback Unable to create file " + i_rel_path_file_name + ' status_save= ' + i_status_save);
+
+    } // saveFileError
 
     // Copy a file with the JQuery function "post"
     // Please refer to UtilServerCopyFile.php for a detailed description of "post"
@@ -134,7 +189,7 @@ class UtilServer
                         return false;
                     }
 
-                    console.log(" UtilServer.copyFile File is copied data_copy= " + data_copy);
+                    console.log(" UtilServer.copyFile File is copied data_copy= " + data_copy.trim());
 
                     return true;
                 }
@@ -189,7 +244,7 @@ class UtilServer
 
                     if (index_fail_copy >= 0 || index_fail_exist >= 0 ||  index_fail_delete >= 0)
                     {
-                        console.log(" UtilServer.UtilServermoveFile.php failure. data_save= " + data_move);
+                        console.log(" UtilServer.UtilServermoveFile.php failure. data_move= " + data_move.trim());
 
                         if (index_fail_exist >= 0)
                         {
@@ -211,7 +266,7 @@ class UtilServer
                 }
                 else
                 {
-                    alert("Execution of UtilServermoveFile.php failed. data_move= " + data_move);
+                    alert("Execution of UtilServermoveFile.php failed. data_move= " + data_move.trim());
 
                     return false;
                 }          
@@ -241,23 +296,23 @@ class UtilServer
             return i_path_file_name;
         }
 
-        console.log("UtilServer.getRelativeExecuteLevelPath i_path_file_name= " + i_path_file_name);
+        //console.log("UtilServer.getRelativeExecuteLevelPath i_path_file_name= " + i_path_file_name);
 
         var path_file_without_homepage = UtilServer.getPathWithoutHomepage(i_path_file_name);
 
-        console.log("UtilServer.getRelativeExecuteLevelPath path_file_without_homepage= " + path_file_without_homepage);
+        //console.log("UtilServer.getRelativeExecuteLevelPath path_file_without_homepage= " + path_file_without_homepage);
 
         var current_base = window.location.href;
 
-        console.log("UtilServer.getRelativeExecuteLevelPath current_base= " + current_base);
+        //console.log("UtilServer.getRelativeExecuteLevelPath current_base= " + current_base);
 
         var n_levels_base = UtilServer.getNumberOfPathLevels(current_base);
 
-        console.log("UtilServer.getRelativeExecuteLevelPath n_levels_base= " + n_levels_base.toString());
+        // console.log("UtilServer.getRelativeExecuteLevelPath n_levels_base= " + n_levels_base.toString());
 
         var full_relative_path = UtilServer.addRelativePathSlashes(n_levels_base, path_file_without_homepage)
 
-        console.log("UtilServer.getRelativeExecuteLevelPath full_relative_path= " + full_relative_path);
+        // console.log("UtilServer.getRelativeExecuteLevelPath full_relative_path= " + full_relative_path);
 
         return full_relative_path;
 
@@ -282,7 +337,7 @@ class UtilServer
 
         var full_relative_path = '../..' + path_file_without_homepage;
 
-        console.log("UtilServer.replaceAbsoluteWithRelativePath full_relative_path= " + full_relative_path);
+        // console.log("UtilServer.replaceAbsoluteWithRelativePath full_relative_path= " + full_relative_path);
 
         return full_relative_path;
 
@@ -456,7 +511,7 @@ class UtilServer
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
-        console.log("UtilServer.initDebugFile Input file= " + file_name + "-------- 1");
+        // console.log("UtilServer.initDebugFile Input file= " + file_name + "-------- 1");
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerInitDebug.php');
     
@@ -513,7 +568,7 @@ class UtilServer
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
-        console.log("UtilServer.appendDebugFile Input file= " + file_name + "----------------------------------------------------------------- 1");
+        // console.log("UtilServer.appendDebugFile Input file= " + file_name + "----------------------------------------------------------------- 1");
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerAppendDebug.php');
 
@@ -543,7 +598,7 @@ class UtilServer
                     }
                     else
                     {
-                        console.log("UtilServer.appendDebug. Data added to " + file_name + "----------------------------------------------------------------- 2");
+                        // console.log("UtilServer.appendDebug. Data added to " + file_name + "----------------------------------------------------------------- 2");
 
                         return true;
                     }
