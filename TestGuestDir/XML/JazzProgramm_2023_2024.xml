@@ -1,0 +1,922 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--  JAZZ live AARAU Saisonprogramm 2023-2024-->
+<Saison>
+  <YearAutum>2023</YearAutum>
+  <YearSpring>2024</YearSpring>
+  <PublishProgram>TRUE</PublishProgram>
+  <!--  Konzert 1 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2023</Year>
+    <Month>10</Month>
+    <Day>7</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Mareille Merck LARUS</BandName>
+    <ShortText>Von Rügen in der Ostsee hat sie ihre Silbermöwe mitgebracht. Wie der zur Gattung ,Larus’ zählende Vogel überfliegt ihr Trio belebte Strände, weite Felder, felsige Küsten und die eine oder andere einsame Insel - die Fender Stratocaster jederzeit für Start und Landung als Fels in der Brandung bereit …</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Der Begriff Jazz</LabelFlyerText>
+    <FlyerText>Das Wort ‚Jazz‘ taucht wohl erstmals 1913 auf, als ein Zeitungsreporter über ein Spiel des Baseballteams der San Francisco Seals schrieb. Er verwendete ‚Jazz‘ synonym für schwungvoll oder enthusiastisch: ‚The poor old Seals have lost their ‘jazz’ and don’t know where to find it‘ (Die bemitleidenswerten Seals haben ihren ‚Jazz‘ verloren und können ihn nicht wiederfinden). Wenige Tage später reflektierte ein Redakteur derselben Zeitung die Attribute des Jazz: ‚Dieses bemerkenswerte Wort bedeutet so etwas wie Leben, Kraft, Energie, Aufbrausen des Geistes, Spaß, Schwung, Anziehungskraft, Elan, Männlichkeit, Mut, Glück. Oh, worum geht’s? JAZZ.‘ Der erste musikalische Nachweis für das Wort Jazz findet sich in der Chicago Daily Tribune vom 11. Juli 1915 im Zusammenhang mit einem synkopierten Rag von Art Hickman.
+
+Für das Jazz-Lexikon bedienen wir uns auch in den weiteren Konzertflyern bei Wikipedia.
+
+</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20231007_Mareille_Merck/PlakatNewsletter20231007.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20231007_Mareille_Merck/PlakatNewsletter20231007_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231007_Mareille_Merck/d20231007_Mareille_Merck_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.mareille-merck.com/larus</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231007_Mareille_Merck/d20231007_Mareille_Merck_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231007_Mareille_Merck/d20231007_Mareille_Merck_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2023.10.07/JazzGalerie_G172.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20231007_Mareille_Merck_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Mareille Merck</ContactPerson>
+    <ContactEmail>info@mareillemerck.com</ContactEmail>
+    <ContactTelephone>+41 78 720 72 26</ContactTelephone>
+    <ContactStreet>Schaffhauserstr. 272</ContactStreet>
+    <ContactPostCode>8057</ContactPostCode>
+    <IbanNumber>CH23 0024 8248 1365 1441 Q</IbanNumber>
+    <ContactRemark>UBS</ContactRemark>
+    <ContactCity>Zürich</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Mareille Merck</Name>
+        <Instrument>g</Instrument>
+        <Text>In Stralsund geboren und heute in Zürich zuhause, hat die junge Gitarristin in der Jazzszene bereits nachhaltige Spuren hinterlegt. Nach Studien in Weimar und anschliessend Luzern, wo sie 2020 ihren Masterabschluss im Bereich Performance erlangte, schloss sich ein Zweitmaster in Musikpädagogik an der ZHdK in Zürich an. Als Gründerin und Leaderin ihres Trios, in welchem sie ihre Eigenkompositionen umsetzt, engagiert sie sich zudem aktiv in der lokalen Jazzszene. So im Vorstand des Vereins Jazzbaragge sowie im Musikerinnenrat und Vorstand des Moods.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+      <Musician>
+        <Name>Florian Bolliger</Name>
+        <Instrument>b</Instrument>
+        <Text>Der in Schaffhausen aufgewachsene Bassist studierte an der Musikhochschule Luzern und erlangte dort 2019 seinen ,Master of Arts in Music Pedagogy’. In verschiedensten Formationen zeigt Bolliger als E- sowie Kontrabassist ein ausgeprägt breites stilistisches Spektrum. Sei es in der Zusammenarbeit mit der libanesischen Sängerin ,Frida’ oder dem Engagement im Projekt ,Who Brings The Juice’, welches Tanzende und Singende zusammenbringt.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Janic Haller</Name>
+        <Instrument>dr</Instrument>
+        <Text>Geboren und aufgewachsen im Toggenburg, entwickelt Haller seine Trommelkünste bereits ab Kindesalter. Die Studien führen ihn an die Musikhochschule Luzern zu Musikern wie Norbert Pfammatter, Dominik Burkhalter, Gerry Hemingway und schliesslich 2022 zum Abschluss ,Master of Arts in Music Pedagogy’. Als Teil von Projekten mit nationalen und internationalen Künstlerinnen wie Edmar Castaneda, Barbara Dennerlein oder Daniel Woodtli beschäftigt sich der Musiker zudem intensiv mit dem Produzieren und Komponieren elektronischer Musik.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 1 End  -->
+  <!--  Konzert 2 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2023</Year>
+    <Month>10</Month>
+    <Day>21</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Dominik Schürmann Trio feat. Max Ionata</BandName>
+    <ShortText>Stabiler Groove, starke Melodien und ausgefeilte Harmonik - dies die Hauptparameter der zuweilen von Jazzstandards beeinflussten Kompositionen des umtriebigen Basler Bassisten. Mit dem italienischen Saxofon-Star zum Quartett erweitert, ist explosiver Hardbop vom Feinsten zu erwarten.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Improvisation</LabelFlyerText>
+    <FlyerText>Technisch gesehen bezeichnet man im Jazz eine Improvisation als Inside-Outside-Improvisation, wenn der Spieler die vorgegebene Tonart oder Tonalität kurzzeitig verlässt, um dann wieder in dieselbe zurückzukehren. 
+Auch im Free Jazz findet die Inside-Outside-Improvisation immer wieder Anwendung. Hier können musikalische Gedanken mit eindeutigen Stimmungsbildern (moods) entstehen, die man gezielt auflösen und anschließend wieder aufleben lassen kann. Üblich ist aber die Improvisation über sogenannte Changes. Als Changes (chord changes) bezeichnet man in diesem Zusammenhang die Akkordfolgen eines Jazz-Standards oder einer Komposition.
+Diese Akkordfolgen können durch verschiedene Tonarten gehen, deren Beziehungsgeflecht der Solist zu berücksichtigen hat. Das heißt, es gibt festgelegte Regeln, die dem Improvisator Zwänge in Bezug auf seine Tonauswahl auferlegen. Der Improvisierende verfügt dabei über eine beschränkte Auswahl an Tonmaterial, das er auf bestimmte Akkorde anzuwenden hat.</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20231021_Schuermann_Ionata/PlakatNewsletter20231021.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20231021_Schuermann_Ionata/PlakatNewsletter20231021_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231021_Schuermann_Ionata/d20231021_Schuermann_Ionata_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>http://www.dominikschuermann.ch/index.php</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231021_Schuermann_Ionata/d20231021_Schuermann_Ionata_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231021_Schuermann_Ionata/d20231021_Schuermann_Ionata_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2023.10.21/JazzGalerie_G173.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20231021_Schuermann_Ionata_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Dominik Schürmann</ContactPerson>
+    <ContactEmail>dominikschuermann@gmail.com</ContactEmail>
+    <ContactTelephone>+41 79 475 70 89</ContactTelephone>
+    <ContactStreet>Emil Angst-Strasse 2</ContactStreet>
+    <ContactPostCode>4059</ContactPostCode>
+    <IbanNumber>CH53 0077 0016 5505 7154 7</IbanNumber>
+    <ContactRemark>Basler Kantonalbank</ContactRemark>
+    <ContactCity>Basel</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Max Ionata</Name>
+        <Instrument>ts</Instrument>
+        <Text>Der Bläser-Star aus Rom ist nicht nur einer der gefragtesten Saxofonisten Italiens, sondern hat auch international ein grosses Renommee erreicht. Er spielt und spielte mit weltbekannten Musikern wie Mike Stern, Dado Moroni, Steve Grossman, Gregory Hutchinson oder Alvin Queen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Yuri Storione</Name>
+        <Instrument>p</Instrument>
+        <Text>Das sizilianische und inzwischen in Basel lebende Tastentalent präsentierte sich vor zwei Jahren erstmals mit seinem Quartett und dem spanischen Über-Saxofonisten Perico Sambeat auf unserer Bühne. Fest verankert in der hiesigen professionellen Jazzszene arbeitet der Pianist regelmässig mit hochkarätigen Musikern aus dem In- und Ausland.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Dominik Schürmann</Name>
+        <Instrument>b</Instrument>
+        <Text>Als Bandleader, Komponist und Bassist ist der Basler seit vielen Jahren in der Schweizer sowie Europäischen Modern Mainstream Jazzszene aktiv. Der Begleiter von u.a. George Gruntz, Oscar Klein und Isla Eckinger versteht es, logisch strukturierte und wunderschön melodisch klingende Kompositionen zu schreiben. Max Ionata in einem Interview einer amerikanischen Fachzeitschrift: ,Dominik Schürmanns Kompositionen sind genau auf mich zugeschnitten.’</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Jãnis Jaunalksnis</Name>
+        <Instrument>dr</Instrument>
+        <Text>Der in Riga (Lettland) in einer Musikerfamilie aufgewachsene Schlagzeugvirtuose wählt nach abgeschlossenen Studien in Riga, Graz und Basel das Dreiländereck zu seinem ständigen Wohnsitz. Dies zur Freude von zahlreichen Musikern, die sein sensibles und geschmackvolles Schlagzeugspiel schätzen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 2 End  -->
+  <!--  Konzert 3 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2023</Year>
+    <Month>11</Month>
+    <Day>4</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Peter Schärli double vision - Hommage an Umberto Arlati &amp; Peter Schmidlin</BandName>
+    <ShortText>2002 - 2004 auf vielen Konzertbühnen zu hören und nun als ,historische’ Aufnahmen auf Doppel-CD. Zwei beteiligte Freunde und Mitmusiker von damals sind leider nicht mehr und möchten von den Überlebenden mit aktueller Konzerttour in Ehren gehalten werden.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Psychologie der Improvisation</LabelFlyerText>
+    <FlyerText>Unabhängig aller akademischen Betrachtungen ist die Inside-Outside-Improvisation ein Mittel, um Improvisationen interessant und spannungsreich zu gestalten. Das Spannungsfeld zwischen Unschärfe und Genauigkeit eröffnet dem Spieler eine Vielzahl an Möglichkeiten, sich für unterschiedliche Verläufe der Improvisation zu entscheiden.
+Ein wichtiger Aspekt dieser Improvisationsweise ist das Erlangen einer inneren Sicherheit. Diese Sicherheit ist der Garant dafür, dass die Töne oder Melodien beim Hörer nicht den Eindruck eines „falschen“ Klangs erzeugen, sondern Ausgangspunkt für neue spannungsreiche Tonfolgen bilden.</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20231104_Peter_Schaerli/PlakatNewsletter20231104.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20231104_Peter_Schaerli/PlakatNewsletter20231104_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231104_Peter_Schaerli/d20231104_Peter_Schaerli_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.schaerlimusic.ch/double-vision</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231104_Peter_Schaerli/d20231104_Peter_Schaerli_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231104_Peter_Schaerli/d20231104_Peter_Schaerli_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2023.11.04/JazzGalerie_G174.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20231104_Peter_Schaerli_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Peter Schärli</ContactPerson>
+    <ContactEmail>trumpet@schaerlimusic.ch</ContactEmail>
+    <ContactTelephone>+41 79 355 01 52</ContactTelephone>
+    <ContactStreet>Neugutstrasse 6</ContactStreet>
+    <ContactPostCode>5000</ContactPostCode>
+    <IbanNumber>CH86 0900 0000 5010 4123 4</IbanNumber>
+    <ContactRemark>PostFinance</ContactRemark>
+    <ContactCity>Aarau</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Lars Lindvall</Name>
+        <Instrument>tp</Instrument>
+        <Text>Der in Schweden aufgewachsene Musiker übersiedelt nach Abschluss an der Musikhochschule Graz für weitere Studien am Berklee College of Music in die USA, wo es zur Zusammenarbeit mit u.a. Bobby McFerrin, Jay Clayton, Herb Pomeroy und Mel Lewis kommt. Lindvall arbeitet an den Jazz-Abteilungen der Musikhochschulen Basel und Luzern.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Peter Schärli</Name>
+        <Instrument>tp</Instrument>
+        <Text>Seit 1978 arbeitet er als professioneller Musiker und spielte mit vielen verschiedenen Künstlern im In- und Ausland in den unterschiedlichsten Besetzungen und Stilrichtungen. Mit eigenen Bands, als vielseitiger Sideman sowie als Komponist von Theatermusik hat sich der umtriebige Trompeter einen hervorragenden Namen gemacht und unterrichtete 40 Jahre als Dozent an der Musikhochschule Luzern.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Vince Benedetti</Name>
+        <Instrument>p</Instrument>
+        <Text>Wird ab sechs Jahren auf dem Klavier unterrichtet, später auch auf Trompete und Posaune. Mit Pony Poindexter reist der Amerikaner nach Europa, arbeitet in Paris, München und Berlin, wo er illustre Namen wie u.a. Pepper Adams, Chet Baker, Stan Getz, Dizzy  Gillespie und Dexter Gordon begleitet. Benedetti leitet ab 1975 während fünf Jahren die Swiss Jazz School in Bern.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Hämi Hämmerli</Name>
+        <Instrument>b</Instrument>
+        <Text>Nach Ausbildung an der Swiss Jazz School als freiberuflicher Musiker tätig, arbeitet er mit u.a. Joe Malinga, Urs Blöchlinger, Franco Ambrosetti, Albert Mangelsdorff, Co Streiff, Lauren Newton und konzertiert in ganz Europa, Peru und Bolivien. Ab 1988 unterrichtete er an der Jazzschule St. Gallen und wurde 1995 als künstlerischer Leiter an die Musikhochschule Luzern berufen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Elmar Frey</Name>
+        <Instrument>dr</Instrument>
+        <Text>Diesen Ausnahme-Drummer unserem Publikum vorzustellen, fühlt sich inzwischen so an, wie jemandem erklären zu müssen, wer vergangenen Mai im United Kingdom wohl gekrönt worden ist. Jedenfalls groovt Elmar königlich und stellte dies auf unserer Bühne seit über 20 Jahren bereits x-fach unter Beweis. Und sein ,Palmares’ ist riesig - es möchten einfach alle mit ihm spielen…</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 3 End  -->
+  <!--  Konzert 4 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2023</Year>
+    <Month>11</Month>
+    <Day>18</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Lily Horn Is Born feat. Helen Iten</BandName>
+    <ShortText>Vier Frauen erleben zwischen 2000 und 2007 groovende Zeiten, und dann ist plötzlich Schluss. Jedenfalls bis zu jenem verhängnisvollen gemeinsamen Abendessen zehn Jahre später. So nimmt alles Weitere seinen Lauf und vereinigt Lily für das aktuelle Projekt mit der Schweizer Sängerin.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazzmuseum </LabelFlyerText>
+    <FlyerText>Im Jahr 1989 wurde der Verein ‚Pro Jazz Schweiz‘ durch den Sammler und Publizisten Otto Flückiger mit einigen Freunden wie Eduard Keller gegründet, dessen Sammlungen die Erstbestände eines aufzubauenden Archivs bildeten. Von 1992 bis 1996 wurde es in Arlesheim BL als kleines Jazzmuseum betrieben.
+Wegen finanzieller Probleme mussten der Standort aufgegeben und die Bestände an der Jazzschule Basel eingelagert werden. 1998 wurden sie nach Uster gebracht und fanden ihren vorläufigen Standort im  Umfeld des 2000 eingerichteten ‚Musikcontainers‘, einer bekannten Jazz-Konzertbühne. 
+Neben der Organisation von Ausstellungen zum Thema ‚Jazz in der Schweiz‘ im Foyer dieser Konzertstätte widmete man sich der Aufnahme, Sichtung und Bewertung von Nachlässen und Schenkungen, die in grosser Zahl und Masse eingingen. So wurde unter anderem die umfangreiche, aus mehreren Tausend Tonträgern und zahlreichen weiteren Objekten bestehende Sammlung aus dem Nachlass des Jazzkenners Hans Georg ‚Johnny‘ Simmen (1918–2004) als eigenständige ‚Simmen-Collection‘ in das Jazzarchiv integriert.
+Inzwischen firmiert der Verein unter dem Namen Swissjazzorama.</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20231118_Lily_Horn/PlakatNewsletter20231118.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20231118_Lily_Horn/PlakatNewsletter20231118_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231118_Lily_Horn/d20231118_Lily_Horn_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>http://www.lilyhorn.ch</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231118_Lily_Horn/d20231118_Lily_Horn_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231118_Lily_Horn/d20231118_Lily_Horn_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2023.11.18/JazzGalerie_G175.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20231118_Lily_Horn_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Fabienne Hoerni</ContactPerson>
+    <ContactEmail>fabihorn@gmx.ch</ContactEmail>
+    <ContactTelephone>+41 79 590 22 55</ContactTelephone>
+    <ContactStreet>Bumelochstrasse 7</ContactStreet>
+    <ContactPostCode>4656</ContactPostCode>
+    <IbanNumber>CH16 0642 8016 3201 7340 0</IbanNumber>
+    <ContactRemark>Clientis Sparkasse Oftringen</ContactRemark>
+    <ContactCity>Starrkirch-Wil</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Annette Kitagawa</Name>
+        <Instrument>ss, as</Instrument>
+        <Text>Als Co-Gründungsmitglied von Lily Horn Is Born studierte die in Bern lebende Saxofonistin an der hiesigen Kunsthochschule HKB Pädagogik, Komposition sowie Arrangement. Es folgen Kompositionsaufträge für den Circus Monti sowie für Schulmusicals in Belp. Aktuell spielt sie in diversen Ad Hoc Bands und erteilt seit vielen Jahren Musik- und Bandunterricht.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+      <Musician>
+        <Name>Susanne Müller</Name>
+        <Instrument>ss, as</Instrument>
+        <Text>Studierte an der Musikhochschule Luzern Saxofon. Neben vielen interessanten Projekten im Bereich Theater-, Film und CD-Produktionen spielte sie viele Jahre in der Jazz-Rockformation ‚Müller4‘ und war 10 Jahre Mitglied der Band ‚Wilhelm Toll‘. Über 20 Jahre spielte sie im Duo mit der viel zu früh verstorbenen Pianistin Eliane Cueni. Leitet aktuell die Band ‚Pink Shoes‘ und spielt als Gitarristin in der Punk-Rock Band ,ThreeAngle’.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+      <Musician>
+        <Name>Fabienne Hoerni</Name>
+        <Instrument>ts</Instrument>
+        <Text>Die Oltnerin studierte an der Musikhochschule Basel und unterrichtet heute in der Aarestadt. Sie arbeitet als Freelance-Musikerin sowie mit diversen Bands wie ,Ivy Trio’, ,James Brown Tribute Show’, ,Miss Jones’ u.v.a. Mehrere erhaltene Förder- und Kulturpreise belohnen ihr Schaffen. Klare Melodieführung, Groove und ein ausgesprochen warmer Klang sind ihr Markenzeichen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+      <Musician>
+        <Name>Lisette Wyss</Name>
+        <Instrument>bs</Instrument>
+        <Text>Ebenfalls Co-Gründerin von L.H.I.B. sowie Studium an der Musikhochschule Luzern in den Fächern Saxofon, Komposition und Arrangement. Die in Bern lebende Baritonsaxerin erhielt Kompositonsaufträge für Circus Monti und ,Zurich Jazz Orchestra’ und war von 2004 bis 2017 künstlerische Leiterin des Festivals ,Buskers Bern’. Interaktive Audioinstallationen mit ihrer Firma TrikTek.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+      <Musician>
+        <Name>Helen Iten</Name>
+        <Instrument>voc</Instrument>
+        <Text>Die Zürcher Sängerin studierte an der Musikhochschule in Basel und unterrichtet an der Musikschule Konservatorium in Zürich, MKZ. Seit ihrem 16. Lebensjahr singt sie in verschiedenen Formationen zwischen Jazz, Pop, Singer-Songwriter und Unterhaltungsmusik. Diverse CD-Produktionen und Mitarbeit in verschiedenen Projekten im deutschsprachigen Raum.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 4 End  -->
+  <!--  Konzert 5 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2023</Year>
+    <Month>12</Month>
+    <Day>2</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Tomas Sauter - Treasure Hunt</BandName>
+    <ShortText>Magie der Momentkunst - alles erscheint so einfach und selbstverständlich. Das Kreativkombinat spielt das facettenreiche Repertoire aus der Feder des inspirierenden Leaders wie im Rausch lustvoll und beiläufig zugleich und macht dabei die Komplexität bei so viel beschwingter Spielfreude glatt ungeschehen.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Der Swing</LabelFlyerText>
+    <FlyerText>Die Swing-Ära von Ende der 1920er bis in die Mitte der 1940er Jahre (in Europa bis in die späten 1940er Jahre) ist die beim Publikum erfolgreichste Zeit des Jazz. Der Swing hatte in den 1930er Jahren seinen Durchbruch. Nach dem Schwarzen Freitag 1929 sanken die Verkaufszahlen der Plattenindustrie dramatisch. Dafür hielt aber das Medium Radio Einzug in den USA und mit ihm der Swing. Bands mit weißen Musikern machten jene Musik beliebt, die schon Jahre zuvor von Afroamerikanern gespielt und gehört wurde. 
+Der dazugehörige afroamerikanische Swing-Tanz hieß Lindy Hop. Die amerikanische Jugend war verrückt nach diesem ausgeflippten Tanzstil und dem schnellen Swing. 
+Während der Wirtschaftsdepression der 1930er Jahre blühte dadurch eine noch nie dagewesene und von der älteren Generation unverstandene Jugendkultur der Fröhlichkeit und der Freiheit auf. Der Musikstil wurde so zur vorherrschenden Populär- und Unterhaltungsmusik.</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20231202_Tomas_Sauter/PlakatNewsletter20231202.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20231202_Tomas_Sauter/PlakatNewsletter20231202_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231202_Tomas_Sauter/d20231202_Tomas_Sauter_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.tomassauter.com</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231202_Tomas_Sauter/d20231202_Tomas_Sauter_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231202_Tomas_Sauter/d20231202_Tomas_Sauter_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2023.12.02/JazzGalerie_G176.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20231202_Tomas_Sauter_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Tomas Sauter</ContactPerson>
+    <ContactEmail>tomas@tomassauter.com</ContactEmail>
+    <ContactTelephone>+41 78 791 77 57</ContactTelephone>
+    <ContactStreet>Marktgasse 26</ContactStreet>
+    <ContactPostCode>2502</ContactPostCode>
+    <IbanNumber>CH04 0900 0000 2502 9043 5</IbanNumber>
+    <ContactRemark>PostFinance</ContactRemark>
+    <ContactCity>Biel</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Domenic Landolf</Name>
+        <Instrument>ts</Instrument>
+        <Text>Begann mit 7 Jahren Klavier zu spielen und wechselte nach fünf Jahren zum Sax. Mit 19 Jahren beginnt er seine Studien an der damaligen Swiss Jazz School (heute HKB). Als Sideman ist er auf über 20, unter eigenem Namen auf drei CD’s zu hören. Arbeitete mit namhaften nationalen sowie internationalen Musikergrössen und ist Professor für Saxofon an der Hochschule für Musik Basel.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Tomas Sauter</Name>
+        <Instrument>g</Instrument>
+        <Text>Sauter beginnt im Alter von 10 Jahren Gitarre zu spielen. Im Anschluss an seine Studien in der Schweiz sowie in New York bei John Abercrombie gewinnt der Gitarrist mehrere Preise und Auszeichnungen als Solist und mit seinen Bands. Als Bandleader hat er ein Dutzend Produktionen unter eigenem Namen veröffentlicht.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Daniel Hernandez</Name>
+        <Instrument>rhodes</Instrument>
+        <Text>Als Kind mit sieben Jahren auf dem klassischen Klavier gestartet, wechselt der Jugendliche zum Jazzunterricht bei Stefan Aeby, bei welchem er die Vorstudien am Konservatorium Fribourg 2018 abschliesst. Im selben Jahr wechselt er an die HKB nach Bern zu Colin Vallon. Regelmässig mit verschiedensten Projekten auf CH-Bühnen zu hören.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Daniel Schläppi</Name>
+        <Instrument>b</Instrument>
+        <Text>Der Bassist ist seit zwei Jahrzehnten mit renommierten Projekten und hunderten von Konzerten in Europa unterwegs. Gemacht hat er dabei Erfahrungen in grosser stilistischer Bandbreite von Free über Mainstream bis zu Funk, Film- und Theatermusik. Rund dreissig, teilweise prämierte CD-Produktionen, sind dabei entstanden.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Kevin Chesham</Name>
+        <Instrument>dr</Instrument>
+        <Text>Mit 11 Jahren erhielt das Kind erste Schlagzeuglektionen, ein Jahr später folgt bereits die erste Banderfahrung. Nach Abschluss der Schulzeit Besuch der Swiss Jazz School und Unterricht bei Ueli Müller. Anschliessend folgt ein Studium an der HKB in Bern mit Unterricht bei Billy Brooks und Dejan Terzic. Viele Konzerte in diversen Stilrichtungen und Besetzungen, von Jazz bis Punk, von Duos bis Sinfonieorchester.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 5 End  -->
+  <!--  Konzert 6 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2023</Year>
+    <Month>12</Month>
+    <Day>16</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Alessandro d'Episcopo - Solo Piano</BandName>
+    <ShortText>That’s All - der Name seines ersten Soloalbums ist Programm und integriert Melodie, Harmonie, Bass und das Perkussive sowieso. Der Pianist besinnt sich hier grundsätzlich auf das Wesentliche, kokettiert nicht mit seiner Virtuosität. Eine entspannte Wohltat in einer eher angespannten Jahreszeit.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Die Stars des Swing</LabelFlyerText>
+    <FlyerText>Bandleader wie Duke Ellington, Count Basie, Benny Goodman und Artie Shaw waren die Stars des Swing. Duke Ellington und sein Orchester hatten jahrelang ein festes Engagement im Cotton Club.
+Die Auftritte der Big Bands zogen ein riesiges Publikum an; Swing war die populäre Tanzmusik dieser Zeit. Aus einer besonderen Spielform des Swing, dem Kansas City Jazz, entwickelte sich letztlich der Rhythm &amp; Blues. 
+Mit der Gründung des Quintette du Hot Club de France durch Django Reinhardt mischte seit 1934 auch Europa in der Jazzgeschichte mit. 
+Bis heute pflegt das Pasadena Roof Orchestra als authentischer Vertreter des Swing diese Epoche mit der Interpretation von Original Arrangements.
+</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20231216_Alessandro_dEpiscopo/PlakatNewsletter20231216.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20231216_Alessandro_dEpiscopo/PlakatNewsletter20231216_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231216_Alessandro_dEpiscopo/d20231216_Alessandro_dEpiscopo_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.alessandrodepiscopo.com/epk-alessandro-d-episcopo-solo-piano</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231216_Alessandro_dEpiscopo/d20231216_Alessandro_dEpiscopo_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20231216_Alessandro_dEpiscopo/d20231216_Alessandro_dEpiscopo_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2023.12.16/JazzGalerie_G177.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20231216_Alessandro_dEpiscopo_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Alessandro d'Episcopo</ContactPerson>
+    <ContactEmail>depis@gmx.net</ContactEmail>
+    <ContactTelephone>+41 79 448 18 85</ContactTelephone>
+    <ContactStreet>Würzenbachmatte 11</ContactStreet>
+    <ContactPostCode>6006</ContactPostCode>
+    <IbanNumber>CH83 8080 8002 6610 4403 6</IbanNumber>
+    <ContactRemark>Raiffeisen</ContactRemark>
+    <ContactCity>Luzern</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Alessandro d'Episcopo</Name>
+        <Instrument>p</Instrument>
+        <Text>Geboren in Neapel, entschied sich Alessandro d'Episcopo bereits mit 13 Jahren, sein Leben der Musik im Allgemeinen und dem Jazz im Speziellen zu widmen. Nach klassischem Musikunterricht am örtlichen Konservatorium zog er 1979 nach Mailand, seinerzeit das Zentrum des italienischen Jazz. Als eine der damaligen Jazz- und Fusion-Triebfedern seines Landes kommt es zu Kooperationen mit Musikern wie Chet Baker, Tony Scott, Gianni Basso, Billy Cobham, Toots Thielemans und entsprechenden Auftritten an Festivals in Umbria, Clusone, Sant'Anna Arresi, Padova, Livorno, Cagliari und Genova.
+
+
+Um seine musikalische Entwicklung weiter voranzubringen, zieht d'Episcopo mit 30 Jahren nach Zürich und lässt sich vom Musikpädagogen Rudolf am Bach in klassischer Musik anweisen. Zur selben Zeit besucht er Kurse bei Thierry Lang am Konservatorium in Montreux, wo er zwei Jahre später sein Diplom in Jazz Performance erhält.
+
+Sein Enthusiasmus sowie Drang nach musikalischem Frieden erlauben ihm die Teilnahme bzw. Zusammenarbeit an unterschiedlichsten Projekten und mit Musikern wie George Robert, Franco Ambrosetti, Marianne Racine, Benny Bailey, Peter Appleyard, Julio Barreto, Phil Wilson, Charito, Scott Hamilton usw.
+
+Seine musikalische Vielseitigkeit und Wissbegierde verdankt d'Episcopo heute zum grossen Teil Chick Corea und Keith Jarrett. Wie auch seine Vorbilder Solo-Projekte mit großem Erfolg präsentiert haben, man denke doch einmal an das genreübergreifende ,Köln Concert’ von Jarrett, versucht sich auch d’Episcopo daran. Und es gelingt ihm dabei eine frische, sinnliche sowie intime Eigenständigkeit.
+</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 6 End  -->
+  <!--  Konzert 7 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2024</Year>
+    <Month>1</Month>
+    <Day>13</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Tribute to Art Blakey &amp; The Jazz Messengers</BandName>
+    <ShortText>Bereits vor fünf Jahren zollten sie dem grossen Schlagzeuger zum 100-Jährigen ihren Respekt. Und weil das damals so unglaublich abgegangen ist, engagieren wir die Truppe bestehend aus der jungen Zürcher Jazzprominenz gleich nochmals vom Fleck weg. Give a big hand now for the Jazz Messengers!</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>NotYetSetNodeValue</LabelFlyerText>
+    <FlyerText>NotYetSetNodeValue</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20240113_Tribute_Art_Blakey/PlakatNewsletter20240113.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20240113_Tribute_Art_Blakey/PlakatNewsletter20240113_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240113_Tribute_Art_Blakey/d20240113_Tribute_Art_Blakey_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.marciodesousa.com/blakey</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240113_Tribute_Art_Blakey/d20240113_Tribute_Art_Blakey_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240113_Tribute_Art_Blakey/d20240113_Tribute_Art_Blakey_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2024.01.13/JazzGalerie_G178.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20240113_Tribute_Art_Blakey_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Márcio de Sousa</ContactPerson>
+    <ContactEmail>info@marciodesousa.com</ContactEmail>
+    <ContactTelephone>+41 79 729 84 10</ContactTelephone>
+    <ContactStreet>Hohlstrasse 46</ContactStreet>
+    <ContactPostCode>8004</ContactPostCode>
+    <IbanNumber>CH44 0483 5061 0710 1000 1</IbanNumber>
+    <ContactRemark>CS</ContactRemark>
+    <ContactCity>Zürich</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Raphael Kalt</Name>
+        <Instrument>tp</Instrument>
+        <Text>In der Badener Musikszene machte der in Leibstadt aufgewachsene Trompeter seine ersten musikalischen Erfahrungen. Nach abgeschlossener Berufslehre folgt ein Musikstudium an der ZHdK. Auftritte mit Zurich Jazz Orchestra, Swiss Jazz Orchestra oder Pepe Lienhard Band sowie diverse CD-Produktionen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Rafael Schilt</Name>
+        <Instrument>ts</Instrument>
+        <Text>Bereits 1998/99 war er Mitglied des Swiss Youth Jazz Orchestra, absolvierte anschliessend ein Studium an der Musikhochschule Luzern und reiste mehrmals nach New York für weiterführende Studien bei Chris Cheek, Chris Speed und Mark Turner. Schilt verfolgt eine rege Konzerttätigkeit im In- bzw. Ausland und gewann bereits verschiedene Stipendien.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Florian Weiss</Name>
+        <Instrument>tb</Instrument>
+        <Text>1991 in Zürich geboren, beginnt Weiss im Alter von neun Jahren Posaune zu spielen. Im Jahre 2012 nimmt er das Studium an der Hochschule der Künste Bern, Abteilung Jazz, auf und studiert dort unter anderem bei Bernhard Bamert, Bert Joris und Frank Sikora. Für den Master in Jazz Performance gibt es 2015 einen Wechsel an die Hochschule Luzern und dort Unterricht insbesondere von Nils Wogram, Andreas Tschopp und Markus Wüest.
+</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Raphael Jost</Name>
+        <Instrument>p</Instrument>
+        <Text>Im Kanton Thurgau aufgewachsen, begann Jost mit sechs Jahren Klavier zu spielen. Zudem wird das Interesse des 18-jährigen Pianisten am Gesang geweckt. Absolviert an der ZHdK sein Musikstudium im Fach Jazz-Piano und erlangt 2013 seinen Masterabschluss in Musikpädagogik und Performance. Unterwegs u.a. mit seinem Oktett Raphael Jost &amp; lots of horns.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Raphael Walser</Name>
+        <Instrument>b</Instrument>
+        <Text>Im Raum Zürich aufgewachsen, erhält Walser mit 11 Jahren Kontrabass-Unterricht, zuerst klassisch, später in Jazz. Es folgt ein Studium an der ZHdK und mit der international besetzten Förderpreis-Band ,Generations Unit’ eine Tour durch Europa. Als gefragter Sideman hat er Auftritte an renommierten Jazzfestivals und ist mit seinem Quintett GangArt unterwegs.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Márcio de Sousa</Name>
+        <Instrument>dr</Instrument>
+        <Text>Als Teilnehmer des Young Composers Project des Künstlerhauses Boswil studierte der in einer portugiesischen Familie in der Schweiz aufgewachsene Drummer und Komponist an der ZHdK bei Tony Renold und Pierre Favre. Der Förderpreisträger der Friedl-Wald Stiftung sowie Arbeitsstipendiat der Stadt Zürich arbeitet als freischaffender Musiker in diversen Bands und Projekten.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 7 End  -->
+  <!--  Konzert 8 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2024</Year>
+    <Month>1</Month>
+    <Day>27</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Dig Dug Dug</BandName>
+    <ShortText>Was nach Zeit- bzw. Stammform eines Verbs tönt, kann durchaus so verstanden werden. Um eine derart freie Spielweise so unterhaltend unterjubeln zu können, müssen gewisse Kunstgriffe schon zuerst aus der tiefen Tradition ausgegraben, verarbeitet und anschliessend verinnerlicht werden - you dig …?</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Modern Jazz</LabelFlyerText>
+    <FlyerText>Mit dem Bebop beginnt der Modern Jazz. Um die Entstehungsgeschichte des Bebop ranken sich allerlei Mythen und Legenden. Fest steht, dass zu einer Zeit, als viele Big Bands des Swing ihren Zenit erreicht oder bereits überschritten hatten und ihre Musik immer formelhafter wurde, junge Musiker unter anderem im Harlemer Club Minton’s Playhouse mit neuen musikalischen Formen experimentierten. 
+Die Unzufriedenheit mit den stereotypen Klischees des kommerziellen Swing, das Zusammentreffen einiger kreativer Musikerpersönlichkeiten und ein erwachendes Selbstbewusstsein dieser meist schwarzen Musiker führte letztendlich zur Entstehung eines neuen Stils. 
+Als Gründerväter des Bebop gelten Charlie Parker, Dizzy Gillespie, Thelonious Monk, Charlie Christian und Kenny Clarke. Die Musiker versuchten, eine Musik zu entwickeln, die nicht mehr primär als Tanz- oder Unterhaltungsmusik fungierte und gegenüber den vorherigen Stilen eine erweiterte Harmonik hatte.
+
+</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20240127_Dig_Dug_Dug/PlakatNewsletter20240127.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20240127_Dig_Dug_Dug/PlakatNewsletter20240127_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240127_Dig_Dug_Dug/d20240127_Dig_Dug_Dug_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.thomasflorin.com/</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240127_Dig_Dug_Dug/d20240127_Dig_Dug_Dug_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240127_Dig_Dug_Dug/d20240127_Dig_Dug_Dug_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>FotoKonzerte/Konzert.2024.01.27/JazzGalerie_G179.htm</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>d20240127_Dig_Dug_Dug_Markus.zip</PhotoGalleryTwoZip>
+    <ContactPerson>Thomas Florin</ContactPerson>
+    <ContactEmail>thomas.florin@bluewin.ch</ContactEmail>
+    <ContactTelephone>+41 79 255 17 51</ContactTelephone>
+    <ContactStreet>31 Route de la Gare</ContactStreet>
+    <ContactPostCode>1242</ContactPostCode>
+    <IbanNumber>CH98 8080 8007 4965 2422 4</IbanNumber>
+    <ContactRemark>Raiffeisen</ContactRemark>
+    <ContactCity>Satigny</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Thomas Florin</Name>
+        <Instrument>p</Instrument>
+        <Text>Der Bandleader seines 2020 gegründeten Trios kennt keinerlei Beisshemmungen mit den verschiedenen Stilen und fühlt sich sowohl in der frei improvisierten und experimentellen Musik als auch in der Jazz-Szene gleichermassen zuhause. Er hatte die Gelegenheit, mit vielen nationalen sowie internationalen Künstlervertretern dieser Genres aufzutreten, in der Schweiz ebenso wie in Frankreich, Italien, Großbritannien, Kanada, China, Japan, Thailand, Senegal und Portugal. Zudem verfolgt der Musiker sein Soloprojekt. Seine musikalischen Forschungen führen ihn zur Zusammenarbeit mit Künstlern der improvisierten Musik und des Free Jazz und immer wieder kommt es zu interdisziplinären Projekten wie einer poetischen Aufführung oder dem Duett mit Tänzer und Choreographen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Bänz Oester</Name>
+        <Instrument>b</Instrument>
+        <Text>Dewey Redman, Joe Lovano, Michael Brecker, Ray Anderson oder Chris Potter - allesamt schillernde Persönlichkeiten der internationalen Jazzszene, welche nicht auf die Dienste des begnadeten Berner Bassisten verzichten wollten. In seinen Händen wird der Bass zu einem Klangkörper, der stilistische Grenzen scheinbar mühelos überschreitet. Er schafft eine Musikarchitektur aus Melodie, Emotion und Groove, die swingt, tanzt und sich genüsslich in den warmen Klang - sein Markenzeichen - hineinsteigert.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Samuel Dühsler</Name>
+        <Instrument>dr</Instrument>
+        <Text>Nach Abschluss am Berklee College of Music in Boston, USA, spielte Dühsler an verschiedensten Veranstaltungsorten, u.a. dem legendären Blue Note in New York. Zudem rundeten Auftritte mit bekannten Künstlerinnen wie Ingrid Jensen, Kevin Mahogany, Herbie Hancock, The New York Voices, Benny Golson und v.a. seinen Aufenthalt in Übersee ab. Zurück in der Schweiz unterrichtet er und spielt als Teil der lokalen Musikszene in der Schweiz und in Deutschland. Tourneen in den USA, Europa, Japan, China und Russland geben Dühsler ein gutes Fundament an musikalischer Erfahrung, wovon nicht zuletzt seine Arbeit mit Kindern, behinderten Musikern, Amateuren und Studenten profitiert.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 8 End  -->
+  <!--  Konzert 9 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2024</Year>
+    <Month>2</Month>
+    <Day>10</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Erich Fischer Quartett feat. Katya Che</BandName>
+    <ShortText>Seit dem letzten Salmen-Auftritt hat sich das Quartett des umtriebigen Aarauer Musikers grundlegend neu formiert bzw. das Instrumentarium des Bandleaders erweitert. In variablen Besetzungen überrascht die musikalische Form und stellt dabei einen Gast aus der Ukraine ins Licht.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Cool Jazz</LabelFlyerText>
+    <FlyerText>Als Geburtsstunde des Cool Jazz werden häufig die Aufnahmen des von Miles Davis geleiteten Nonetts 1949 und 1950 betrachtet, die in den 1950er Jahren unter dem Titel Birth of the Cool Berühmtheit erlangten.
+Die Musik dieses Orchesters ist geprägt durch komplexe, vielstimmige Arrangements, die im Unterschied zum Bebop weniger die extrovertierten und oft rasend schnellen Soli der Musiker in den Vordergrund rücken, als vielmehr auf einen kunstvoll aus den einzelnen Instrumentalstimmen gewobenen Klang setzen. 
+Bedeutende Arrangeure waren Gil Evans und der Baritonsaxofonist Gerry Mulligan. Diese ,coole' Ästhetik wurde auch von Jazzmusikern wie Chet Baker, Stan Getz und Shelly Manne an der Westküste der USA aufgegriffen und erlangte in den 1950er Jahren unter dem Begriff West Coast Cool große Popularität. 
+In den 1960ern folgen Bossa-Nova-Interpretationen (Stan Getz, Paul Winter, Herbie Mann, Charlie Byrd) und erreichen ebenfalls das breite Publikum.</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20240210_Erich_Fischer/PlakatNewsletter20240210.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20240210_Erich_Fischer/PlakatNewsletter20240210_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240210_Erich_Fischer/d20240210_Erich_Fischer_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.erichfischer-musik.ch/erich-fischer-quartett</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240210_Erich_Fischer/d20240210_Erich_Fischer_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240210_Erich_Fischer/d20240210_Erich_Fischer_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>NotYetSetNodeValue</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>NotYetSetNodeValue</PhotoGalleryTwoZip>
+    <ContactPerson>Erich Fischer</ContactPerson>
+    <ContactEmail>joeyoz@bluewin.ch</ContactEmail>
+    <ContactTelephone>+41 62 824 68 64</ContactTelephone>
+    <ContactStreet>Pestalozzistrasse 50</ContactStreet>
+    <ContactPostCode>5000</ContactPostCode>
+    <IbanNumber>CH76 0900 0000 5004 7794 1</IbanNumber>
+    <ContactRemark>PostFinance</ContactRemark>
+    <ContactCity>Aarau</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Dave Feusi</Name>
+        <Instrument>ts, ss</Instrument>
+        <Text>Er lernt bereits in früher Kindheit Klarinette und steigt mit zwölf Jahren auf das Sax um. Noch während seiner Ausbildung am Konservatorium Zürich gründet er die Swiss Big Band Eruption. Nach Erfahrungen am Opernhaus, an der Tonhalle und in weiteren Schweizer Orchestern entscheidet sich Feusi trotz Angeboten aus der klassischen Musikszene für ein Jazz-Performance Studium am Berklee College of Music in Boston, USA, bei George Garzone und Bill Pierce.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Erich "Joey Oz" Fischer</Name>
+        <Instrument>vib, bh</Instrument>
+        <Text>Als Aarauer Unikum und Hans Dampf in vielen Gassen ist ,Joey Oz’ seit Ende der 80-er Jahre als Vibrafonist, Perkussionist, Sänger, Komponist und Arrangeur in verschiedensten Jazz-, Latin- und Volksmusikformationen aktiv. Neben Auftritten in der Schweiz, Europa, Kalifornien, Boston und New York wirkte der Musiker bei mehr als 20 CD-Aufnahmen und -Produktionen mit.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Thomas Lähns</Name>
+        <Instrument>b</Instrument>
+        <Text>Als gefragter Bassist kombiniert er die Bogen-Technik eines klassischen Orchestermusikers mit der Spontanität eines Jazz-Bassisten und bestreitet regelmäßig klassische Soloauftritte in Europa und Südamerika. Als Jazzbassist spielt Lähns mehr als 100 Konzerte im Jahr und bezieht sich auf die Tradition von Scott LaFaro, Richard Davis oder Miroslav Vitous.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Tony Renold</Name>
+        <Instrument>dr</Instrument>
+        <Text>Als sogenannter ,Musician's Musician’ gehört der Aargauer Jazzdrummer landesweit zu den bedeutendsten Vertretern seines Fachs. Wer ihn in seiner Band weiss, kann sich auf einen technisch höchst versierten und stets pünktlich-präzisen Rhythmiker verlassen, der zudem die Fieberkurve der Expressivität empathisch mitzuzeichnen versteht.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Kateryna Chemezova</Name>
+        <Instrument>voc</Instrument>
+        <Text>Die ukrainische Sängerin und Schauspielerin musste ihren Heimatort Kiew aus bekannten Gründen verlassen und lebt seither in Basel. Sie besitzt einen Master in Pop Vocals der ,Academy of circus and variety arts’ in Kiew und arbeitete während mehreren Jahren in Theatern und auf Konzertbühnen als Sängerin, Tänzerin sowie Schauspielerin.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 9 End  -->
+  <!--  Konzert 10 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2024</Year>
+    <Month>2</Month>
+    <Day>24</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Florian Weiss' Woodism</BandName>
+    <ShortText>Idealerweise sind Musiker eines Ensembles durch ein unsichtbares elastisches Band miteinander verbunden und gruppieren sich immer wieder neu, sobald es auf einer Seite zieht. Dies die in die Tat umgesetzte Konzeptionierung eines Quartetts, das seit nun zehn Jahren in unverändertem Line up auftritt.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Free Jazz</LabelFlyerText>
+    <FlyerText>Seit etwa 1957 deuten sich freiere Spielweisen an, bei denen sich die Musiker in ihren Soli teilweise von der Jazzharmonik lösen. Dies gilt einerseits für Musiker wie John Coltrane und Eric Dolphy.
+1961 erscheint Colemans Platte Free Jazz, die bald zum Namen für die freien Formen wird. Selbst das Schlagzeugspiel wird durch den die Metren umspielenden Sunny Murray emanzipiert. Sieht man von britischen Musikern um Joe Harriott ab, findet erst seit etwa 1965 in Europa – teilweise unabhängig vom Free Jazz der USA – ein Bruch mit den traditionellen und konventionellen Spielweisen statt.
+Erste Protagonisten dieser neuen Richtung waren in Europa unter anderem das Manfred-Schoof-Quintet, die Gunter-Hampel-Gruppe Heartplants, die britische Band Joseph Holbrooke und die Gruppe um den französischen Trompeter Bernard Vitet. 
+Die Improvisationshaltung wurde zunehmend radikaler und führte im Extrem zur freien Form, die ohne jede Verabredung im Zusammenspiel entwickelt wird. Daneben existieren der Avantgarde Jazz und Spielhaltungen, die als Free Bop und als Creative Music bekannt wurden.</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20240224_Florian_Weiss/PlakatNewsletter20240224.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20240224_Florian_Weiss/PlakatNewsletter20240224_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240224_Florian_Weiss/d20240224_Florian_Weiss_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.woodoism.ch/</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240224_Florian_Weiss/d20240224_Florian_Weiss_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240224_Florian_Weiss/d20240224_Florian_Weiss_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>NotYetSetNodeValue</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>NotYetSetNodeValue</PhotoGalleryTwoZip>
+    <ContactPerson>Florian Weiss</ContactPerson>
+    <ContactEmail>woodoism@florianweiss.ch</ContactEmail>
+    <ContactTelephone>+41 76 506 12 47</ContactTelephone>
+    <ContactStreet>Viktoriarain 13</ContactStreet>
+    <ContactPostCode>3013</ContactPostCode>
+    <IbanNumber>CH74 0900 0000 1506 2196 6</IbanNumber>
+    <ContactRemark>PostFinance</ContactRemark>
+    <ContactCity>Bern</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Linus Amstad</Name>
+        <Instrument>as, fl</Instrument>
+        <Text>Geboren und aufgewachsen in Zug, beginnt Amstad seine Ausbildung an der ZHdK in Zürich sowie dem Musikkonservatorium in Wien, um anschliessend ein Jazzstudium an der HKB in Bern mit erfolgreichem Masterabschluss anzuhängen. Der Saxofonist pflegt eine aktive künstlerische Tätigkeit und bewegt sich dabei musikalisch und performativ in verschiedenen Welten von Klassik bis Jazz.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Florian Weiss</Name>
+        <Instrument>tb</Instrument>
+        <Text>Mit seinem Quartett ,Woodism’ gewinnt der in Zürich geborene Posaunist 2018 den renommierten Jazzpreis der Zürcher Kantonalbank und war 2020 bis 2022 Teil der prioritären Jazzförderung von Pro Helvetia. Die Band veröffentlichte bis dato drei Alben und tourte in Europa, Russland und Südamerika. Seit 2012 befindet sich der Lebens- und Arbeitsmittelpunkt des Musikers in Bern.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Valentin von Fischer</Name>
+        <Instrument>b</Instrument>
+        <Text>In Belp bei Bern geboren, wechselt der jugendliche Gitarrist erst zum E-Bass, lässt sich bald darauf auf dem Kontrabass unterrichten und beginnt 2011 sein Studium an der Hochschule der Künste Bern (HKB) bei Thomas Dürst und Patrice Moret mit Masterabschluss 2017. Der Bassist konzertiert regelmässig mit verschiedenen Formationen im In- und Ausland und ist daneben als Instrumentallehrer tätig.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Philipp Leibundgut</Name>
+        <Instrument>dr</Instrument>
+        <Text>Beginnt mit 10 Jahren Schlagzeug und Marschtrommel zu spielen und besucht bald darauf das Gymnasium mit Schwerpunkt Musik. Anschliessend folgt ein Studium an der HKB in Bern mit Masterabschluss 2018. Spielt mit verschiedensten Projekten - u.a. Swiss Jazz Orchestra - in der Schweiz und im Ausland.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 10 End  -->
+  <!--  Konzert 11 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2024</Year>
+    <Month>3</Month>
+    <Day>9</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Adrian Frey Trio</BandName>
+    <ShortText>Basierend auf der afro-amerikanischen Tradition mit Verbindungen zur europäischen Klassik entwickelt das seit 2008 in unveränderter Besetzung spielende Trio seine Improvisationen. Sogar Robert Schumanns Klavierstück ,Träumerei’ von 1838 findet als Rohmaterial Eingang ins aktuelle Repertoire.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Der Soul</LabelFlyerText>
+    <FlyerText>Soul bezeichnet eine Hauptströmung der afroamerikanischen Unterhaltungsmusik. Sie entwickelte sich Ende der 1950er Jahre aus Rhythm and Blues und Gospel. In den 1960er Jahren war Soul fast das Synonym für schwarze Popmusik. 
+Eng verknüpft ist die Geschichte dieser Stilrichtung mit dem Kampf der US-amerikanischen Bürgerrechtsbewegung gegen Rassentrennung und für Gleichberechtigung. 
+Der Begriff Soul-Musik wird seit den 1990ern in einem engeren und einem weiteren Sinn definiert. Der engere bezieht sich auf die musikalische Vortragsweise, wie sie in den 1960ern und 1970ern praktiziert wurde. Diese besteht in einer stark emotionalen Darbietung von Vokal- und Instrumentalsoli (heart and soul ‚mit ganzer Seele‘), der Betonung des Gesangsparts und in dramatisch aufgebauten Musikstücken mit starken Kontrasten bei Lautstärke und Instrumentierung.
+Vor allem die Sechziger wurden musikalisch von der Soulmusik entscheidend mitgeprägt. Der Stil entwickelte sich zu Beginn des Jahrzehnts und entfaltete sich in den folgenden Jahren zu einer eigenständigen schwarzen Popmusik. Rückblickend werden die Sixties als die klassische Ära der Soul-Musik gewertet. 
+</FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20240309_Adrian_Frey/PlakatNewsletter20240309.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20240309_Adrian_Frey/PlakatNewsletter20240309_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240309_Adrian_Frey/d20240309_Adrian_Frey_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.adrian-frey.ch/</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240309_Adrian_Frey/d20240309_Adrian_Frey_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240309_Adrian_Frey/d20240309_Adrian_Frey_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>NotYetSetNodeValue</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>NotYetSetNodeValue</PhotoGalleryTwoZip>
+    <ContactPerson>Adrian Frey</ContactPerson>
+    <ContactEmail>adrian.frey@sunrise.ch</ContactEmail>
+    <ContactTelephone>+41 79 405 51 57</ContactTelephone>
+    <ContactStreet>Ekkehardstrasse 31</ContactStreet>
+    <ContactPostCode>8006</ContactPostCode>
+    <IbanNumber>CH72 0070 0111 4000 5851 5</IbanNumber>
+    <ContactRemark>Zürcher Kantonalbank</ContactRemark>
+    <ContactCity>Zürich</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Adrian Frey</Name>
+        <Instrument>p</Instrument>
+        <Text>Von Jazz über Latin bis Experimental - dies das breitgefächerte Betätigungsfeld des Bandleaders. Er spielt nach ersten Erfahrungen mit Jazz und Improvisation in der Familie bereits mit 19 Jahren am Jazzfestival Zürich. Nach Studien am Konservatorium Zürich sowie am New England Conservatory in Boston tritt der Pianist vorwiegend mit seinen eigenen Formationen auf, im Trio, Quintett und Septett sowie mit der Gruppe Sonic Calligraphy, mit der er mehrere Tournéen in den USA und in China unternommen hat. Zudem spielt er seit vielen Jahren Auftritte von Solopiano- bis zu Bigbandkonzerten.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Patrick Sommer</Name>
+        <Instrument>b</Instrument>
+        <Text>Der vielbeschäftigte E- und Kontrabassist studierte seine beiden Instrumente an der Swiss Jazz School in Bern (heute HKB) und in Los Angeles. Ein warmer und voller Sound zeichnen sein Spiel aus, ebenso das Gespür für Groove, Interaktionsfreude sowie ein breites stilistisches und instrumentales Spektrum - entsprechend gross deshalb sein Band-Portfolio bzw. seine Diskografie. Sommer lebt und arbeitet als freischaffender Musiker in Zürich und betreibt eine rege Konzerttätigkeit im In- und Ausland.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Tony Renold</Name>
+        <Instrument>dr</Instrument>
+        <Text>Ein Musician’s Musician ist ein Musiker, von Berufskollegen sehr geschätzt, von der grossen Mehrheit der Nichtmusiker jedoch nicht in dem Sinne wahrgenommen. Dieser Nimbus trifft auf den Aargauer Jazzdrummer exakt zu, über den, obwohl landesweit einer der bedeutendsten Vertreter seines Fachs, vorab die Mitmusiker aufgrund seines Könnens und seiner Musikalität schwärmen. Ein rhythmisch feinfühliger und hochpräziser Groover, auf den jederzeit Verlass ist. Zuweilen reduziert er seine Begleitung auf wenige, sichere Impulse, um die Solisten dann wiederum mit schlauen trommlerischen Einfällen in einen lockeren Dialog zu ziehen.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 11 End  -->
+  <!--  Konzert 12 Start  -->
+  <Concert>
+    <DayName>Samstag</DayName>
+    <Year>2024</Year>
+    <Month>3</Month>
+    <Day>23</Day>
+    <TimeStartHour>15</TimeStartHour>
+    <TimeStartMinute>30</TimeStartMinute>
+    <TimeEndHour>17</TimeEndHour>
+    <TimeEndMinute>15</TimeEndMinute>
+    <Place>Spagi by Marcello</Place>
+    <Street>Metzgergasse 8</Street>
+    <City>Aarau</City>
+    <ConcertCancelled>FALSE</ConcertCancelled>
+    <BandName>Cool Cats Unlimited</BandName>
+    <ShortText>Zum Saisonabschluss wird wieder einmal unsere Vorstandsfrau am Bass im Fokus sein und zusammen mit ihren drei Freunden für ein abwechslungsreiches, spannendes Repertoire aus Jazz Originals und Standards der 50-er und 60-er Jahre sorgen - brillante Soli und fesselndes Interplay garantiert.</ShortText>
+    <AdditionalText>NotYetSetNodeValue</AdditionalText>
+    <LabelAdditionalText>NotYetSetNodeValue</LabelAdditionalText>
+    <FlyerTextHomepagePublish>TRUE</FlyerTextHomepagePublish>
+    <LabelFlyerText>Das Jazz-Lexikon: Funk</LabelFlyerText>
+    <FlyerText>Der Haupttrend innerhalb der schwarzen Musik der Siebziger war Funk. Anders als die auf Gospel-Refrains und Popsong-Formate fixierte Soulmusik der Sechziger zelebrierte Funk den reinen Rhythmus. Kennzeichnend für den neuen Sound waren ein treibender Bass, abgehackte Gitarren-Riffs sowie akzentuiert eingesetzte Bläsersätze. Der Gesang erfüllte im Grunde lediglich die Rolle, die Darbietung der Stücke zu moderieren und ihre Wirkung emotional zu steigern. </FlyerText>
+    <PosterBigSize>NotYetSetNodeValue</PosterBigSize>
+    <PosterMidSize>PlakateFlyersBilletsVorlagen/d20240323_Cool_Cats/PlakatNewsletter20240323.jpg</PosterMidSize>
+    <PosterSmallSize>PlakateFlyersBilletsVorlagen/d20240323_Cool_Cats/PlakatNewsletter20240323_Klein.jpg</PosterSmallSize>
+    <SoundSample>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240323_Cool_Cats/d20240323_Cool_Cats_Sound_Sample.mp3</SoundSample>
+    <BandWebsite>https://www.alljazzpromotion.ch/AJP.CCU.html</BandWebsite>
+    <SoundSampleQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240323_Cool_Cats/d20240323_Cool_Cats_Sound_QR_code.png</SoundSampleQrCode>
+    <BandWebsiteQrCode>https://jazzliveaarau.ch/PlakateFlyersBilletsVorlagen/d20240323_Cool_Cats/d20240323_Cool_Cats_Website_QR_code.png</BandWebsiteQrCode>
+    <PhotoGalleryOne>NotYetSetNodeValue</PhotoGalleryOne>
+    <PhotoGalleryTwo>NotYetSetNodeValue</PhotoGalleryTwo>
+    <PhotoGalleryOneZip>NotYetSetNodeValue</PhotoGalleryOneZip>
+    <PhotoGalleryTwoZip>NotYetSetNodeValue</PhotoGalleryTwoZip>
+    <ContactPerson>Laura Cesar</ContactPerson>
+    <ContactEmail>lauracesar@gmx.ch</ContactEmail>
+    <ContactTelephone>+41 79 857 75 13</ContactTelephone>
+    <ContactStreet>Rossweid 11</ContactStreet>
+    <ContactPostCode>5619</ContactPostCode>
+    <IbanNumber>CH03 0025 8258 1097 8841 B</IbanNumber>
+    <ContactRemark>UBS</ContactRemark>
+    <ContactCity>Büttikon</ContactCity>
+    <LoginPassword>musiker</LoginPassword>
+    <Musicians>
+      <Musician>
+        <Name>Pius Baumgartner</Name>
+        <Instrument>ts, ss</Instrument>
+        <Text>Seine musikalischen Wurzeln verdankt der Saxofonist, Klarinettist und Flötist der Bündner Volksmusik. Seit seinem Studium in den 90ern an der Jazzschule St. Gallen ist er als gefragter Multi-Instrumentalist in den verschiedensten Stilrichtungen und Besetzungen in der Schweiz und im Ausland unterwegs.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Beat Baumli</Name>
+        <Instrument>g</Instrument>
+        <Text>Seit seinen Studien an der Swiss Jazz School und am Berklee College of Music in den 80ern verfolgt Beat Baumli eine freiberufliche Karriere als Gitarrist, Bandleader, Komponist und seit 2012 auch als Produzent des Labels All Jazz Promotion. Im Jahr 2015 wurde er mit dem Beat Baumli &amp; Jürg Morgenthaler Jazz Trio (B.B. &amp; J.M. Jazz Trio) für den Swiss Jazz Award nominiert.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+      <Musician>
+        <Name>Laura Cesar</Name>
+        <Instrument>b</Instrument>
+        <Text>Nach ihrem Musikstudium am Humber College und der York University in Toronto tourte die kanadische Bassistin regelmässig quer durch Nordamerika und seit ihrer Ankunft in der Schweiz in den frühen 90ern auch in Europa. Sie ist im In- und Ausland in verschiedensten Stilen und Besetzungen, als Freelance-Musikerin wie auch mit eigenen Bands unterwegs. Und notabene seit acht Jahren in unserem Programmteam tätig.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>female</Gender>
+      </Musician>
+      <Musician>
+        <Name>Reto Ohnsorg</Name>
+        <Instrument>dr</Instrument>
+        <Text>Seit früher Kindheit spielt Reto Ohnsorg Schlagzeug. Verschiedene Lehrer und Schulen wie z.B. das Drummer's Collective NYC führten seine Fähigkeiten in geordnete Bahnen. Er ist vor allem im Bereich Instrumental-Jazz, Soul &amp; Boogaloo unterwegs sowie als Freelancer in Big Bands, Theater und Musical Produktionen tätig.</Text>
+        <BirthYear>NotYetSetNodeValue</BirthYear>
+        <Gender>male</Gender>
+      </Musician>
+    </Musicians>
+  </Concert>
+  <!--  Konzert 12 End  -->
+</Saison>

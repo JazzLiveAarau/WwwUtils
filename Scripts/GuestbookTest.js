@@ -1,5 +1,5 @@
 // File: GuestbookTest.js
-// Date: 2024-02-15
+// Date: 2024-02-16
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -14,6 +14,8 @@
 // Main function simulating the use of UtilServer functions in the Guestbook application
 function guestbookTest()
 {
+    console.log("guestbookTest");
+
     loadAllXmlObjectsForAdminAndUpload();
 
 } // guestbookTest
@@ -28,6 +30,16 @@ function onClickTestGuestbook()
         return;
     }
 
+    if (g_executing_append_delete)
+    {
+        console.log("onClickTestGuestbook Still executing append-save-delete-save");
+
+        return;
+
+    }
+
+    console.log("onClickTestGuestbook");
+
     guestbookTest();
 
 } // onClickTestGuestbook
@@ -36,6 +48,10 @@ function onClickTestGuestbook()
 // Start XML is the object corresponding to JazzGuests.xml
 function loadAllXmlObjectsForAdminAndUpload()
 {
+    console.log("loadAllXmlObjectsForAdminAndUpload");
+
+    g_executing_append_delete = true;
+
     var n_level_xml = 1;
 
     var update_xml = false;
@@ -47,6 +63,15 @@ function loadAllXmlObjectsForAdminAndUpload()
 // Load of XML object corresponding to JazzGuestsUploaded.xml
 function callbackGuestbookUploadedXml()
 {
+    if (g_guests_xml == null)
+    {
+        console.log("callbackGuestbookUploadedXml g_guests_xml is null");
+
+        return;
+    }
+
+    console.log("callbackGuestbookUploadedXml");
+
     var n_level_xml = 1;
 
     var update_xml = true;
@@ -58,17 +83,32 @@ function callbackGuestbookUploadedXml()
 // The guestbook XML objects have been created
 function xmlObjectsAreCreated()
 {
+    if (g_guests_uploaded_xml == null)
+    {
+        console.log("xmlObjectsAreCreated g_guests_uploaded_xml is null");
+
+        return;
+    }
+
     var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
 
     var n_recs = g_guests_xml.getNumberOfGuestRecords();
 
-    console.log("saveAppendedUploadedXml Uploaded n_recs= " + n_uploaded_recs.toString());
+    console.log("saveAppendedUploadedXml Enter Uploaded n_recs= " + n_uploaded_recs.toString());
 
-    console.log("saveAppendedUploadedXml Admin n_recs= " + n_recs.toString());
+    console.log("saveAppendedUploadedXml Enter Admin n_recs= " + n_recs.toString());
 
     appendSetGuestbookRecord(g_guests_uploaded_xml);
 
     appendSetGuestbookRecord(g_guests_xml);
+
+    n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+
+    n_recs = g_guests_xml.getNumberOfGuestRecords();
+
+    console.log("saveAppendedUploadedXml Exit  Uploaded n_recs= " + n_uploaded_recs.toString());
+
+    console.log("saveAppendedUploadedXml Exit  Admin n_recs= " + n_recs.toString());
 
     saveAppendedUploadedXml();
 
@@ -88,7 +128,7 @@ async function saveAppendedUploadedXml()
 
     var xml_content_str = pretty_print.xmlToWinFormattedString();
 
-    await UtilServer.saveFileCallback(absolute_file_name, xml_content_str, saveAppendedXml);
+    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, saveAppendedXml);
 
 } // saveAppendedUploadedXml
 
@@ -104,7 +144,7 @@ async function saveAppendedXml()
 
     var xml_content_str = pretty_print.xmlToWinFormattedString();
 
-    await UtilServer.saveFileCallback(absolute_file_name, xml_content_str, deleteXmlRecord);
+    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, deleteXmlRecord);
 
 } // saveAppendedXml
 
@@ -114,13 +154,21 @@ function deleteXmlRecord()
 
     var n_recs = g_guests_xml.getNumberOfGuestRecords();
 
-    console.log("deleteXmlRecord Uploaded n_recs= " + n_uploaded_recs.toString());
+    console.log("deleteXmlRecord Enter Uploaded n_recs= " + n_uploaded_recs.toString());
 
-    console.log("deleteXmlRecord Admin n_recs= " + n_recs.toString());
+    console.log("deleteXmlRecord Enter Admin n_recs= " + n_recs.toString());
 
     g_guests_uploaded_xml.deleteGuestNode(n_uploaded_recs);
 
     g_guests_xml.deleteGuestNode(n_recs);
+
+    n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+
+    n_recs = g_guests_xml.getNumberOfGuestRecords();
+
+    console.log("deleteXmlRecord Exit  Uploaded n_recs= " + n_uploaded_recs.toString());
+
+    console.log("deleteXmlRecord Exit  Admin n_recs= " + n_recs.toString());
 
     saveDeletedUploadedXml();
 
@@ -138,7 +186,7 @@ async function saveDeletedUploadedXml()
 
     var xml_content_str = pretty_print.xmlToWinFormattedString();
 
-    await UtilServer.saveFileCallback(absolute_file_name, xml_content_str, saveDeletedXml);
+    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, saveDeletedXml);
 
 } // saveDeletedUploadedXml
 
@@ -154,13 +202,21 @@ async function saveDeletedXml()
 
     var xml_content_str = pretty_print.xmlToWinFormattedString();
 
-    await UtilServer.saveFileCallback(absolute_file_name, xml_content_str, afterAppendAndDeleted);
+    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, afterAppendAndDeleted);
 
 } // saveDeletedXml
 
 function afterAppendAndDeleted()
 {
-    console.log("afterAppendAndDeleted Enter");
+    var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+
+    var n_recs = g_guests_xml.getNumberOfGuestRecords();
+
+    console.log("afterAppendAndDeleted Uploaded n_recs= " + n_uploaded_recs.toString());
+
+    console.log("afterAppendAndDeleted Admin n_recs= " + n_recs.toString());
+
+    g_executing_append_delete = false;
 
 } // afterAppendAndDeleted
 
@@ -233,8 +289,8 @@ var g_season_xml = null;
 // Object with get functions for the XML file JazzApplication.xml
 var g_application_xml = null;
 
-// Flag telling if loading is for Guestbook Upload or Admin
-var g_load_for_guestbook_admin = null;
+// Flag telling if append-save-delete-save is executing
+var g_executing_append_delete = false;
 
 
 var g_guestbook_start_url = 'https://jazzliveaarau.ch/WwwUtils/TestGuestDir/';
@@ -327,7 +383,7 @@ class GuestbookServer
             i_callback_done();
         }
     
-        await UtilServer.saveFileCallback(url_relative, xml_content_str, i_callback_done);
+        UtilServer.saveFileCallback(url_relative, xml_content_str, i_callback_done);
     
     } // saveXmlFile
 

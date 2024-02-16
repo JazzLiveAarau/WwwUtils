@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-13
+// Date: 2024-02-16
 // Author: Gunnar Lidén
 
 // File content
@@ -80,11 +80,13 @@ class UtilServer
                 }          
             } // function
           ); // post 
+
+        console.log("UtilServer.saveFile The function comes here, but without a return it won't come further");
         
     } // saveFile
 
-    // Same as saveFile but with a callback function
-    static async saveFileCallback(i_path_file_name, i_content_string, i_callback_function)
+    // Same as saveFile but with a callback function and no async/await
+    static saveFileCallback(i_path_file_name, i_content_string, i_callback_function)
     {
         // console.log("UtilServer.saveFileCallback i_path_file_name= " + i_path_file_name);
 
@@ -92,7 +94,7 @@ class UtilServer
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerSaveFile.php');
     
-        await $.post
+        $.post
           (rel_path_file_php,
             {
               file_content: i_content_string,
@@ -125,7 +127,7 @@ class UtilServer
             } // function
         ); // post 
 
-        // console.log("saveFileCallback The function should only come here when the file has been saved or there was a failure. Or ???");
+        // console.log("saveFileCallback The function comes here, but without a return it won't come further");
        
     } // saveFileCallback
 
