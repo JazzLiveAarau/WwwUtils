@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-01-31
+// Date: 2024-02-17
 // Author: Gunnar Lidén
 
 // File content
@@ -32,6 +32,8 @@ class UtilEmail
             return false;
         }
 
+        var b_send_success = false;
+
         // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
         // i.e. for mutiple addresses separated with ;
 
@@ -61,34 +63,33 @@ class UtilEmail
                     
                     if (b_ok)			
                     {
-                        // alert("E-Mail ist gesendet");
-
                         console.log("UtilEmail.send Mail is sent to " + i_to);
 
-                        return true;
+                        b_send_success = true;
                     }
                     else if (b_failure)
                     {
                         alert("UtilEmail.send Mail is not sent");
 
-                        return false;
+                        b_send_success = false;
                     }
                     else 
                     {
                         alert("Fehler: data_send= " + data_send);
-                        return false;
+                        b_send_success = false;
                     }			
               }
               else
               {
                   alert("Execution of UtilEmailSend.php failed. status_send= " + status_send);
-                  return false;
+                  b_send_success = false;
               }   
               
           });	
 
-    } // send
+          return b_send_success;
 
+    } // send
 
 } // UtilEmail
 
