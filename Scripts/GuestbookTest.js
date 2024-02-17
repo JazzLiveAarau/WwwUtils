@@ -1,5 +1,5 @@
 // File: GuestbookTest.js
-// Date: 2024-02-16
+// Date: 2024-02-17
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -8,7 +8,7 @@
 // Test of server utility functions used by application Guestbook
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Test Functions ////////////////////////////////////////////
+///////////////////////// Start Test Common Functions /////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Main function simulating the use of UtilServer functions in the Guestbook application
@@ -90,135 +90,122 @@ function xmlObjectsAreCreated()
         return;
     }
 
-    var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+    var b_callback_alternative = true;
 
-    var n_recs = g_guests_xml.getNumberOfGuestRecords();
+    if (b_callback_alternative)
+    {
+        callbackAlternative();
+    }
+    else
+    {
+        awaitAlternative();
+    }
 
-    console.log("saveAppendedUploadedXml Enter Uploaded n_recs= " + n_uploaded_recs.toString());
+} // xmlObjectsAreCreated
 
-    console.log("saveAppendedUploadedXml Enter Admin n_recs= " + n_recs.toString());
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Test Common Functions ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Async/Await Functions /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Append-save-delete-save with the async/await alternative
+function awaitAlternative()
+{
+
+} // awaitAlternative
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Async/Await Functions ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Callback Functions ////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Append-save-delete-save with the callback alternative
+function callbackAlternative()
+{
+    numberRecordsBothXmlToConsole("callbackAlternative Enter");
 
     appendSetGuestbookRecord(g_guests_uploaded_xml);
 
     appendSetGuestbookRecord(g_guests_xml);
 
-    n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
-
-    n_recs = g_guests_xml.getNumberOfGuestRecords();
-
-    console.log("saveAppendedUploadedXml Exit  Uploaded n_recs= " + n_uploaded_recs.toString());
-
-    console.log("saveAppendedUploadedXml Exit  Admin n_recs= " + n_recs.toString());
+    numberRecordsBothXmlToConsole("callbackAlternative Exit ");
 
     saveAppendedUploadedXml();
 
-    // alert("xmlObjectsAreCreated Record is appended to both XML objects");
+} // callbackAlternative
 
-} // xmlObjectsAreCreated
-
-async function saveAppendedUploadedXml()
+function saveAppendedUploadedXml()
 {
-    var n_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+    numberRecordsUploadedXmlToConsole("saveAppendedUploadedXml");
 
-    console.log("saveAppendedUploadedXml n_recs= " + n_recs.toString());
-
-    var absolute_file_name =  g_guestbook_start_url + "JazzGuests/Uploaded/JazzGuestsUploaded.xml";
-
-    var pretty_print = new PrettyPrintXml(g_guests_uploaded_xml.getXmlObject());
-
-    var xml_content_str = pretty_print.xmlToWinFormattedString();
-
-    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, saveAppendedXml);
+    UtilServer.saveFileCallback(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml), saveAppendedXml);
 
 } // saveAppendedUploadedXml
 
-async function saveAppendedXml()
+function saveAppendedXml()
 {
-    var n_recs = g_guests_xml.getNumberOfGuestRecords();
+    numberRecordsAdminXmlToConsole("saveAppendedXml");
 
-    console.log("saveAppendedXml n_recs= " + n_recs.toString());
-
-    var absolute_file_name =  g_guestbook_start_url + "XML/JazzGuests.xml";
-
-    var pretty_print = new PrettyPrintXml(g_guests_xml.getXmlObject());
-
-    var xml_content_str = pretty_print.xmlToWinFormattedString();
-
-    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, deleteXmlRecord);
+    UtilServer.saveFileCallback(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_xml), deleteXmlRecord);
 
 } // saveAppendedXml
 
 function deleteXmlRecord()
 {
+    numberRecordsBothXmlToConsole("deleteXmlRecord Enter");
+
     var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
 
     var n_recs = g_guests_xml.getNumberOfGuestRecords();
-
-    console.log("deleteXmlRecord Enter Uploaded n_recs= " + n_uploaded_recs.toString());
-
-    console.log("deleteXmlRecord Enter Admin n_recs= " + n_recs.toString());
 
     g_guests_uploaded_xml.deleteGuestNode(n_uploaded_recs);
 
     g_guests_xml.deleteGuestNode(n_recs);
 
-    n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
-
-    n_recs = g_guests_xml.getNumberOfGuestRecords();
-
-    console.log("deleteXmlRecord Exit  Uploaded n_recs= " + n_uploaded_recs.toString());
-
-    console.log("deleteXmlRecord Exit  Admin n_recs= " + n_recs.toString());
+    numberRecordsBothXmlToConsole("deleteXmlRecord Exit");
 
     saveDeletedUploadedXml();
 
 } // deleteXmlRecord
 
-async function saveDeletedUploadedXml()
+function saveDeletedUploadedXml()
 {
-    var n_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+    numberRecordsUploadedXmlToConsole("saveDeletedUploadedXml");
 
-    console.log("saveDeletedUploadedXml n_recs= " + n_recs.toString());
-
-    var absolute_file_name =  g_guestbook_start_url + "JazzGuests/Uploaded/JazzGuestsUploaded.xml";
-
-    var pretty_print = new PrettyPrintXml(g_guests_uploaded_xml.getXmlObject());
-
-    var xml_content_str = pretty_print.xmlToWinFormattedString();
-
-    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, saveDeletedXml);
+    UtilServer.saveFileCallback(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml), saveDeletedXml);
 
 } // saveDeletedUploadedXml
 
-async function saveDeletedXml()
+function saveDeletedXml()
 {
-    var n_recs = g_guests_xml.getNumberOfGuestRecords();
+    numberRecordsAdminXmlToConsole("saveDeletedXml");
 
-    console.log("saveDeletedXml n_recs= " + n_recs.toString());
-
-    var absolute_file_name =  g_guestbook_start_url + "XML/JazzGuests.xml";
-
-    var pretty_print = new PrettyPrintXml(g_guests_xml.getXmlObject());
-
-    var xml_content_str = pretty_print.xmlToWinFormattedString();
-
-    UtilServer.saveFileCallback(absolute_file_name, xml_content_str, afterAppendAndDeleted);
+    UtilServer.saveFileCallback( getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_xml), afterAppendAndDeleted);
 
 } // saveDeletedXml
 
 function afterAppendAndDeleted()
 {
-    var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
-
-    var n_recs = g_guests_xml.getNumberOfGuestRecords();
-
-    console.log("afterAppendAndDeleted Uploaded n_recs= " + n_uploaded_recs.toString());
-
-    console.log("afterAppendAndDeleted Admin n_recs= " + n_recs.toString());
+    numberRecordsBothXmlToConsole("afterAppendAndDeleted");
 
     g_executing_append_delete = false;
 
 } // afterAppendAndDeleted
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Callback Functions //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Utility Functions /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
 // Add and set an XML record for JazzGuests.xml or JazzGuestsUploaded.xml
 function appendSetGuestbookRecord(i_guests_xml)
@@ -267,10 +254,54 @@ function appendSetGuestbookRecord(i_guests_xml)
 
 } // appendSetGuestbookRecord
 
+function numberRecordsBothXmlToConsole(i_function_name)
+{
+    numberRecordsAdminXmlToConsole(i_function_name);
 
+    numberRecordsUploadedXmlToConsole(i_function_name);
+
+} // numberRecordsBothXmlToConsole
+
+function numberRecordsAdminXmlToConsole(i_function_name)
+{
+    var n_recs = g_guests_xml.getNumberOfGuestRecords();
+
+    console.log(i_function_name + " Admin n_recs= " + n_recs.toString());
+
+} // numberRecordsAdminXmlToConsole
+
+function numberRecordsUploadedXmlToConsole(i_function_name)
+{
+    var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+
+    console.log(i_function_name + " Uploaded n_recs= " + n_uploaded_recs.toString());
+
+} // numberRecordsUploadedXmlToConsole
+
+function getPrettyPrintContent(i_xml_object)
+{
+    var pretty_print = new PrettyPrintXml(i_xml_object.getXmlObject());
+
+    var xml_content_str = pretty_print.xmlToWinFormattedString();
+
+    return xml_content_str;
+
+} // getPrettyPrintContent
+
+function getAbsoluteFilenameJazzGuests()
+{
+    return  g_guestbook_start_url + "XML/JazzGuests.xml";
+
+} // getAbsoluteFilenameJazzGuests
+
+function getAbsoluteFilenameJazzGuestsUploaded()
+{
+    return  g_guestbook_start_url + "JazzGuests/Uploaded/JazzGuestsUploaded.xml";
+
+} // getAbsoluteFilenameJazzGuestsUploaded
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Test Functions //////////////////////////////////////////////
+///////////////////////// End Utility Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
