@@ -90,7 +90,7 @@ function xmlObjectsAreCreated()
         return;
     }
 
-    var b_callback_alternative = true;
+    var b_callback_alternative = false;
 
     if (b_callback_alternative)
     {
@@ -113,8 +113,67 @@ function xmlObjectsAreCreated()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Append-save-delete-save with the async/await alternative
-function awaitAlternative()
+async function awaitAlternative()
 {
+    console.log("awaitAlternative Enter")
+
+    g_executing_append_delete = true;
+
+    numberRecordsBothXmlToConsole("awaitAlternative Start");
+
+    appendSetGuestbookRecord(g_guests_uploaded_xml);
+
+    appendSetGuestbookRecord(g_guests_xml);
+
+    numberRecordsBothXmlToConsole("awaitAlternative After append");
+
+    var b_exec = false;
+
+    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml));
+
+    if (!b_exec)
+    {
+        alert("awaitAlternative Save uploaded XML failed after append");
+        return;
+    }
+
+    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_uploaded_xml));
+    
+    if (!b_exec)
+    {
+        alert("awaitAlternative Save admin XML failed after append");
+        return;
+    }
+
+    var n_uploaded_recs = g_guests_uploaded_xml.getNumberOfGuestRecords();
+
+    var n_recs = g_guests_xml.getNumberOfGuestRecords();
+
+    g_guests_uploaded_xml.deleteGuestNode(n_uploaded_recs);
+
+    g_guests_xml.deleteGuestNode(n_recs);
+
+    numberRecordsBothXmlToConsole("awaitAlternative After delete");
+
+    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml));
+
+    if (!b_exec)
+    {
+        alert("awaitAlternative Save uploaded XML failed after delete");
+        return;
+    }
+
+    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_uploaded_xml));
+    
+    if (!b_exec)
+    {
+        alert("awaitAlternative Save admin XML failed after delete");
+        return;
+    }
+
+    g_executing_append_delete = false;
+
+    console.log("awaitAlternative Exit")
 
 } // awaitAlternative
 

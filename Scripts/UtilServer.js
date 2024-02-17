@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-16
+// Date: 2024-02-17
 // Author: Gunnar Lidén
 
 // File content
@@ -40,6 +40,8 @@ class UtilServer
     {
         // console.log("UtilServer.saveFile i_path_file_name= " + i_path_file_name);
 
+        var b_save_success = false;
+
         var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
 
         var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerSaveFile.php');
@@ -52,6 +54,9 @@ class UtilServer
             },
             function(data_save,status_save)
             {   
+                // Do not return true or false from this anonymous function. 
+                // It will not be the return value for saveFile! (undefined will be returned if one tries)
+                // Parameter b_save_success works fine because of await
                 if (status_save == "success")
                 {
                     // The PHP function returns succed for an opening failure. Therefore the returned
@@ -64,24 +69,27 @@ class UtilServer
                         console.log(" UtilServer.saveFile failure. data_save= " + data_save);
                         alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + rel_path_file_name);
 
-                        return false;
+                        b_save_success = false;
                     }
 
                     console.log(" UtilServer.saveFile Filed is saved. data_save= " + data_save);
 
-                    return true;
+                    b_save_success = true;
+
                 }
                 else
                 {
                     console.log(" UtilServer.saveFile failure. data_save= " + data_save);
                     alert("Execution of UtilServer.saveFile failed");
 
-                    return false;
+                    b_save_success = false;
                 }          
             } // function
           ); // post 
 
-        console.log("UtilServer.saveFile The function comes here, but without a return it won't come further");
+        // console.log("UtilServer.saveFile Exit b_save_success= " + b_save_success.toString());
+
+        return b_save_success;
         
     } // saveFile
 
@@ -156,6 +164,8 @@ class UtilServer
             return false;
         }
 
+        var b_copy_success = false;
+
         var rel_path_file_input = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_input);
 
         var rel_path_file_copy = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_copy);
@@ -188,22 +198,24 @@ class UtilServer
                             alert("UtilServer.copyFile Unable to copy file " + rel_path_file_input);
                         }
 
-                        return false;
+                        b_copy_success = false;
                     }
 
                     console.log(" UtilServer.copyFile File is copied data_copy= " + data_copy.trim());
 
-                    return true;
+                    b_copy_success = true;
                 }
                 else
                 {
                     alert("Execution of UtilServerCopyFile.php failed. data_copy= " + data_copy);
 
-                    return false;
+                    b_copy_success = false;
                 }          
             } // function
 
         ); // post
+
+        return b_copy_success;
         
     } // copyFile
 
@@ -222,6 +234,8 @@ class UtilServer
 
             return false;
         }
+
+        var b_move_success = false;
 
         var rel_path_file_input = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_input);
 
@@ -261,20 +275,22 @@ class UtilServer
                             alert("UtilServer.moveFile Unable to copy file " + rel_path_file_input);
                         }
 
-                        return false;
+                        b_move_success = false;
                     }
 
-                    return true;
+                    b_move_success = true;
                 }
                 else
                 {
                     alert("Execution of UtilServermoveFile.php failed. data_move= " + data_move.trim());
 
-                    return false;
+                    b_move_success = false;
                 }          
             } // function
 
         ); // post
+
+        return b_move_success;
         
     } // moveFile
 
@@ -511,6 +527,8 @@ class UtilServer
             return;
         }
 
+        var b_delete_success = false;
+
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
         // console.log("UtilServer.initDebugFile Input file= " + file_name + "-------- 1");
@@ -537,13 +555,13 @@ class UtilServer
 
                         alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + file_name);
 
-                        return false;
+                        b_delete_success = false;
                     }
                     else
                     {
                         console.log("UtilServer.initDebugFile. File " + file_name + " is created " + "--- 2");
 
-                        return true;
+                        b_delete_success = true;
                     }
                 }
                 else
@@ -551,11 +569,13 @@ class UtilServer
                     console.log(" UtilServer.UtilServerInitDebug.php failure. data_save= " + data_save);
                     alert("Execution of UtilServer.UtilServerInitDebug.php failed");
 
-                    return false;
+                    b_delete_success = false;
                 }          
             } // function
           ); // post
         
+          return b_delete_success;
+
     } // initDebugFile
 
     // Append text to the debug file in the directory /www/JazzScripts/Php/Debug
