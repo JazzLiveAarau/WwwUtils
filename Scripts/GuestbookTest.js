@@ -113,7 +113,9 @@ function xmlObjectsAreCreated()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Append-save-delete-save with the async/await alternative
-async function awaitAlternative()
+// Note that there is no need to call UtilServer.saveFile with await.
+// (the await in awaitAlternative refers to async/await for UtilServer.saveFile)
+function awaitAlternative()
 {
     console.log("awaitAlternative Enter")
 
@@ -129,7 +131,7 @@ async function awaitAlternative()
 
     var b_exec = false;
 
-    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml));
+    b_exec =  UtilServer.saveFile(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml));
 
     if (!b_exec)
     {
@@ -137,7 +139,7 @@ async function awaitAlternative()
         return;
     }
 
-    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_uploaded_xml));
+    b_exec =  UtilServer.saveFile(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_uploaded_xml));
     
     if (!b_exec)
     {
@@ -155,7 +157,7 @@ async function awaitAlternative()
 
     numberRecordsBothXmlToConsole("awaitAlternative After delete");
 
-    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml));
+    b_exec =  UtilServer.saveFile(getAbsoluteFilenameJazzGuestsUploaded(), getPrettyPrintContent(g_guests_uploaded_xml));
 
     if (!b_exec)
     {
@@ -163,7 +165,7 @@ async function awaitAlternative()
         return;
     }
 
-    b_exec = await UtilServer.saveFile(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_uploaded_xml));
+    b_exec =  UtilServer.saveFile(getAbsoluteFilenameJazzGuests(), getPrettyPrintContent(g_guests_uploaded_xml));
     
     if (!b_exec)
     {
