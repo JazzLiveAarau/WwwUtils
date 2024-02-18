@@ -527,6 +527,18 @@ class UtilServer
             return;
         }
 
+        var util_server_key = 'jazz_util_server';
+        var util_server_value = 'util_server_debug_initialized';
+
+        var session_debug_value = window.sessionStorage.getItem(util_server_key);
+
+        if (session_debug_value != null || session_debug_value == util_server_value)
+        {
+            console.log("UtilServer.initDebugFile Do nothing. Debug already initialized for this session");
+
+            return;
+        }
+
         var b_init_debug_success = false;
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
@@ -573,6 +585,8 @@ class UtilServer
                 }          
             } // function
           ); // post
+
+          window.sessionStorage.setItem(util_server_key, util_server_value);
         
           return b_init_debug_success;
 
