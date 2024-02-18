@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-17
+// Date: 2024-02-18
 // Author: Gunnar Lidén
 
 // File content
@@ -527,7 +527,7 @@ class UtilServer
             return;
         }
 
-        var b_delete_success = false;
+        var b_init_debug_success = false;
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
@@ -555,13 +555,13 @@ class UtilServer
 
                         alert("UtilServer.saveFileWithJQueryPostFunction Unable to create file " + file_name);
 
-                        b_delete_success = false;
+                        b_init_debug_success = false;
                     }
                     else
                     {
                         console.log("UtilServer.initDebugFile. File " + file_name + " is created " + "--- 2");
 
-                        b_delete_success = true;
+                        b_init_debug_success = true;
                     }
                 }
                 else
@@ -569,12 +569,12 @@ class UtilServer
                     console.log(" UtilServer.UtilServerInitDebug.php failure. data_save= " + data_save);
                     alert("Execution of UtilServer.UtilServerInitDebug.php failed");
 
-                    b_delete_success = false;
+                    b_init_debug_success = false;
                 }          
             } // function
           ); // post
         
-          return b_delete_success;
+          return b_init_debug_success;
 
     } // initDebugFile
 
@@ -587,6 +587,8 @@ class UtilServer
 
             return;
         }
+
+        var b_append_debug_success = false;
 
         var file_name = './Debug/debug_server_utils_' + i_unigue_str + '.txt';
 
@@ -616,13 +618,13 @@ class UtilServer
                         console.log(" UtilServer.UtilServerAppendDebug.php failure. data_save= " + data_save);
                         alert("UtilServer.appendDebugFile Unable to create file " + file_name);
 
-                        return false;
+                        b_append_debug_success = false;
                     }
                     else
                     {
                         // console.log("UtilServer.appendDebug. Data added to " + file_name + "----------------------------------------------------------------- 2");
 
-                        return true;
+                        b_append_debug_success = true;
                     }
                 }
                 else
@@ -630,11 +632,13 @@ class UtilServer
                     console.log(" UtilServer.UtilServerInitDebug.php failure. data_save= " + data_save);
                     alert("Execution of UtilServer.UtilServerAppendDebug.php failed");
 
-                    return false;
+                    b_append_debug_success = false;
                 }          
             } // function
           ); // post
           
+          return b_append_debug_success;
+
     } // appendDebugFile
 	
 
