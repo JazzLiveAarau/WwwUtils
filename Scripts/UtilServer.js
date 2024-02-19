@@ -1,44 +1,60 @@
 // File: UtilServer.js
-// Date: 2024-02-18
+// Date: 2024-02-19
 // Author: Gunnar Lidén
 
 // File content
 // =============
 //
-// Class with server utility functions
+// Class with server utility functions based on the asynchronous jQuery function $.post.
+// Implemented functions are:
+// - Save (create) a file on the server defined by the file content and the file URL
+// - Copy a file. Input data are two URLs
+// - Move a file. Input data are two URLs
+// - Delete a file. Input data is an URL TODO Not yet implemented
+//
+// For debug there are also two function
+// - Initialize a debug file with a given name
+// - Append text the to the debug file. A name defines which debug file
+//
+// For the JAZZ live AARAU the absolute (full) URL may be given as input. The browsers
+// (the jQuery function $.post) only accept relative URLs, but these may be difficult
+// to set. In the class there are functions that convert the absolute URL to a relative
+// URL.
+//
+// Please also note that the functions only will execute if running on the server
+// for a jazz application. This is checked with UtilServer.execApplicationOnServer.
+//
+// The server executing PHP files (functions) are in the dirextory /www/JazzScripts/Php
+//
+// Syntax for the jScript $.post function is: $.post(URL, data, callback); 
+// Parameter URL is the requested PHP file that processes the data on the server
+// Parameter data are object properties written as name:value pairs separated by commas 
+// within curly braces {}. 
+// Parameter callback is the name of the function that will be called when the data has 
+// been processed. In this class it is implemented as an anonymous function.
+// The callback function has two arguments: ret_data and status.
+// Argument ret_data is text written by the PHP function with echo.
+// Argument status returns the text 'success' if the PHP function has been executed.
+// Please note that the returned 'success' not means that from the calling function
+// requested result was achieved, like for instance that a file was actually saved. 
+// When the opening of a new file failed the reurned status is 'success' and for 
+// such a case the returned ret_data is returned woth a failure code that is examined
+// here. 
 
 class UtilServer
 {
-    // Save a file with the JQuery function "post"
-    //
-    // Input parameter i_file_name is the server file name that shall be created.
-    //
-    // The input file name (URL) can be absolute. Example
-    // https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServerLevelFour.txt
-    // The input file name (URL) can be relative. Example
-    // ../../WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServerLevelFour.txt
-    //          
-    // Input parameter i_content_string is the content of the file.
-    // Please note that escape characters like \n not is allowed in the string
-    //
-    // The function returns false for failure.
-    //
-    // Please refer to UtilServerSaveFile.php for a detailed description of "post"
-    //
-    // The browser PHP function do not accept an absolute file URL. When given as
-    // input the part / https://www.jazzliveaarau.ch/ is replaced with ../../
-    //
-    // It must be able to call this function from any level with only one PHP file.
-    // For instance from
-    // https://www.jazzliveaarau.ch/WwwUtils/LevelThree/LevelFour/TestUtilsLevelFour.htm
-    // The used PHP function (file) is UtilServerSaveFile.php in /www/JazzScripts/Php
-    // An absolut path is not allowed therefore the relative path is constructed
-    // ../../../../JazzScripts/Php/UtilServerSaveFile.php
-    // Please refer to UtilServer.getRelativeExecuteLevelPath
-    //
+    // Save a file with the JQuery asynchronous function $.post and UtilServerSaveFile.php 
+    // The function returns true (for success) or false when finished.
+    // Please note that it is an async function with await, but the
+    // UtilServer.saveFile function will not stop until the file is saved
     static async saveFile(i_path_file_name, i_content_string)
     {
-        // console.log("UtilServer.saveFile i_path_file_name= " + i_path_file_name);
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("saveFile UtilServerSaveFile.php cannot be executed on the local (live) server");
+
+            return false;
+        }
 
         var b_save_success = false;
 
@@ -93,10 +109,21 @@ class UtilServer
         
     } // saveFile
 
-    // Same as saveFile but with a callback function and no async/await
-    static saveFileCallback(i_path_file_name, i_content_string, i_callback_function)
+    // Save a file with the JQuery asynchronous function $.post and UtilServerSaveFile.php 
+    // Input parameters
+    // i_path_file_name: A relative or absolute URL for the created file
+    // i_content_string: The content of the file. Row ends defined as \n are not allowed
+    // i_callback_fctn:  The name of the callback function
+    //
+    // For an error the function UtilServer.saveFileError will be called
+    static saveFileCallback(i_path_file_name, i_content_string, i_callback_fctn)
     {
-        // console.log("UtilServer.saveFileCallback i_path_file_name= " + i_path_file_name);
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("saveFileCallback UtilServerSaveFile.php cannot be executed on the local (live) server");
+
+            return;
+        }
 
         var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
 
@@ -125,7 +152,7 @@ class UtilServer
 
                     console.log(" UtilServer.saveFileCallback Filed is saved. data_save= " + data_save.trim());
 
-                    i_callback_function();
+                    i_callback_fctn();
                 }
                 else
                 {
@@ -148,18 +175,18 @@ class UtilServer
 
     } // saveFileError
 
-    // Copy a file with the JQuery function "post"
-    // Please refer to UtilServerCopyFile.php for a detailed description of "post"
-    // Input parameter i_url_file_input is the url for server file name that shall be copied
-    // Input parameter i_url_file_copy is the url for server file name for the backup copy
-    // File names (URLs) can be given as absolute or relative paths
-    //
-    // The function returns false for failure
+    // Copy a file with the JQuery asynchronous function $.post and UtilServerCopyFile.php 
+    // The function returns true (for success) or false when finished.
+    // Please note that it is an async function with await, but the
+    // UtilServer.copyFile function will not await until the file is saved
+    // Input parameters:
+    // i_url_file_input: The url (relative or absolute) for the server file to copy
+    // i_url_file_copy:  The url (relative or absolute) for the copied file
     static async copyFile(i_url_file_input, i_url_file_copy)
     {
         if (!UtilServer.execApplicationOnServer())
         {
-            alert("copyFile BackupFileOnServer.php cannot be executed on the local (live) server");
+            alert("copyFile UtilServerCopyFile.php cannot be executed on the local (live) server");
 
             return false;
         }
@@ -219,13 +246,13 @@ class UtilServer
         
     } // copyFile
 
-    // Move a file with the JQuery function "post"
-    // Please refer to UtilServerMoveFile.php for a detailed description of "post"
-    // Input parameter i_url_file_input is the url for server file name that shall be moved
-    // Input parameter i_url_file_move is the url fot the moved file
-    // File names (URLs) can be given as absolute or relative paths
-    //
-    // The function returns false for failure
+    // Move a file with the JQuery asynchronous function $.post and UtilServerMoveFile.php 
+    // The function returns true (for success) or false when finished.
+    // Please note that it is an async function with await, but the
+    // UtilServer.moveFile function will not await until the file has been moved
+    // Input parameters:
+    // i_url_file_input: The url (relative or absolute) for the server file to move
+    // i_url_file_move:  The url (relative or absolute) for the moved file
     static async moveFile(i_url_file_input, i_url_file_move)
     {
         if (!UtilServer.execApplicationOnServer())
