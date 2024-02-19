@@ -1,5 +1,5 @@
 // File: GuestbookTest.js
-// Date: 2024-02-17
+// Date: 2024-02-19
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -98,6 +98,8 @@ function xmlObjectsAreCreated()
     }
     else
     {
+        // Please not that this test seems OK, but it is not certain that
+        // functions will be called in the right order.
         awaitAlternative();
     }
 

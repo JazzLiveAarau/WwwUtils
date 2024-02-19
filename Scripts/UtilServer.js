@@ -246,6 +246,80 @@ class UtilServer
         
     } // copyFile
 
+    // Copy a file with the JQuery asynchronous function $.post and UtilServerCopyFile.php 
+    // Input parameters:
+    // i_url_file_input: The url (relative or absolute) for the server file to copy
+    // i_url_file_copy:  The url (relative or absolute) for the copied file
+    // i_callback_fctn:  The name of the callback function
+    static copyFileCallback(i_url_file_input, i_url_file_copy, i_callback_fctn)
+    {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("copyFile UtilServerCopyFile.php cannot be executed on the local (live) server");
+
+            return false;
+        }
+
+        var rel_path_file_input = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_input);
+
+        var rel_path_file_copy = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_copy);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerCopyFile.php');
+
+        $.post
+        (rel_path_file_php,
+            {
+            file_input: rel_path_file_input,
+            file_copy: rel_path_file_copy
+            },
+            function(data_copy,status_copy)
+            {
+                if (status_copy == "success")
+                {
+                    var index_fail_copy = data_copy.indexOf('Unable_to_copy_file_');
+                    var index_fail_exist = data_copy.indexOf('File_exists_not');
+
+                    if (index_fail_copy >= 0 || index_fail_exist >= 0)
+                    {
+                        console.log(" UtilServer.copyFile Failure copying file. data_copy= " + data_copy);
+
+                        if (index_fail_exist >= 0)
+                        {
+                            alert("UtilServer.copyFile There is no file " + rel_path_file_input);
+                        }
+                        else
+                        {
+                            alert("UtilServer.copyFile Unable to copy file " + rel_path_file_input);
+                        }
+
+                        UtilServer.copyFileError(rel_path_file_input, data_copy, status_copy);
+                    }
+
+                    console.log(" UtilServer.copyFile File is copied data_copy= " + data_copy.trim());
+
+                    i_callback_fctn();
+                }
+                else
+                {
+                    alert("Execution of UtilServerCopyFile.php failed. data_copy= " + data_copy);
+
+                    UtilServer.copyFileError(rel_path_file_input, data_copy, status_copy);
+                }          
+            } // function
+
+        ); // post
+        
+    } // copyFileCallback
+
+    // Failure copying file
+    static copyFileError(i_rel_path_file_name, i_data_copy, i_status_copy)
+    {
+        console.log(" UtilServer.copyFileCallback failure. data_copy= " + i_data_copy + ' status_copy= ' + i_status_copy);
+
+        alert("UtilServer.copyFileCallback Unable to copy file " + i_rel_path_file_name + ' status_copy= ' + i_status_copy);
+
+    } // copyFileError
+
     // Move a file with the JQuery asynchronous function $.post and UtilServerMoveFile.php 
     // The function returns true (for success) or false when finished.
     // Please note that it is an async function with await, but the
@@ -321,6 +395,83 @@ class UtilServer
         
     } // moveFile
 
+    // Move a file with the JQuery asynchronous function $.post and UtilServerMoveFile.php 
+    // Input parameters:
+    // i_url_file_input: The url (relative or absolute) for the server file to move
+    // i_url_file_move:  The url (relative or absolute) for the moved file
+    // i_callback_fctn:  The name of the callback function
+    static moveFileCallback(i_url_file_input, i_url_file_move, i_callback_fctn)
+    {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("moveFile UtilServerMoveFile.php cannot be executed on the local (live) server");
+
+            return;
+        }
+
+        var rel_path_file_input = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_input);
+
+        var rel_path_file_move = UtilServer.replaceAbsoluteWithRelativePath(i_url_file_move);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerMoveFile.php');
+
+        $.post
+        (rel_path_file_php,
+            {
+            file_input: rel_path_file_input,
+            file_move: rel_path_file_move
+            },
+            function(data_move,status_move)
+            {
+                if (status_move == "success")
+                {
+                    
+                    var index_fail_copy = data_move.indexOf('Unable_to_copy_file_');
+                    var index_fail_exist = data_move.indexOf('File_exists_not');
+                    var index_fail_delete = data_move.indexOf('Unable_to_delete_file_');
+
+                    if (index_fail_copy >= 0 || index_fail_exist >= 0 ||  index_fail_delete >= 0)
+                    {
+                        console.log(" UtilServer.UtilServermoveFile.php failure. data_move= " + data_move.trim());
+
+                        if (index_fail_exist >= 0)
+                        {
+                            alert("UtilServer.moveFile There is no file " + rel_path_file_input);
+                        }
+                        else if (index_fail_delete >= 0)
+                        {
+                            alert("UtilServer.moveFile Failure deleting file " + rel_path_file_input);
+                        }
+                        else
+                        {
+                            alert("UtilServer.moveFile Unable to copy file " + rel_path_file_input);
+                        }
+
+                        UtilServer.moveFileError(rel_path_file_input, data_move, status_move);
+                    }
+
+                    i_callback_fctn();
+                }
+                else
+                {
+                    alert("Execution of UtilServermoveFile.php failed. data_move= " + data_move.trim());
+
+                    UtilServer.moveFileError(rel_path_file_input, data_move, status_move);
+                }          
+            } // function
+
+        ); // post
+        
+    } // moveFileCallback
+
+    // Failure moving file
+    static moveFileError(i_rel_path_file_name, i_data_move, i_status_move)
+    {
+        console.log(" UtilServer.copyFileCallback failure. data_move= " + i_data_move + ' status_move= ' + i_status_move);
+
+        alert("UtilServer.copyFileCallback Unable to move file " + i_rel_path_file_name + ' status_move= ' + i_status_move);
+
+    } // moveFileError
 
     // Returns the relative path (URL) to the executing HTML file 
     // If the input URL not is an absolute path starting with 
