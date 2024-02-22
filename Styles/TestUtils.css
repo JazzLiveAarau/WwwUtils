@@ -51,4 +51,18 @@ Defines styles for the test application of XML functions
     height: 40px;    
 }
 
+.cl_div_util_image_results
+{
+    border: solid 2px blue;
+    height: 150px;
+    width: 75%;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+button
+{
+    margin-bottom: 10px;
+}
+
 

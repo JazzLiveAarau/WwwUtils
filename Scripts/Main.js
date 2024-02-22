@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-02-05
+// Date: 2024-02-22
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -23,6 +23,8 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
+    testUtilImage();
+
     // testUtilPayment();
 
     // testUtilServerDebug();
@@ -35,13 +37,28 @@ function initTestUtils()
 
     // testUtilServerMove();
 
-    testUtilDate();
+   // testUtilDate();
 
     // testUtilString();
 
     // testUtilSearch();
 
 } // initTestControls
+
+// Test of UtilImage
+function testUtilImage()
+{
+
+} // testUtilImage
+
+// Load another image
+function onClickLoadImage()
+{
+    var test_image_filename = 'https://jazzliveaarau.ch/WwwUtils/Images/Hombrechtikon.jpg';
+
+    UtilImage.replaceImageInDivContainer(test_image_filename, getDivElementUtilImageResults());
+
+} // onClickLoadImage
 
 // Test of UtilPayment
 function testUtilPayment()
@@ -281,6 +298,20 @@ function testUtilSearch()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Id And Element Functions //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Returns the element utility image results <div> element
+function getDivElementUtilImageResults()
+{
+    return document.getElementById(getIdDivElementUtilImageResults());
+
+} // getDivElementUtilImageResults
+
+// Returns the identity of the element utility image results <div> 
+function getIdDivElementUtilImageResults()
+{
+    return 'id_div_util_image_results';
+
+} // getIdDivElementUtilImageResults
 
 // Returns the element utility payment results <div> element
 function getDivElementUtilPaymentResults()
