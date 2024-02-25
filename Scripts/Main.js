@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-02-22
+// Date: 2024-02-25
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -23,6 +23,7 @@
 // Main (onload) function for the test functions
 function initTestUtils()
 {
+    
     testUtilImage();
 
     // testUtilPayment();
@@ -46,8 +47,74 @@ function initTestUtils()
 } // initTestControls
 
 // Test of UtilImage
-function testUtilImage()
+async function testUtilImage()
 {
+    await UtilServer.initDebugFile("CompressPhoto");
+
+    var file_input_el = document.getElementById("id_file_input");
+
+    var browser_type = UtilServer.getBrowserType();
+
+    console.log("testUtilImage Browser type= " + browser_type);
+
+    await UtilServer.appendDebugFile("testUtilImage Browser type= " + browser_type, "CompressPhoto");
+
+    var user_agent_str = navigator.userAgent;
+    console.log("testUtilImage navigator.userAgent= " + navigator.userAgent);
+    await UtilServer.appendDebugFile("testUtilImage navigator.userAgent= " + navigator.userAgent, "CompressPhoto");
+
+    file_input_el.onchange = async function(e) 
+    {
+        // Only one file can be selected and only images
+        var image_file = this.files[0];
+
+        var scale_factor = 0.5;
+
+        var file_type_str = 'image/jpeg';
+
+        await UtilServer.appendDebugFile("testUtilImage Image file is selected", "CompressPhoto");
+
+        var image_file_url = '';
+
+        const compressed_file = await compressImage(image_file, 
+        {
+            quality: scale_factor,
+            type: file_type_str,
+        });
+    
+        image_file_url = URL.createObjectURL(compressed_file);
+
+        /* Alternatively
+
+        if (UtilServer.isSafari() )
+        {
+            image_file_url = URL.createObjectURL(image_file);
+
+            console.log("testUtilImage Image URL = " + image_file_url);
+
+            await UtilServer.appendDebugFile("testUtilImage Image URL= " + image_file_url, "CompressPhoto");
+        }
+        else
+        {
+            const compressed_file = await compressImage(image_file, 
+                {
+                    quality: scale_factor,
+                    type: file_type_str,
+                });
+        
+                image_file_url = URL.createObjectURL(compressed_file);
+
+                console.log("testUtilImage Compressed image URL = " + image_file_url);
+
+                await UtilServer.appendDebugFile("testUtilImage Compressed image URL= " + image_file_url, "CompressPhoto");
+        }
+
+         Alternatively */
+
+
+        UtilImage.replaceImageInDivContainer(image_file_url, getDivElementUtilImageResults());
+
+    } // onchange
 
 } // testUtilImage
 
@@ -55,6 +122,8 @@ function testUtilImage()
 function onClickLoadImage()
 {
     var test_image_filename = 'https://jazzliveaarau.ch/WwwUtils/Images/Hombrechtikon.jpg';
+
+    //QQQ var compressed_image = UtilImage.getCompressed(test_image_filename, 0.5, 'TODO');
 
     UtilImage.replaceImageInDivContainer(test_image_filename, getDivElementUtilImageResults());
 

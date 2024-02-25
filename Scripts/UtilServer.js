@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-19
+// Date: 2024-02-25
 // Author: Gunnar Lidén
 
 // File content
@@ -859,4 +859,190 @@ class UtilServer
     } // execApplicationOnServer
 
 
+    // https://bobbyhadz.com/blog/get-browser-type-and-version-using-javascript#get-browser-name-chrome-firefox-safari-in-javascript
+
+    // Returns the browser type
+    static getBrowserType() 
+    {
+
+        var user_agent_str = navigator.userAgent;
+        console.log("UtilServer.getBrowserType user_agent_str= " + user_agent_str);
+
+        if (UtilServer.isOpera()) {
+        return 'Opera';
+        } else if (UtilServer.isEdge() || UtilServer.isEdgeChromium()) {
+        return 'Microsoft Edge';
+        } else if (UtilServer.isChrome()) {
+        return 'Google Chrome';
+        } else if (UtilServer.isFirefox()) {
+        return 'Mozilla Firefox';
+        } else if (UtilServer.isSafari()) {
+        return 'Apple Safari';
+        } else if (UtilServer.isInternetExplorer()) {
+        return 'Microsoft Internet Explorer';
+        } else if (UtilServer.isUCBrowser()) {
+        return 'UC Browser';
+        } else if (UtilServer.isSamsungBrowser()) {
+        return 'Samsung browser';
+        } else {
+        return 'Unknown browser';
+        }
+
+    } // getBrowserType
+  
+    // Returns true if the browser is Opera
+    static isOpera() 
+    {
+        return (
+          !!window.opr ||
+          !!window.opera ||
+          navigator.userAgent.toLowerCase().includes('opr/')
+        );
+
+    } // isOpera
+
+    // Returns true if the browser is Mozilla Firefox
+    static isFirefox() 
+    {
+        return (
+          navigator.userAgent.toLowerCase().includes('firefox') ||
+          typeof InstallTrigger !== 'undefined'
+        );
+
+    } // isFirefox
+
+
+    // Returns true if the browser is Apple Safari
+    static isSafari() 
+    {
+        if (UtilServer.isChrome())
+        {
+            return false;
+        }
+
+        // String from iPhone     navigator.userAgent= 
+        // Mozilla/5.0 (iPhone; CPU iPhone OS 12_5_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.2 Mobile/15E148 Safari/604.1
+        var user_agent_str = navigator.userAgent.toLowerCase();
+        var ret_includes = user_agent_str.includes('safari');
+        console.log("UtilServer.isSafari user_agent_str= " + user_agent_str);
+        console.log("UtilServer.isSafari ret_includes= " + ret_includes);
+
+        return ret_includes;
+
+    } // isSafari
+
+    // Returns true if the browser is Microsoft Internet Explorer
+    static isInternetExplorer() 
+    {
+        return false || !!document.documentMode;
+
+    } // isInternetExplorer
+      
+    // Returns true if the browser is Microsoft Edge
+    static isEdge() 
+    {
+        return !UtilServer.isInternetExplorer() && !!window.StyleMedia;
+
+    } // isEdge
+
+    // Returns true if the browser is 
+    static isChrome() 
+    {
+        const userAgent = navigator.userAgent.toLowerCase();
+
+        console.log("UtilServer.isChrome user_agent_str= " + userAgent);
+      
+        return (
+          userAgent.includes('chrome') ||
+          userAgent.includes('chromium') ||
+          userAgent.includes('crios')
+        );
+
+    } // isChrome
+      
+    // Returns true if the browser is Microsoft Edge
+    static isEdgeChromium() 
+    {
+        console.log("UtilServer.isEdgeChromium user_agent_str= " + navigator.userAgent);
+        
+        return UtilServer.isChrome() && navigator.userAgent.includes('Edg');
+
+    } // isEdgeChromium
+
+    // Returns true if the browser is UC Browser
+    static isUCBrowser() 
+    {
+        return navigator.userAgent.toLowerCase().includes('ucbrowser');
+
+    } // isUCBrowser
+
+    // Returns true if the browser is Samsung browser
+    static isSamsungBrowser() 
+    {
+        return navigator.userAgent
+          .toLowerCase()
+          .includes('samsungbrowser');
+    } // isSamsungBrowser
+
 } // UtilServer
+
+// Returns a compressed image file. 
+// Input image file is returned uncompressed for Apple Safari
+// TODO Convert to a member function in UtilServer
+const compressImage = async (i_image_file, { quality = 1, type = file_type }) => 
+{
+    console.log("compressImage Enter quality= " + quality.toString() + ' type= ' + type);
+
+    await UtilServer.appendDebugFile("compressImage Enter quality= " + quality.toString(), "CompressPhoto");
+
+    if (UtilServer.isSafari())
+    {
+        console.log("compressImage Browser is Apple Safari and createImageBitmap is not implemented. Uncompressed input image is returned");
+
+        await UtilServer.appendDebugFile("compressImage Browser is Apple Safari and createImageBitmap is not implemented. Uncompressed input image is returned", "CompressPhoto");
+
+        return i_image_file;
+    }
+
+    // Get as image data
+    const imageBitmap = await createImageBitmap(i_image_file);
+
+    console.log("compressImage Bitmap= ");
+    console.log(imageBitmap);
+
+    await UtilServer.appendDebugFile("compressImage Bitmap created", "CompressPhoto");
+
+    // Draw to canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = imageBitmap.width;
+    canvas.height = imageBitmap.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(imageBitmap, 0, 0);
+
+    console.log("compressImage canvas= ");
+    console.log(canvas);
+
+    await UtilServer.appendDebugFile("compressImage canvas created", "CompressPhoto");
+
+    // Turn into Blob
+    const blob = await new Promise
+    ((resolve) =>
+        canvas.toBlob(resolve, type, quality)
+    );
+
+    console.log("compressImage blob= ");
+    console.log(blob);
+
+    await UtilServer.appendDebugFile("compressImage Blob created", "CompressPhoto");
+
+    // Turn Blob into File
+    var ret_file = new File([blob], i_image_file.name, {type: blob.type,});
+
+    console.log("compressImage Returned file= ");
+    console.log(ret_file);
+
+    await UtilServer.appendDebugFile("compressImage File to return created", "CompressPhoto");
+
+    return ret_file;
+};
+

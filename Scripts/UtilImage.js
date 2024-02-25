@@ -1,5 +1,5 @@
 // File: UtilImage.js
-// Date: 2024-02-22
+// Date: 2024-02-25
 // Author: Gunnar Lidén
 
 // File content
