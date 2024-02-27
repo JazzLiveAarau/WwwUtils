@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-25
+// Date: 2024-02-27
 // Author: Gunnar Lidén
 
 // File content
@@ -472,6 +472,81 @@ class UtilServer
         alert("UtilServer.copyFileCallback Unable to move file " + i_rel_path_file_name + ' status_move= ' + i_status_move);
 
     } // moveFileError
+
+    // Upload image to the server
+    // i_image_file: Input file object (selected with <input type="file">) 
+    // i_abs_file_upload_name: Full (relative?) name and path for the upploaded file
+    // i_file_uploaded_callback: Name of function that shall be called when file is uploaded
+    static async uploadFile(i_image_file, i_abs_file_upload_name, i_file_uploaded_callback) 
+    {
+        if (null == i_image_file)
+        {
+            alert("UtilServer.uploadFile Input image file is null");
+    
+            return;
+        }
+        var rel_path_file_upload = UtilServer.replaceAbsoluteWithRelativePath(i_abs_file_upload_name);
+
+
+        var form_data = new FormData(); 
+        
+        form_data.append("file_input", i_image_file);
+
+        form_data.append("to_file_name", rel_path_file_upload);
+    
+        console.log("UtilServer.uploadFile Sent to PHP is FormData where the following data has been appended ");
+
+        console.log(i_abs_file_upload_name);
+    
+        console.log(i_image_file);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerUploadFile.php');
+    
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("UtilServer.uploadFile File cannot be uploaded with PHP functions. Please upload and execute the application on the server");
+    
+            return;
+        }
+    
+        var response = null;
+    
+        try
+        {
+            response = await fetch(rel_path_file_php, 
+            {
+            method: "POST", 
+            body: form_data
+            }
+          );    
+        }
+        catch (error) 
+        {
+            console.log(error);
+    
+            alert('UtilServer.uploadFile Failure uploading file: ' + error);
+    
+            return;
+        }
+    
+        console.log("UtilServer.uploadFile response=");
+        console.log(response);
+    
+        if (response.ok)
+        {
+            console.log("UtilServer.uploadFile The file has been uploaded successfully");
+
+            i_file_uploaded_callback(i_abs_file_upload_name);
+        }
+        else
+        {
+            console.log("UtilServer.uploadFile Failure uploading file. response=");
+            console.log(response);
+
+            alert('UtilServer.uploadFile Failure uploading file (respons).');
+        }
+
+    } // uploadFile
 
     // Returns the relative path (URL) to the executing HTML file 
     // If the input URL not is an absolute path starting with 
