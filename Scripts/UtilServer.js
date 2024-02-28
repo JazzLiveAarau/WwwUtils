@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-27
+// Date: 2024-02-28
 // Author: Gunnar Lidén
 
 // File content
@@ -664,7 +664,7 @@ class UtilServer
 
     } // getPathWithoutHomepage
 
-    // Returns true if it is a relative part, i.e. not containing jazzliveaarau.ch
+    // Returns true if it is a relative path, i.e. not containing jazzliveaarau.ch
     static isRelativePath(i_path_file_name)
     {
         var server_url = 'jazzliveaarau.ch';
@@ -686,6 +686,25 @@ class UtilServer
 
     } // isRelativePath
 
+    // Returns true if it is an (JAZZ live AARAU) absolute path, i.e. containing jazzliveaarau.ch
+    static isAbsolutePath(i_path_file_name)
+    {
+        var server_url = 'jazzliveaarau.ch';
+    
+        var index_url = i_path_file_name.indexOf(server_url);
+
+        if (index_url > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // isAbsolutePath
+
+
     // Returns the file extension
     static getFileExtension(i_file_name)
     {
@@ -702,7 +721,7 @@ class UtilServer
 
     } // getFileExtension
 
-    // Returns the file name
+    // Returns the file name with extension
     static getFileName(i_path_file_name)
     {
         var ret_file_name = '';
@@ -714,18 +733,85 @@ class UtilServer
 
             ret_file_name = i_path_file_name.substring(index_last_slash + 1);
 
-            // No check that it is a file name e.g. containing a point
-
-            return ret_file_name;
         }
         else
         {
-            // Assume that input file name didn't have a path. No check!
+            // Input file name without a path
 
-            return i_path_file_name;
+            ret_file_name = i_path_file_name;
         }
 
+        var index_last_point = ret_file_name.lastIndexOf('.');
+
+        if (index_last_point < 0)
+        {
+            alert("UtilServer.getFileName No extension point in input name= " + i_path_file_name);
+
+            return "";
+        }
+
+        return ret_file_name;
+
     } // getFileName
+
+    // Returns the file name
+    static getFileNameWithoutExtension(i_path_file_name)
+    {
+        var ret_file_name_no_ext = '';
+
+        var file_name = null;
+
+        var index_last_slash = i_path_file_name.lastIndexOf('/');
+
+        if (index_last_slash > 0)
+        {
+
+            file_name = i_path_file_name.substring(index_last_slash + 1);
+
+        }
+        else
+        {
+            // Input file name did not have a path.
+
+            file_name = i_path_file_name;
+
+        }
+
+        var index_last_point = file_name.lastIndexOf('.');
+
+        if (index_last_point < 0)
+        {
+            alert("UtilServer.getFileNameWithoutExtension No extension point in input name= " + i_path_file_name);
+
+            return "";
+        }
+
+        ret_file_name_no_ext = file_name.substring(0, index_last_point);
+
+        return ret_file_name_no_ext;
+
+    } // getFileNameWithoutExtension
+
+    // Returns the file path
+    static getFilePath(i_path_file_name)
+    {
+        var ret_file_path = '';
+
+        var index_last_slash = i_path_file_name.lastIndexOf('/');
+
+        if (index_last_slash > 0)
+        {
+
+            ret_file_path = i_path_file_name.substring(0, index_last_slash + 1);
+
+            return ret_file_path;
+        }
+        else
+        {
+            return ret_file_path;
+        }
+
+    } // getFilePath
 
     // Returns the number of path levels from https://jazzliveaarau.ch
     static getNumberOfPathLevels(i_url)

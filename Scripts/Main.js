@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-02-27
+// Date: 2024-02-28
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -25,6 +25,14 @@ function initTestUtils()
 {
     
     testUtilImage();
+
+    //QQvar b_absolute_path = UtilServer.isAbsolutePath("https://www.jazzliveaarau.ch/WwwControls/TestControls.htm");
+    //QQif (b_absolute_path)
+    //QQ{
+    //QQ    alert("Is an absolute path");
+    //QQ}
+    //QQ var file_name_no_ext = UtilServer.getFileNameWithoutExtension("https://www.jazzliveaarau.ch/WwwControls/TestControls.htm");
+    //QQalert(file_name_no_ext);
 
     // testUtilPayment();
 
