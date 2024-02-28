@@ -500,14 +500,14 @@ class UtilServer
     
         console.log(i_image_file);
 
-        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerUploadFile.php');
-    
         if (!UtilServer.execApplicationOnServer())
         {
             alert("UtilServer.uploadFile File cannot be uploaded with PHP functions. Please upload and execute the application on the server");
     
             return;
         }
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilServerUploadFile.php');
     
         var response = null;
     
@@ -562,6 +562,13 @@ class UtilServer
     // ../../../../JazzScripts/Php/UtilServerSaveFile.php
     static getRelativeExecuteLevelPath(i_path_file_name)
     {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("UtilServer.getRelativeExecuteLevelPath  Please upload and execute the application on the server");
+    
+            return;
+        }
+
         if (UtilServer.isRelativePath(i_path_file_name))
         {
             return i_path_file_name;
