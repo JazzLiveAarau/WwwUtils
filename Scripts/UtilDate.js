@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2024-02-07
+// Date: 2024-02-29
 // Author: Gunnar Lidén
 
 // File content
@@ -41,6 +41,34 @@ class UtilDate
         return ret_boolean;
         
     }  // DateIsPassed
+
+    // Calculates the number of days to the current data
+    // https://www.javatpoint.com/calculate-days-between-two-dates-in-javascript
+    // This function is also in class SeasonXml
+    static numberOfDaysToCurrentDate(i_concert_year, i_concert_month, i_concert_day)
+    {
+        var current_date = new Date();
+
+        var current_hours = current_date.getHours();
+
+        var current_minutes = current_date.getMinutes();
+
+        var current_seconds = current_date.getSeconds();
+
+        // new Date(year, monthIndex, day, hours, minutes, seconds)
+
+        var concert_date = new Date(i_concert_year, i_concert_month - 1, i_concert_day, 
+                                current_hours, current_minutes, current_seconds);
+
+        var time_difference = concert_date.getTime() - current_date.getTime();  
+  
+        var days_difference_float = time_difference / (1000 * 60 * 60 * 24);   
+
+        var days_difference = Math.round(days_difference_float);
+
+        return days_difference;
+
+    } // numberOfDaysToCurrentDate
 
     // Get the date string normally is used in Switzerland
     static getSwissDateString(i_year, i_month, i_day)
