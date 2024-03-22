@@ -171,8 +171,8 @@ class UtilLock
                 if (status_exec == "success")
                 {
                     
-                    var index_fail_lock = data_exec.indexOf('Unable_to_lock_files');
-                    var index_fail_unlock = data_exec.indexOf('Unable_to_unlock_files');
+                    var index_fail_lock = data_exec.indexOf(UtilLock.dataPhpKeyUnableToLockFiles());
+                    var index_fail_unlock = data_exec.indexOf(UtilLock.dataPhpKeyUnableToUnlockFiles());
 
                     if (index_fail_lock >= 0 || index_fail_unlock >= 0)
                     {
@@ -184,7 +184,11 @@ class UtilLock
 
                             //Test UtilLock.filesCouldNotBeLocked();
 
-                            g_util_lock_object.m_locking_failed_callback_fctn(data_exec);
+                            var key_str_length = UtilLock.dataPhpKeyUnableToLockFiles().length;
+
+                            var email_str = data_exec.substring(key_str_length + 1);
+
+                            g_util_lock_object.m_locking_failed_callback_fctn(email_str);
 
                             return;
                         }
@@ -268,9 +272,9 @@ class UtilLock
     } // filesCouldNotBeUnlocked
 
     // Callback function if locking failed
-    static filesCouldNotBeLocked(i_data_exec)
+    static filesCouldNotBeLocked(i_email_str)
     {
-        alert("UtilLock.filesCouldNotBeLocked   Failure locking the files. i_data_exec= " + i_data_exec);
+        alert("UtilLock.filesCouldNotBeLocked   Failure locking the files. Locked by email= " + i_email_str);
 
     } // filesCouldNotBeLocked
 
@@ -301,6 +305,20 @@ class UtilLock
         return "ExecInitDebugFile";
 
     } // execPhpCaseInitDebug
+
+    // The PHP key telling that files not could be locked
+    static dataPhpKeyUnableToLockFiles()
+    {
+        return 'Unable_to_lock_files';
+
+    } // dataPhpKeyUnableToLockFiles
+
+    // The PHP key telling that files not could be unlocked
+    static dataPhpKeyUnableToUnlockFiles()
+    {
+        return 'Unable_to_unlock_files';
+
+    } // dataPhpKeyUnableToUnlockFiles
 
     // Sets the name of the lock/unlock file
     // Default name (already set) is LockUnlock.txt
