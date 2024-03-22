@@ -20,19 +20,15 @@
 ///////////////////////// Start Main Functions ////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Instance of the class UtilLock
+var g_util_lock_object = null;
+
 // Main (onload) function for the test functions
 function initTestUtils()
 {
+    initLockUnlock();
     
     testUtilImage();
-
-    //QQvar b_absolute_path = UtilServer.isAbsolutePath("https://www.jazzliveaarau.ch/WwwControls/TestControls.htm");
-    //QQif (b_absolute_path)
-    //QQ{
-    //QQ    alert("Is an absolute path");
-    //QQ}
-    //QQ var file_name_no_ext = UtilServer.getFileNameWithoutExtension("https://www.jazzliveaarau.ch/WwwControls/TestControls.htm");
-    //QQalert(file_name_no_ext);
 
     // testUtilPayment();
 
@@ -53,6 +49,31 @@ function initTestUtils()
     // testUtilSearch();
 
 } // initTestControls
+
+// Initialzation of the lock/unlock functionality
+function initLockUnlock()
+{
+    var lock_dir = 'https://jazzliveaarau.ch/JazzGuests/LockUnlock/';
+
+    g_util_lock_object = new UtilLock(lock_dir);
+
+    g_util_lock_object.setUserEmail('gunnar.liden@viewsoncad.ch');
+
+} // initLockUnlock
+
+// User clicked the button lock files
+function onClickLockFiles()
+{
+    g_util_lock_object.lock();
+
+} // onClickLockFiles
+
+// User clicked the button unlock files
+function onClickUnlockFiles()
+{
+    g_util_lock_object.unlock();
+
+} // onClickUnlockFiles
 
 // Test of UtilImage
 async function testUtilImage()
