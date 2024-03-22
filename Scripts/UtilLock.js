@@ -71,9 +71,12 @@ class UtilLock
         this.m_unexpected_failure_callback_fctn = UtilLock.unexpectedFailure;
 
         // The number of trials locking the files, i.e. waiting time 
-        // untlil another user unloccks the files. Default (already
+        // untlil another user unlocks the files. Default (already
         // set) number is five (5).
         this.m_number_locking_trials = 5;
+
+        // The number of used locking trials
+        this.m_used_number_locking_trials = 0;
 
         // The sleeping time for ech lock trial, i.e. defines the 
         // waiting time until another user unloccks the files. 
@@ -107,7 +110,7 @@ class UtilLock
         }
         else
         {
-            console.log("UtilLock.init The global UtilLock object variable has the right name g_util_lock_object");
+            // console.log("UtilLock.init The global UtilLock object variable has the right name g_util_lock_object");
 
             return true;
         }
@@ -262,19 +265,38 @@ class UtilLock
     {
         alert("UtilLock.filesHaveBeenUnlocked Files have been unlocked");
 
+        g_util_lock_object.m_used_number_locking_trials = 0;
+
     } // filesHaveBeenUnlocked
 
     // Callback function if unlocking failed
     static filesCouldNotBeUnlocked()
     {
-        alert("UtilLock.filesCouldNotBeUnlocked   Failure unlocking the files");
+
+        alert("UtilLock.filesCouldNotBeUnlocked   Failure unlocking the files. ");
 
     } // filesCouldNotBeUnlocked
 
     // Callback function if locking failed
     static filesCouldNotBeLocked(i_email_str)
     {
-        alert("UtilLock.filesCouldNotBeLocked   Failure locking the files. Locked by email= " + i_email_str);
+
+        if (g_util_lock_object.m_used_number_locking_trials < g_util_lock_object.m_number_locking_trials)
+        {
+            g_util_lock_object.m_used_number_locking_trials = g_util_lock_object.m_used_number_locking_trials + 1;
+
+            console.log("UtilLock.filesCouldNotBeLocked m_used_number_locking_trials= " +
+                    g_util_lock_object.m_used_number_locking_trials);
+
+            setTimeout(g_util_lock_object.lock(), g_util_lock_object.m_trial_sleep_time);
+        }
+        else
+        {
+            alert("UtilLock.filesCouldNotBeLocked   Failure unlocking the files. m_used_number_locking_trials= " +
+                            g_util_lock_object.m_used_number_locking_trials + ' Locked by email= ' + i_email_str);
+
+            g_util_lock_object.m_used_number_locking_trials = 0;
+        }
 
     } // filesCouldNotBeLocked
 
