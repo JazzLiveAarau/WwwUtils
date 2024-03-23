@@ -1,5 +1,5 @@
 // File: UtilLock.js
-// Date: 2024-03-22
+// Date: 2024-03-23
 // Author: Gunnar Lidén
 
 // File content
@@ -85,6 +85,7 @@ class UtilLock
 
         // The user email. The email address is not necessary for
         // the funtionality. It is only used for debugging purposes
+        // Also a user name can be used
         this.m_user_email = '';
 
         // Initialization
@@ -130,6 +131,15 @@ class UtilLock
         this.execOnServer(exec_case);
 
     } // lock
+
+    // Force locking the files even if somebody else has locked them
+    lockForce()
+    {
+        var exec_case = UtilLock.execPhpCaseLockFilesForce();
+
+        this.execOnServer(exec_case);
+
+    } // lockForce
 
     // Unlock files
     unlock()
@@ -218,6 +228,10 @@ class UtilLock
 
                         g_util_lock_object.m_locked_callback_fctn();
                     }
+                    else if (i_exec_case == UtilLock.execPhpCaseLockFilesForce())
+                    {
+                        g_util_lock_object.m_locked_callback_fctn();
+                    }
                     else if (i_exec_case == UtilLock.execPhpCaseUnlockFiles())
                     {
                         //Text UtilLock.filesHaveBeenUnlocked();
@@ -292,10 +306,12 @@ class UtilLock
         }
         else
         {
-            alert("UtilLock.filesCouldNotBeLocked   Failure unlocking the files. m_used_number_locking_trials= " +
+            console.log("UtilLock.filesCouldNotBeLocked   Failure unlocking the files. m_used_number_locking_trials= " +
                             g_util_lock_object.m_used_number_locking_trials + ' Locked by email= ' + i_email_str);
 
             g_util_lock_object.m_used_number_locking_trials = 0;
+
+            g_util_lock_object.lockForce();
         }
 
     } // filesCouldNotBeLocked
@@ -313,6 +329,13 @@ class UtilLock
         return "ExecLockFiles";
 
     } // execPhpCaseLockFiles
+
+    // PHP execution case lock files even if somebody has locked the files
+    static execPhpCaseLockFilesForce()
+    {
+        return "ExecLockFilesForce";
+
+    } // execPhpCaseLockFilesForce
 
     // PHP execution case unlock files
     static execPhpCaseUnlockFiles()
