@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-02-28
+// Date: 2024-03-23
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -584,6 +584,17 @@ function eventCopyPhpFiles()
     path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerUploadFile.php';
 
     path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilServerUploadFile.php';
+
+    var b_file_upload = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_file_upload)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilLock.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilLock.php';
 
     var b_file_upload = UtilServer.copyFile(path_file_input, path_file_output);  
 

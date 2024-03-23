@@ -45,6 +45,7 @@ $file_content .= "\n" . file_get_contents('../Scripts/UtilRandom.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilEmail.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilPayment.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilImage.js');
+$file_content .= "\n" . file_get_contents('../Scripts/UtilLock.js');
 
 $dir_name= '../../JazzScripts/';
 
