@@ -1,7 +1,7 @@
 <?php
 
 // File: UtilLock.php
-// Date: 2024-03-22
+// Date: 2024-03-24
 // Author: Gunnar Liden
 
 // This file defines all PHP functions for JavaScript class UtilLock
@@ -24,7 +24,7 @@ $file_debug = "Debug/DebugUtilLock.txt";
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-debugAppend('UtilLock Enter exec_case= ' . $exec_case, $file_debug);
+// debugAppend('UtilLock Enter exec_case= ' . $exec_case , $file_debug);
 
 switch ($exec_case) 
 {
@@ -48,28 +48,28 @@ switch ($exec_case)
 // Lock files
 function lockFiles($i_url_file, $i_unlocked_str, $i_locked_str, $i_user_email, $i_file_debug)
 {
-  debugAppend('lockFiles Enter', $i_file_debug);
+  // debugAppend('lockFiles Enter', $i_file_debug);
 
   $b_can_be_locked = false;
 
   if (lockFileExists($i_url_file))
   {
-    debugAppend('lockFiles Lock file exists.', $i_file_debug);
+    // debugAppend('lockFiles Lock file exists.', $i_file_debug);
 
     $b_can_be_locked = contentEqualToUnlocked($i_url_file, $i_unlocked_str, $i_file_debug);
 
     if ($b_can_be_locked)
     {
-      debugAppend('lockFiles Log file can be locked.', $i_file_debug);
+      // debugAppend('lockFiles Files can be locked. Email= ' . $i_user_email, $i_file_debug);
     }
     else
     {
-      debugAppend('lockFiles Log file CANNOT be locked.', $i_file_debug);
+      // debugAppend('lockFiles Files CANNOT be locked. Email= ' . $i_user_email, $i_file_debug);
     }
   }
   else
   {
-    debugAppend('lockFiles Lock file do NOT exist.', $i_file_debug);
+    debugAppend('lockFiles Lock file do NOT exist. Email= ' . $i_user_email, $i_file_debug);
 
     $b_can_be_locked = true;
   }
@@ -88,7 +88,7 @@ function lockFiles($i_url_file, $i_unlocked_str, $i_locked_str, $i_user_email, $
 
   $file_content_write =  $i_locked_str . '_' . $i_user_email;
 
-  debugAppend('lockFiles File content= ' . $file_content_write, $i_file_debug);
+  // debugAppend('lockFiles File content= ' . $file_content_write, $i_file_debug);
 
   $file_object = fopen($i_url_file, "w") or exit("Unable_to_open_file_".error_get_last());
 
@@ -98,7 +98,7 @@ function lockFiles($i_url_file, $i_unlocked_str, $i_locked_str, $i_user_email, $
   // Close the file
   fclose($file_object); 
 
-  debugAppend('lockFiles Files have been locked.', $i_file_debug);
+  debugAppend('lockFiles Files have been locked. Email= ' . $i_user_email, $i_file_debug);
   
   echo 'Files_have_been_locked';
 
@@ -107,11 +107,11 @@ function lockFiles($i_url_file, $i_unlocked_str, $i_locked_str, $i_user_email, $
 // Force locking the files
 function lockFilesForce($i_url_file, $i_locked_str, $i_user_email, $i_file_debug)
 {
-  debugAppend('lockFilesForce Enter', $i_file_debug);
+  // debugAppend('lockFilesForce Enter', $i_file_debug);
 
   $file_content_write =  $i_locked_str . '_' . $i_user_email;
 
-  debugAppend('lockFiles File content= ' . $file_content_write, $i_file_debug);
+  // debugAppend('lockFiles File content= ' . $file_content_write, $i_file_debug);
 
   $file_object = fopen($i_url_file, "w") or exit("Unable_to_open_file_".error_get_last());
 
@@ -121,7 +121,7 @@ function lockFilesForce($i_url_file, $i_locked_str, $i_user_email, $i_file_debug
   // Close the file
   fclose($file_object); 
 
-  debugAppend('lockFilesForce Files have been locked.', $i_file_debug);
+  debugAppend('lockFilesForce Files have been locked. Email= ' . $i_user_email, $i_file_debug);
   
   echo 'Files_have_been_locked';
 
@@ -132,7 +132,7 @@ function contentEqualToUnlocked($i_url_file, $i_unlocked_str, $i_file_debug)
 {
   $file_content_read = file_get_contents($i_url_file);
 
-  debugAppend('contentEqualToUnlocked Content= ' . $file_content_read, $i_file_debug);
+  // debugAppend('contentEqualToUnlocked Content= ' . $file_content_read, $i_file_debug);
 
   if (str_contains($file_content_read, $i_unlocked_str))
   {
@@ -150,7 +150,7 @@ function getEmailFromLockUnlockFile($i_url_file, $i_locked_str, $i_file_debug)
 {
   $file_content_read = file_get_contents($i_url_file);
 
-  debugAppend('getEmailFromLockUnlockFile Content= ' . $file_content_read, $i_file_debug);
+  // debugAppend('getEmailFromLockUnlockFile Content= ' . $file_content_read, $i_file_debug);
 
   if (!str_contains($file_content_read, $i_locked_str))
   {
@@ -161,7 +161,7 @@ function getEmailFromLockUnlockFile($i_url_file, $i_locked_str, $i_file_debug)
 
   $email_str = substr($file_content_read, $str_length + 1);
 
-  debugAppend('getEmailFromLockUnlockFile email= ' . $email_str, $i_file_debug);
+  // debugAppend('getEmailFromLockUnlockFile email= ' . $email_str, $i_file_debug);
 
   return $email_str;
 
@@ -170,9 +170,12 @@ function getEmailFromLockUnlockFile($i_url_file, $i_locked_str, $i_file_debug)
 // Unlock files
 function unlockFiles($i_url_file, $i_unlocked_str, $i_file_debug)
 {
+
+  $file_content_read_debug = file_get_contents($i_url_file);
+
   $file_content_write =  $i_unlocked_str;
 
-  debugAppend('unlockFiles Content= ' . $file_content_write, $i_file_debug);
+  // debugAppend('unlockFiles Content= ' . $file_content_write, $i_file_debug);
 
   $file_object = fopen($i_url_file, "w") or exit("Unable_to_open_file_".error_get_last());
 
@@ -182,7 +185,7 @@ function unlockFiles($i_url_file, $i_unlocked_str, $i_file_debug)
   // Close the file
   fclose($file_object); 
 
-  debugAppend('unlockFiles Files have been unlocked.', $i_file_debug);
+  debugAppend('unlockFiles Files have been unlocked. file_content_read_debug= ' . $file_content_read_debug, $i_file_debug);
 
   echo 'Files_have_been_unlocked';
 

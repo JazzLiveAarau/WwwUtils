@@ -1,5 +1,5 @@
 // File: UtilLock.js
-// Date: 2024-03-23
+// Date: 2024-03-24
 // Author: Gunnar Lidén
 
 // File content
@@ -80,8 +80,8 @@ class UtilLock
 
         // The sleeping time for ech lock trial, i.e. defines the 
         // waiting time until another user unloccks the files. 
-        // Default (already set) time is 300 milliseconds.
-        this.m_trial_sleep_time = '300';
+        // Default (already set) time is 800 milliseconds.
+        this.m_trial_sleep_time = '800';
 
         // The user email. The email address is not necessary for
         // the funtionality. It is only used for debugging purposes
@@ -167,8 +167,8 @@ class UtilLock
 
         var rel_path_file_input = UtilServer.replaceAbsoluteWithRelativePath(this.m_lock_dir + this.m_file_name);
 
-        // var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilLock.php');
-        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/WwwUtils/Php/UtilLock.php');
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilLock.php');
+        // var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/WwwUtils/Php/UtilLock.php');
 
         $.post
         (rel_path_file_php,
