@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-03-23
+// Date: 2024-04-20
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -60,6 +60,14 @@ function initLockUnlock()
     g_util_lock_object.setUserEmail('gunnar.liden@viewsoncad.ch');
 
 } // initLockUnlock
+
+// User clicked download a file
+function onClickDownload()
+{
+    var file_url = 'https://jazzliveaarau.ch/JazzGuests/Uploaded/Image_20240203_15_49_36.jpg';
+
+    UtilServer.download();
+}
 
 // User clicked the button lock files
 function onClickLockFiles()

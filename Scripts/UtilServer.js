@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-02-28
+// Date: 2024-04-20
 // Author: Gunnar Lidén
 
 // File content
@@ -862,6 +862,19 @@ class UtilServer
         return n_levels;
 
     } // getNumberOfPathLevels
+
+    // Downloads a file from the server
+    // https://byby.dev/node-download-image
+    // https://www.youtube.com/watch?v=DDYkcydo1WA
+
+    // Open with an application
+    // https://www.makeuseof.com/node-js-open-files-urls-npm-package/
+
+    static async download(i_url)
+    {
+        alert("UtilServer.download Not yet implemented");
+
+    } // download
 
     // Initialization (creation) of the debug file in the directory /www/JazzScripts/Php/Debug
     static async initDebugFile(i_unigue_str)
