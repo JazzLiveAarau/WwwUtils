@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-04-20
+// Date: 2024-10-09
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -26,9 +26,11 @@ var g_util_lock_object = null;
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    initLockUnlock();
+    testFullScreen();
     
-    testUtilImage();
+    // initLockUnlock();
+    
+    // testUtilImage();
 
     // testUtilPayment();
 
@@ -49,6 +51,51 @@ function initTestUtils()
     // testUtilSearch();
 
 } // initTestControls
+
+// Test of fullscreen functions
+function testFullScreen()
+{
+   
+
+} // testFullScreen
+
+// Open full screen
+function onClickOpenFullscreen()
+{
+    // alert("onClickOpenFullscreen");
+
+    var fullscreen_el = getDivElementTestPage();
+
+    UtilDevice.openFullScreen(fullscreen_el);
+
+} // onClickOpenFullscreen
+
+// Close full screen
+function onClickCloseFullscreen()
+{
+    // alert("onClickCloseFullscreen");
+
+    UtilDevice.exitFullScreen();
+
+} // onClickCloseFullScreen
+
+// Analyse full screen mode/data
+function onClickAnalyseFullscreen()
+{
+    var b_full = UtilDevice.isFullScreen();
+
+    if (b_full)
+    {
+        var fullscreen_el = UtilDevice.getFullScreenElement();
+
+        alert("Element is displayed on the full screen. HTML= " + fullscreen_el.innerHTML);
+    }
+    else
+    {
+        alert("No element is displayed in full screen");
+    }
+
+} // onClickAnalyseFullscreen
 
 // Initialzation of the lock/unlock functionality
 function initLockUnlock()
@@ -419,6 +466,20 @@ function getIdDivElementUtilImageResults()
 
 } // getIdDivElementUtilImageResults
 
+// Returns the element test page <div> element
+function getDivElementTestPage()
+{
+    return document.getElementById(getIdDivElementTestPage());
+
+} // getDivElementTestPage
+
+// Returns the identity of the element test page <div> 
+function getIdDivElementTestPage()
+{
+    return 'id_test_page';
+
+} // getIdDivElementTestPage
+
 // Returns the element utility payment results <div> element
 function getDivElementUtilPaymentResults()
 {
@@ -516,7 +577,7 @@ function getIdDivElementUtilEmailResults()
 // /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
 function eventMergeFiles()
 {
-    var file_name = 'Utils_20231213.js';
+    var file_name = 'Utils_20241009.js';
 
     $.post
       ('PhpMerge/MergeFiles.php',
