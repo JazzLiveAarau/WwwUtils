@@ -1,5 +1,5 @@
 // File: UtilDevice.js
-// Date: 2024-10-03
+// Date: 2024-10-09
 // Author: Gunnar Lidén
 
 // File content
