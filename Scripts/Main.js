@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-10-09
+// Date: 2024-11-07
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -26,7 +26,11 @@ var g_util_lock_object = null;
 // Main (onload) function for the test functions
 function initTestUtils()
 {
-    testFullScreen();
+    // testUtilEmailSecure()
+
+    //testUtilEmail(); REMOVE later
+
+    // testFullScreen();
     
     // initLockUnlock();
     
@@ -35,8 +39,6 @@ function initTestUtils()
     // testUtilPayment();
 
     // testUtilServerDebug();
-
-    //testUtilEmail();
 
     // testUtilServerSave();
 
@@ -129,6 +131,95 @@ function onClickUnlockFiles()
     g_util_lock_object.unlock();
 
 } // onClickUnlockFiles
+
+// Test of UtilEmail with the secure functionality
+function testUtilEmailSecure()
+{
+    var email_from = 'guestbook@jazzliveaarau.ch';
+
+    email_from = 'no-reply-address@jazzliveaarau.ch';
+
+    var email_subject = 'JAZZ live AARAU Gästebuch Xyz';
+
+    var email_message = 'testUtilEmailSecure():   JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
+                        'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
+                        'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  ';
+
+    email_message = '\r\nHallo Gunnar Liden, \r\n \r\n' + 
+    'vielen Dank für Ihre Bestellung Nr. TCH8871070 ! \r\n'+
+    'Wir möchten Sie heute informieren, dass Ihre Bestellung weiterhin bearbeitet wird - keine Sorge, \r\n '+
+    'wir haben Sie nicht vergessen! Leider können wir unseren gewohnten schnellen Lieferservice nicht ganz einhalten. Für den Lieferverzug gibt es ganz verschiedene Gründe: manche Artikel sind zwischenzeitlich vielleicht schon wieder ausverkauft und wir warten noch auf die Lieferung unserer Lieferanten. Bei Fragen kontaktieren Sie uns einfach, wir sind immer für Sie da!'
+     + '\r\n \r\n \r\n' 
+
+    + 'Wenn Sie mehrere Artikel bestellt haben, kann es möglich sein, dass nur einzelne Artikel vergriffen sind. Kontaktieren Sie uns gerne und wir schauen ob wir Ihnen eine Teillieferung zusenden können ! ';
+
+    var email_to = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com';
+
+    email_to = '   gunnar.liden@viewsoncad.ch ';
+
+    // email_to = 'gunnar.liden@viewsoncad.ch';
+	
+	var secure_to = 'guestbook@jazzliveaarau.ch';
+    
+    // To many email copies var email_bcc = 'guestbook@jazzliveaarau.ch';
+    var email_bcc = '';
+
+    email_bcc = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com';
+
+    var email_message_html = UtilString. rowEndsWindowsToHtml(email_message);
+
+    
+    var b_send = UtilEmail.sendSecureCallback(email_from, email_subject, email_message_html, email_to, email_bcc, secure_to, successfulSend);
+
+    if (!b_send)
+    {
+        alert("testUtilEmailSecure The email was NOT sent ");
+    }
+
+} // testUtilEmailSecure
+
+function successfulSend()
+{
+    alert("successfulSend The email was sent ");
+}
+
+
+// Test of UtilEmail
+// REMOVE later
+function testUtilEmail()
+{
+    var email_from = 'guestbook@jazzliveaarau.ch';
+
+    var email_subject = 'JAZZ live AARAU Gästebuch Xyz';
+
+    var email_message = 'testUtilEmail():   JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
+                        'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
+                        'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  ';
+
+    var email_to = 'gunnar.liden@viewsoncad.ch';
+    
+    // To many email copies var email_bcc = 'guestbook@jazzliveaarau.ch';
+    var email_bcc = '';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilEmail Please upload to the server. PHP cannot execute with Visual Studio Live Server ");
+
+        return;
+    }
+    
+    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc);
+
+    if (b_send)
+    {
+        alert("testUtilEmail Email sent ");
+    }
+    else
+    {
+        alert("testUtilEmail Error! The email was not sent ");
+    }
+
+} // testUtilEmail
 
 // Test of UtilImage
 async function testUtilImage()
@@ -224,41 +315,6 @@ function testUtilPayment()
 
 } // testUtilPayment
 
-// test of UtilEmail
-function testUtilEmail()
-{
-    var email_from = '<guestbook@jazzliveaarau.ch>';
-
-    var email_subject = 'JAZZ live AARAU Gästebuch Xyz';
-
-    var email_message = 'testUtilEmail():   JAZZ <i>live</i> AARAU Gästebuch ghdjksajLGKSHFJFGJFJ   <br>' +
-                        'Second row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  <br>' + 
-                        'Third row jwhgfdkegfkjdzöobäqwpodkkkahf   hkwhkhdkshkj  ';
-
-    var email_to = 'gunnar.liden@viewsoncad.ch';
-    
-    // To many email copies var email_bcc = 'guestbook@jazzliveaarau.ch';
-    var email_bcc = '';
-
-    if (!UtilServer.execApplicationOnServer())
-    {
-        alert("testUtilEmail Please upload to the server. PHP cannot execute with Visual Studio Live Server ");
-
-        return;
-    }
-    
-    var b_send = UtilEmail.send(email_from, email_subject, email_message, email_to, email_bcc);
-
-    if (b_send)
-    {
-        alert("testUtilEmail Email sent ");
-    }
-    else
-    {
-        alert("testUtilEmail Error! The email was not sent ");
-    }
-
-} // testUtilEmail
 
 // Test of UtilServer move
 function testUtilServerMove()
@@ -577,7 +633,7 @@ function getIdDivElementUtilEmailResults()
 // /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
 function eventMergeFiles()
 {
-    var file_name = 'Utils_20241009.js';
+    var file_name = 'Utils_20241106.js';
 
     $.post
       ('PhpMerge/MergeFiles.php',
@@ -624,6 +680,17 @@ function eventCopyPhpFiles()
     var b_email_send = UtilServer.copyFile(path_file_input, path_file_output);  
 
     if (!b_email_send)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilEmailSecure.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSecure.php';
+
+    var b_email_secure = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_email_secure)
     {
         alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
     }
