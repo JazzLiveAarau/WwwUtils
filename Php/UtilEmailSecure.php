@@ -61,9 +61,23 @@ $secure_to = $_POST['s_to'];
 
 $file_secure_time_stamps = "Secure/SecureUtilEmailTimeStamps.txt";
 
+if (!file_exists($file_secure_time_stamps)) 
+{ 
+  
+  // Create a new file or direcotry 
+  mkdir($file_secure_time_stamps, 0777, true); 
+} 
+
 // Debug file names
 $file_debug_rows = "Debug/DebugUtilEmailSecureRowEnds.txt";
 $file_debug_send = "Debug/DebugUtilEmailSecureSend.txt";
+
+if (!file_exists($file_debug_send)) 
+{ 
+  
+  // Create a new file or direcotry 
+  mkdir($file_debug_send, 0777, true); 
+} 
 
 secureAppendTimeStamp($address_to, $file_secure_time_stamps);
 

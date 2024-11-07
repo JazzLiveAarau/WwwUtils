@@ -164,17 +164,12 @@ function testUtilEmailSecure()
     // To many email copies var email_bcc = 'guestbook@jazzliveaarau.ch';
     var email_bcc = '';
 
-    email_bcc = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com';
+    // email_bcc = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com';
 
     var email_message_html = UtilString. rowEndsWindowsToHtml(email_message);
 
     
-    var b_send = UtilEmail.sendSecureCallback(email_from, email_subject, email_message_html, email_to, email_bcc, secure_to, successfulSend);
-
-    if (!b_send)
-    {
-        alert("testUtilEmailSecure The email was NOT sent ");
-    }
+    UtilEmail.sendSecureCallback(email_from, email_subject, email_message_html, email_to, email_bcc, secure_to, successfulSend);
 
 } // testUtilEmailSecure
 

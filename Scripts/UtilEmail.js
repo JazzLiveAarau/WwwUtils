@@ -30,14 +30,15 @@ class UtilEmail
     {
         if (!UtilEmail.checkInput(i_from, i_subject, i_message, i_to, i_bcc, i_secure_to))
         {
-            return false;
+            // Please note that the user gets alert error messsages from checkInput
+            return;
         }
 
         if (!UtilServer.execApplicationOnServer())
         {
             alert("UtilEmail.sendSecureCallback UtilEmailSecure.php cannot be executed on the local (live) server");
 
-            return false;
+            return;
         }
 
         // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
@@ -347,12 +348,12 @@ class UtilEmail
       
     } // validateAddress
 
-    // Failure copying file
+    // Failure sending mail
     static sendError(i_subject, i_data_send, i_status_send)
     {
-        console.log(" UtilEmail.sendCallback failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
+        console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
 
-        alert("UtilEmail.sendCallback Failure sending mail. Subject= " + i_subject + ' status_copy= ' + i_status_copy);
+        alert("UtilEmail.sendCallbackSecure Failure sending mail. Subject= " + i_subject + ' status_copy= ' + i_status_copy);
 
     } // sendError
 
