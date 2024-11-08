@@ -57,29 +57,15 @@ $address_to = $_POST['a_to'];
 $address_bcc = $_POST['a_bcc'];
 $secure_to = $_POST['s_to'];
 
-// Secure file names
-
-$file_secure_time_stamps = "Secure/SecureUtilEmailTimeStamps.txt";
-
-if (!file_exists($file_secure_time_stamps)) 
-{ 
-  
-  // Create a new file or direcotry 
-  mkdir($file_secure_time_stamps, 0777, true); 
-} 
-
 // Debug file names
 $file_debug_rows = "Debug/DebugUtilEmailSecureRowEnds.txt";
-$file_debug_send = "Debug/DebugUtilEmailSecureSend.txt";
+$file_debug_send = getDebugFileNamePath($file_debug_send);
 
-if (!file_exists($file_debug_send)) 
-{ 
-  
-  // Create a new file or direcotry 
-  mkdir($file_debug_send, 0777, true); 
-} 
+// Secure file name
+$file_secure_time_stamps = getSecureFileNamePath($file_debug_send);
 
-secureAppendTimeStamp($address_to, $file_secure_time_stamps);
+
+secureAppendTimeStamp($address_to, $file_secure_time_stamps, $file_debug_send);
 
 $email_message_lines = replaceHtmlRowEnds($email_message, $file_debug_rows);
 
@@ -176,14 +162,118 @@ function replaceHtmlRowEnds($i_email_message, $i_file_debug)
 
 } // replaceHtmlRowEnds
 
+// Get the name and path for the secure file
+function getSecureFileNamePath($i_file_debug)
+{
+  $date_str = getYearMonthDayString($i_file_debug);
+
+  $dir_name = "Secure";
+
+  $file_name_start = "SecureUtilEmail_";
+
+  $file_extension = ".txt";
+
+  $ret_file_name_path =  $dir_name . "/" . $file_name_start . $date_str . $file_extension;
+
+  debugAppend('getSecureFileNamePath File name= ' . $ret_file_name_path, $i_file_debug);
+
+  if (file_exists($ret_file_name_path)) 
+  {
+    return $ret_file_name_path;
+  }
+
+  // https://clouddevs.com/php/file_exists-function/#:~:text=The%20file_exists()%20function%20in,various%20aspects%20of%20web%20development.
+
+  if (!file_exists($dir_name)) 
+  {
+    mkdir($dir_name, 0777, true); 
+
+    debugAppend('getSecureFileNamePath Created directory= ' . $dir_name, $i_file_debug);
+  }
+
+  return $ret_file_name_path;
+
+} // getSecureFileNamePath
+
+// Get the name and path for the debug secure file
+function getDebugFileNamePath($i_file_debug)
+{
+  $date_str = getYearMonthDayString($i_file_debug);
+
+  $dir_name = "Debug";
+
+  $file_name_start = "DebugUtilEmail_";
+
+  $file_extension = ".txt";
+
+  $ret_file_name_path =  $dir_name . "/" . $file_name_start . $date_str . $file_extension;
+
+  debugAppend('getDebugFileNamePath File name= ' . $ret_file_name_path, $i_file_debug);
+
+  if (file_exists($ret_file_name_path)) 
+  {
+    return $ret_file_name_path;
+  }
+
+  // https://clouddevs.com/php/file_exists-function/#:~:text=The%20file_exists()%20function%20in,various%20aspects%20of%20web%20development.
+
+  if (!file_exists($dir_name)) 
+  {
+    mkdir($dir_name, 0777, true); 
+
+    debugAppend('getDebugFileNamePath Created directory= ' . $dir_name, $i_file_debug);
+  }
+
+  return $ret_file_name_path;
+
+} // getDebugFileNamePath
+
+// Returns a year_month_day string
+function getYearMonthDayString($i_file_debug)
+{
+  // https://www.php.net/manual/en/function.date.php
+
+  debugAppend('getYearMonthDayString Enter ', $i_file_debug);
+
+  $date_str = date("Y_m_d"); 
+
+  debugAppend('getYearMonthDayString date_str= ' . $date_str , $i_file_debug);
+  
+  return $date_str;
+
+} // getYearMonthDayString
+
+// Returns a year_month_day_hour_minute_second string
+function getYearMonthDayHourMinutSecondString($i_file_debug)
+{
+  // https://www.php.net/manual/en/function.date.php
+
+  $date_time_str = date("Y_m_d_H_i_s"); 
+
+  debugAppend('getYearMonthDayHourMinutSecondString date_time_str= ' . $date_time_str , $i_file_debug);
+
+  return $date_time_str;
+ 
+} // getYearMonthDayHourMinutSe
+
+// Returns the timestamp in milliseconds as string
+function getTimeStampIntString()
+{
+  // https://www.php.net/manual/en/datetime.gettimestamp.php
+  // https://www.php.net/manual/en/datetime.settimestamp.php (set)
+
+  $date = date_create();
+
+  $ret_time_stamp = date_timestamp_get($date);
+
+  return $ret_time_stamp;
+
+} // getTimeStampIntString
+
 // Creation of a new secure file
 function initSecure($i_file_secure)
 {
-  $time_stamp_now = time();
-
-  $time_stamp_str =  date ("F d Y H:i:s.", $time_stamp_now);
-
-  $file_content = "Secure output from UtilEmailSecure" . PHP_EOL . $i_file_secure . PHP_EOL . "Time stamp: " . $time_stamp_str . PHP_EOL;
+  $file_content = "";
 
   $new_file = fopen($i_file_secure, "w") or die("Unable to open file!");
 
@@ -213,7 +303,8 @@ function secureAppend($i_secure_str, $i_file_secure)
 } // secureAppend
 
 // Appends secure data to file 
-function secureAppendTimeStamp($i_secure_str, $i_file_secure)
+// i_secure_str  String written after the time stamp and the date
+function secureAppendTimeStamp($i_secure_str, $i_file_secure, $i_file_debug)
 {
   if (strlen($i_file_secure) <= 2)
   {
@@ -225,11 +316,13 @@ function secureAppendTimeStamp($i_secure_str, $i_file_secure)
     initSecure($i_file_secure);
   }
 
+  $time_stamp_int = getTimeStampIntString();
+
+  $date_time = getYearMonthDayHourMinutSecondString($i_file_debug);
+
   $time_stamp_now = time();
 
-  $time_stamp_str =  date ("F d Y H:i:s.", $time_stamp_now);
-
-  $secure_str = $time_stamp_str . "    " . $i_secure_str . PHP_EOL;
+  $secure_str = $time_stamp_int . "    " . $date_time . "    " . $i_secure_str . PHP_EOL;
 
   file_put_contents($i_file_secure, $secure_str, FILE_APPEND);
 
