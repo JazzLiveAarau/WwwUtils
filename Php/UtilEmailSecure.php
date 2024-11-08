@@ -64,23 +64,149 @@ $file_debug_send = getDebugFileNamePath($file_debug_send);
 // Secure file name
 $file_secure_time_stamps = getSecureFileNamePath($file_debug_send);
 
-
 secureAppendTimeStamp($address_to, $file_secure_time_stamps, $file_debug_send);
+
+$b_spam_use = usedForSpam($secure_to, $file_secure_time_stamps, $file_debug_send);
 
 $email_message_lines = replaceHtmlRowEnds($email_message, $file_debug_rows);
 
 sendEmail($email_subject, $email_message_lines, $address_to, $address_from, $address_bcc, $file_debug_send);
 
-// Determine if the PHP file has been (is being) used to send spam
-function secureEmail($i_secure_to, $i_file_secure_time_stamps)
+// Returns true if this PHP function is being used to send spam
+// i_secure_to  Email address for a spam usage messaage 
+function usedForSpam($i_secure_to, $i_file_secure_time_stamps, $i_file_debug)
 {
+  debugAppend('usedForSpam Enter', $i_file_debug);
+
 	// Do nothing if the secure email address not is set
 	if (strlen($i_secure_to) <= 2)
 	{
-	  return;
+    debugAppend('usedForSpam Exit Mail address undefined', $i_file_debug);
+	  return false;
 	}
 
-} // secureEmail
+  $file_rows_array =  getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug);
+
+  $n_rows = count($file_rows_array);
+
+  debugAppend('usedForSpam Number of rows of the secure file n_rows= ' . strval($n_rows), $i_file_debug);
+
+  $time_stamp_int_array = getTimeStampArray($file_rows_array, $i_file_debug);
+
+  debugAppend('usedForSpam Exit', $i_file_debug);
+
+  return false;
+
+} // usedForSpam
+
+// Returns a time stamp integer (milliseconds) array retrieved from the file rows array
+function getTimeStampArray($i_file_rows_array, $i_file_debug)
+{
+  $time_stamp_array = array();
+
+  $n_rows = count($i_file_rows_array);
+
+  debugAppend('getTimeStampArray Number of rows of the secure file n_rows= ' . strval($n_rows), $i_file_debug);
+
+  for ($index_row = 0; $index_row < $n_rows; $index_row = $index_row + 1 )
+  {
+
+    $current_row = $i_file_rows_array[$index_row];
+
+    $pos_hash = strpos($current_row, "#");
+
+    if ($pos_hash == false)
+    {
+      debugAppend('getTimeStampArray Error. Separator # is missing Row= ' . $current_row, $i_file_debug);
+
+      return $time_stamp_array;
+    }
+
+    $time_stamp_str = substr($current_row, 0, $pos_hash);
+
+    $time_stamp_trimmed_str = trim($time_stamp_str);
+
+    $time_stamp_int = intval($time_stamp_trimmed_str);
+
+    array_push($time_stamp_array, $time_stamp_int);
+
+    debugAppend('getTimeStampArray Added to output array time stamp integer= ' . strval($time_stamp_int), $i_file_debug);
+
+  }
+
+  $n_elements = count($time_stamp_array);
+
+  debugAppend('getTimeStampArray Exit. n_elements= ' . strval($n_elements), $i_file_debug);
+
+  return $time_stamp_array;
+
+} // getTimeStampArray
+
+// Returns the content of the file rows as an array
+function getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug)
+{
+  // https://www.w3schools.com/php/php_file_open.asp
+  // https://www.w3schools.com/php/php_ref_array.asp
+
+  // debugAppend('getAllFileRowsAsArray Enter', $i_file_debug);
+  
+  // https://www.geeksforgeeks.org/best-way-to-initialize-empty-array-in-php/
+  $ret_rows_array = array();
+
+  if (!file_exists($i_file_secure_time_stamps)) 
+  {
+    debugAppend('getAllFileRowsAsArray A not existing file ' . $i_file_secure_time_stamps, $i_file_debug);
+
+    return $ret_rows_array;
+  }
+
+  $secure_file = fopen($i_file_secure_time_stamps, "r") or die("Unable to open file!");
+
+  $file_content = fread($secure_file,filesize($i_file_secure_time_stamps));
+
+  fclose($secure_file);
+
+  // debugAppend('getAllFileRowsAsArray File content is retrieved', $i_file_debug);
+
+  $content_remaining = $file_content;
+
+  $max_n_rows = 1000;
+
+  for ($loop_number=1; $loop_number <= $max_n_rows; $loop_number = $loop_number + 1)
+  {
+	  $pos_eol = strpos($content_remaining, PHP_EOL);
+
+    if ($pos_eol === false)
+    {
+      debugAppend('getAllFileRowsAsArray No end of line', $i_file_debug);
+
+      break;
+    }
+
+    $current_row = substr($content_remaining, 0, $pos_eol);
+
+    debugAppend('getAllFileRowsAsArray current_row= ' . $current_row, $i_file_debug);
+
+    array_push($ret_rows_array, $current_row);
+
+    $content_remaining = substr($content_remaining, $pos_eol + strlen(PHP_EOL));
+
+    if (strlen($content_remaining) == 0)
+    {
+      debugAppend('getAllFileRowsAsArray content_remaining is empty', $i_file_debug);
+
+      break;
+    }
+
+  } // loop_number
+
+  $n_elements = count($ret_rows_array);
+
+  debugAppend('getAllFileRowsAsArray n_elements= ' . strval($n_elements), $i_file_debug);
+
+  return $ret_rows_array;
+
+} // getAllFileRowsAsArray
 
 // Send the email
 function sendEmail($i_email_subject, $i_email_message, $i_address_to, $i_address_from, $i_address_bcc, $i_file_debug)
@@ -175,7 +301,7 @@ function getSecureFileNamePath($i_file_debug)
 
   $ret_file_name_path =  $dir_name . "/" . $file_name_start . $date_str . $file_extension;
 
-  debugAppend('getSecureFileNamePath File name= ' . $ret_file_name_path, $i_file_debug);
+  // debugAppend('getSecureFileNamePath File name= ' . $ret_file_name_path, $i_file_debug);
 
   if (file_exists($ret_file_name_path)) 
   {
@@ -208,7 +334,7 @@ function getDebugFileNamePath($i_file_debug)
 
   $ret_file_name_path =  $dir_name . "/" . $file_name_start . $date_str . $file_extension;
 
-  debugAppend('getDebugFileNamePath File name= ' . $ret_file_name_path, $i_file_debug);
+  // debugAppend('getDebugFileNamePath File name= ' . $ret_file_name_path, $i_file_debug);
 
   if (file_exists($ret_file_name_path)) 
   {
@@ -233,11 +359,11 @@ function getYearMonthDayString($i_file_debug)
 {
   // https://www.php.net/manual/en/function.date.php
 
-  debugAppend('getYearMonthDayString Enter ', $i_file_debug);
+  // debugAppend('getYearMonthDayString Enter ', $i_file_debug);
 
   $date_str = date("Y_m_d"); 
 
-  debugAppend('getYearMonthDayString date_str= ' . $date_str , $i_file_debug);
+  // debugAppend('getYearMonthDayString date_str= ' . $date_str , $i_file_debug);
   
   return $date_str;
 
@@ -250,7 +376,7 @@ function getYearMonthDayHourMinutSecondString($i_file_debug)
 
   $date_time_str = date("Y_m_d_H_i_s"); 
 
-  debugAppend('getYearMonthDayHourMinutSecondString date_time_str= ' . $date_time_str , $i_file_debug);
+  // debugAppend('getYearMonthDayHourMinutSecondString date_time_str= ' . $date_time_str , $i_file_debug);
 
   return $date_time_str;
  
@@ -322,7 +448,7 @@ function secureAppendTimeStamp($i_secure_str, $i_file_secure, $i_file_debug)
 
   $time_stamp_now = time();
 
-  $secure_str = $time_stamp_int . "    " . $date_time . "    " . $i_secure_str . PHP_EOL;
+  $secure_str = $time_stamp_int . "   #" . $date_time . "   #" . $i_secure_str . PHP_EOL;
 
   file_put_contents($i_file_secure, $secure_str, FILE_APPEND);
 
