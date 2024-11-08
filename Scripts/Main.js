@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-11-07
+// Date: 2024-11-08
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -156,6 +156,20 @@ function testUtilEmailSecure()
     var email_to = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com';
 
     email_to = '   gunnar.liden@viewsoncad.ch ';
+
+    if (!UtilEmail.validateMultipleAddresses(email_to))
+    {
+        alert("testUtilEmailSecure Email TO addresses are not OK");
+
+        return;
+    }
+
+    var n_adresses = UtilEmail.getNumberOfAdresses(email_to);
+
+    if (n_adresses > 2)
+    {
+        alert("testUtilEmailSecure WARNING Too many addreses n_adresses= " + n_adresses.toString() + " Max is 2");
+    }
 
     // email_to = 'gunnar.liden@viewsoncad.ch';
 	

@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-11-07
+// Date: 2024-11-08
 // Author: Gunnar Lidén
 
 // File content
@@ -172,6 +172,41 @@ class UtilEmail
     {
         var b_adresses_valid = true;
 
+        var all_adresses = UtilEmail.getAdressesArray(i_addresses);
+
+        var n_adresses = UtilEmail.getNumberOfAdresses(i_addresses);
+
+        if (n_adresses == 0)
+        {
+            alert("UtilEmail.validateMultipleAddresses No adresses in the input string i_addresses= " + i_addresses);
+
+            b_adresses_valid = false;
+
+            return b_adresses_valid;
+        }
+
+        for (var index_valid=0; index_valid < n_adresses; index_valid++)
+        {
+            var check_address = all_adresses[index_valid];
+
+            var b_valid = UtilEmail.validateAddress(check_address);
+
+            if (!b_valid)
+            {
+                alert("UtilEmail.validateMultipleAddresses Not a valid email address check_address= " + check_address);
+    
+                b_adresses_valid = false;
+            }  
+
+        } // index_valid
+
+        return b_adresses_valid;
+
+    } // validateMultipleAddresses
+
+    // Get addresses as an array
+    static getAdressesArray(i_addresses)
+    {
         var all_adresses = [];
 
         var remaining_adresses = i_addresses;
@@ -207,37 +242,25 @@ class UtilEmail
 
             }
 
+            if (i_adress == n_max_adresses)
+            {
+                alert("UtilEmail.getAdressesArray WARNING Only the first " + n_max_adresses.toString() + "addresses are in the output array" );
+            }
+
         } // i_adress
 
-        var n_adresses = all_adresses.length;
+        return all_adresses;
 
-        if (n_adresses == 0)
-        {
-            alert("UtilEmail.validateMultipleAddresses No adresses in the input string i_addresses= " + i_addresses);
+    } // getAdressesArray
 
-            b_adresses_valid = false;
+    // Returns the number of addresses
+    static getNumberOfAdresses(i_addresses)
+    {
+        var address_array = UtilEmail.getAdressesArray(i_addresses);
 
-            return b_adresses_valid;
-        }
+        return address_array.length;
 
-        for (var index_valid=0; index_valid < n_adresses; index_valid++)
-        {
-            var check_address = all_adresses[index_valid];
-
-            var b_valid = UtilEmail.validateAddress(check_address);
-
-            if (!b_valid)
-            {
-                alert("UtilEmail.validateMultipleAddresses Not a valid email address check_address= " + check_address);
-    
-                b_adresses_valid = false;
-            }  
-
-        } // index_valid
-
-        return b_adresses_valid;
-
-    } // validateMultipleAddresses
+    } // getNumberOfAdresses
 
     // Determines if a string contains window (escaped) row ends
     static containsEscapedRowEnds(i_string)
