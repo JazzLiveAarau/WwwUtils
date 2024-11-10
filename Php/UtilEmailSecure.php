@@ -58,25 +58,45 @@ $address_bcc = $_POST['a_bcc'];
 $secure_to = $_POST['s_to'];
 
 // Debug file names
-$file_debug_rows = "Debug/DebugUtilEmailSecureRowEnds.txt";
+//$file_debug_rows = "Debug/DebugUtilEmailSecureRowEnds.txt";
+$file_debug_rows = "";
 $file_debug_send = getDebugFileNamePath($file_debug_send);
+
+debugAppend('UtilEmailSecure.php Enter', $file_debug_send);
 
 // Secure file name
 $file_secure_time_stamps = getSecureFileNamePath($file_debug_send);
 
 secureAppendTimeStamp($address_to, $file_secure_time_stamps, $file_debug_send);
 
-$b_spam_use = usedForSpam($secure_to, $file_secure_time_stamps, $file_debug_send);
+$b_spam_use = usedForSpam($secure_to, $file_secure_time_stamps, $address_to, $address_bcc, $file_debug_send);
 
-$email_message_lines = replaceHtmlRowEnds($email_message, $file_debug_rows);
+if ($b_spam_use == false)
+{
+  $email_message_lines = replaceHtmlRowEnds($email_message, $file_debug_rows);
 
-sendEmail($email_subject, $email_message_lines, $address_to, $address_from, $address_bcc, $file_debug_send);
+  //QQQQQ debugAppend('UtilEmailSecure.php No spam. Call function sendEmail', $file_debug_send);
+
+  sendEmail($email_subject, $email_message_lines, $address_to, $address_from, $address_bcc, $file_debug_send);
+
+  //QQQQQ debugAppend('UtilEmailSecure.php Exit. No spam. Function sendEmail was called', $file_debug_send);
+}
+else
+{
+  debugAppend('UtilEmailSecure.php Exit. Spam. Email was not sent', $file_debug_send);
+
+  echo 'MailIsNotSent';
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// Functions /////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Returns true if this PHP function is being used to send spam
 // i_secure_to  Email address for a spam usage messaage 
-function usedForSpam($i_secure_to, $i_file_secure_time_stamps, $i_file_debug)
+function usedForSpam($i_secure_to, $i_file_secure_time_stamps, $i_address_to, $i_address_bcc, $i_file_debug)
 {
-  debugAppend('usedForSpam Enter', $i_file_debug);
+  // debugAppend('usedForSpam Enter', $i_file_debug);
 
 	// Do nothing if the secure email address not is set
 	if (strlen($i_secure_to) <= 2)
@@ -87,17 +107,188 @@ function usedForSpam($i_secure_to, $i_file_secure_time_stamps, $i_file_debug)
 
   $file_rows_array =  getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug);
 
-  $n_rows = count($file_rows_array);
+  // $n_rows = count($file_rows_array);
 
-  debugAppend('usedForSpam Number of rows of the secure file n_rows= ' . strval($n_rows), $i_file_debug);
+  // debugAppend('usedForSpam Number of rows of the secure file n_rows= ' . strval($n_rows), $i_file_debug);
 
   $time_stamp_int_array = getTimeStampArray($file_rows_array, $i_file_debug);
 
-  debugAppend('usedForSpam Exit', $i_file_debug);
+  $n_addresses_to = getNumberOfAddresses($i_address_to, $i_file_debug);
 
-  return false;
+  $n_addresses_bcc = getNumberOfAddresses($i_address_bcc, $i_file_debug);
+
+  $b_spam = isSpam($i_secure_to, $time_stamp_int_array, $n_addresses_to, $n_addresses_bcc, $i_file_debug);
+
+  if ($b_spam)
+  {
+    debugAppend('usedForSpam Exit. SPAM!', $i_file_debug);
+  }
+  //else
+  //{
+  //  debugAppend('usedForSpam Exit. No spam', $i_file_debug);
+  //}
+  
+  return $b_spam;
 
 } // usedForSpam
+
+// Returns true for spam use
+function isSpam($i_secure_to, $i_time_stamp_int_array, $i_n_address_to, $i_n_address_bcc, $i_file_debug)
+{
+  // debugAppend('isSpam Enter', $i_file_debug);
+
+  $ret_b_spam = false;
+
+	// Do nothing if the secure email address not is set
+	if (strlen($i_secure_to) <= 2)
+	{
+    debugAppend('isSpam Exit Secure mail address undefined', $i_file_debug);
+	  return $ret_b_spam;
+	}
+
+  $spam_criterion_n_address_to = 2;
+
+  $spam_criterion_n_address_bcc = 3;
+
+  $spam_criterion_n_send_calls = 3;
+
+  $spam_criterion_n_send_calls_time = 12; // Within last 12 seconds
+
+
+  $b_n_calls = isSpamNumberOfCalls($i_time_stamp_int_array, $spam_criterion_n_send_calls_time, 
+                $spam_criterion_n_send_calls, $i_file_debug);
+
+  if ($b_n_calls || $i_n_address_to > $spam_criterion_n_address_to || $i_n_address_bcc > $spam_criterion_n_address_bcc)
+  {
+    $ret_b_spam = true;
+  }
+
+  /* QQQQQQQQQQQQQQQQQQ
+  if ($ret_b_spam == true)
+  {
+    debugAppend('isSpam Exit. Spam !!!!!!!!!!!!!!!!!!!!!!!!', $i_file_debug);
+  }
+  else
+  {
+    debugAppend('isSpam Exit. No spam ', $i_file_debug);
+  }
+  QQQQQQQQQQQQQQQQQQQ */
+
+  return $ret_b_spam;
+
+} // isSpam
+
+// Returns true if the number of calls within a given (input) time period 
+// exceeds a given (input) number
+function isSpamNumberOfCalls($i_time_stamp_int_array, $i_spam_criterion_n_send_calls_time, 
+                              $i_spam_criterion_n_send_calls, $i_file_debug)
+{
+  $ret_b_calls = false;
+
+  $n_stamps = count($i_time_stamp_int_array);
+
+  if ($n_stamps < $i_spam_criterion_n_send_calls)
+  {
+    debugAppend('isSpamNumberOfCalls Exit. Number of calls n_stamps= ' . strval($n_stamps) . " < Number criterion= "
+                  . strval($i_spam_criterion_n_send_calls), $i_file_debug);
+
+    return $ret_b_calls;
+  }
+
+  $last_stamp_time = $i_time_stamp_int_array[$n_stamps - 1];
+
+  $current_n_calls = 1;
+
+  for ($index_stamp = $n_stamps - 2; $index_stamp >= 0; $index_stamp--)
+  {
+    $current_stamp_time = $i_time_stamp_int_array[$index_stamp];
+
+    $current_n_calls = $current_n_calls + 1;
+
+    $time_difference = $last_stamp_time - $current_stamp_time;
+
+    // debugAppend('isSpamNumberOfCalls time_difference= ' . strval($time_difference) . " current_n_calls= ". strval($current_n_calls), $i_file_debug);
+
+    if ($time_difference > $i_spam_criterion_n_send_calls_time)
+    {
+
+      //debugAppend('isSpamNumberOfCalls Exit false: time_difference= ' . strval($time_difference) .
+      //            " > Time criterion= ". strval($i_spam_criterion_n_send_calls_time), $i_file_debug);
+
+      $ret_b_calls = false;
+
+      break;
+    }
+
+    if ($current_n_calls > $i_spam_criterion_n_send_calls) // && $time_difference <= $i_spam_criterion_n_send_calls_time
+    {
+
+      debugAppend("isSpamNumberOfCalls Exit true: Number of calls is " . strval($current_n_calls) . 
+                  " > Number criterion is " . strval($i_spam_criterion_n_send_calls) , $i_file_debug);
+
+                   debugAppend("isSpamNumberOfCalls Exit true: " .
+                   " These calls were made within " . strval($time_difference) . " seconds. " .
+                    "Time criterion is "  . strval($i_spam_criterion_n_send_calls_time) . " seconds. " , $i_file_debug);
+
+      $ret_b_calls = true;
+
+      break;
+    }    
+
+  } // index_stamp
+
+
+  return $ret_b_calls;
+
+} // isSpamNumberOfCalls
+
+// Returns the number of addresses
+function getNumberOfAddresses($i_addresses, $i_file_debug)
+{
+  if (trim(strlen($i_addresses)) == 0)
+  {
+    return 0;
+  }
+
+  $addresses_array = array();
+
+  $n_addresses_max = 100;
+
+  $remaining_addresses = $i_addresses;
+
+  for ($i_address=1; $i_address <= $n_addresses_max; $i_address++)
+  {
+
+    $pos_comma = strpos($remaining_addresses, ",");
+
+    if ($pos_comma === false)
+    {
+      $current_address = trim($remaining_addresses);
+
+      array_push($addresses_array, $current_address);
+
+      debugAppend('getNumberOfAddresses current_address= ' . $current_address, $i_file_debug);
+
+      break;
+    }
+
+    $current_address = trim(substr($remaining_addresses, 0, $pos_comma));
+
+    array_push($addresses_array, $current_address);
+
+    debugAppend('getNumberOfAddresses current_address= ' . $current_address, $i_file_debug);
+
+    $remaining_addresses = substr($remaining_addresses, $pos_comma + 1);
+
+  }
+
+  $n_addresses = count($addresses_array);
+
+  debugAppend('getNumberOfAddresses n_addresses= ' . strval($n_addresses), $i_file_debug);
+
+  return $n_addresses;
+
+} // getNumberOfAddresses
 
 // Returns a time stamp integer (milliseconds) array retrieved from the file rows array
 function getTimeStampArray($i_file_rows_array, $i_file_debug)
@@ -106,7 +297,7 @@ function getTimeStampArray($i_file_rows_array, $i_file_debug)
 
   $n_rows = count($i_file_rows_array);
 
-  debugAppend('getTimeStampArray Number of rows of the secure file n_rows= ' . strval($n_rows), $i_file_debug);
+  // debugAppend('getTimeStampArray Number of rows of the secure file n_rows= ' . strval($n_rows), $i_file_debug);
 
   for ($index_row = 0; $index_row < $n_rows; $index_row = $index_row + 1 )
   {
@@ -115,7 +306,7 @@ function getTimeStampArray($i_file_rows_array, $i_file_debug)
 
     $pos_hash = strpos($current_row, "#");
 
-    if ($pos_hash == false)
+    if ($pos_hash === false)
     {
       debugAppend('getTimeStampArray Error. Separator # is missing Row= ' . $current_row, $i_file_debug);
 
@@ -130,13 +321,13 @@ function getTimeStampArray($i_file_rows_array, $i_file_debug)
 
     array_push($time_stamp_array, $time_stamp_int);
 
-    debugAppend('getTimeStampArray Added to output array time stamp integer= ' . strval($time_stamp_int), $i_file_debug);
+    // debugAppend('getTimeStampArray Added to output array time stamp integer= ' . strval($time_stamp_int), $i_file_debug);
 
   }
 
   $n_elements = count($time_stamp_array);
 
-  debugAppend('getTimeStampArray Exit. n_elements= ' . strval($n_elements), $i_file_debug);
+  debugAppend('getTimeStampArray Exit. Number of elements of the integer array is ' . strval($n_elements), $i_file_debug);
 
   return $time_stamp_array;
 
@@ -153,7 +344,7 @@ function getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug)
   // https://www.geeksforgeeks.org/best-way-to-initialize-empty-array-in-php/
   $ret_rows_array = array();
 
-  if (!file_exists($i_file_secure_time_stamps)) 
+  if (file_exists($i_file_secure_time_stamps) == false) 
   {
     debugAppend('getAllFileRowsAsArray A not existing file ' . $i_file_secure_time_stamps, $i_file_debug);
 
@@ -185,7 +376,7 @@ function getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug)
 
     $current_row = substr($content_remaining, 0, $pos_eol);
 
-    debugAppend('getAllFileRowsAsArray current_row= ' . $current_row, $i_file_debug);
+    // debugAppend('getAllFileRowsAsArray current_row= ' . $current_row, $i_file_debug);
 
     array_push($ret_rows_array, $current_row);
 
@@ -193,7 +384,7 @@ function getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug)
 
     if (strlen($content_remaining) == 0)
     {
-      debugAppend('getAllFileRowsAsArray content_remaining is empty', $i_file_debug);
+      // debugAppend('getAllFileRowsAsArray content_remaining is empty', $i_file_debug);
 
       break;
     }
@@ -202,7 +393,7 @@ function getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug)
 
   $n_elements = count($ret_rows_array);
 
-  debugAppend('getAllFileRowsAsArray n_elements= ' . strval($n_elements), $i_file_debug);
+  debugAppend('getAllFileRowsAsArray Exit. Number of rows in the secure file is ' . strval($n_elements), $i_file_debug);
 
   return $ret_rows_array;
 
@@ -211,6 +402,8 @@ function getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug)
 // Send the email
 function sendEmail($i_email_subject, $i_email_message, $i_address_to, $i_address_from, $i_address_bcc, $i_file_debug)
 {
+  //QQQ debugAppend('sendEmail Enter. Send email to ' . $i_address_to, $i_file_debug);
+
 	// Always set content-type when sending HTML email
 	$headers = "MIME-Version: 1.0" . "\r\n";
 	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -222,17 +415,17 @@ function sendEmail($i_email_subject, $i_email_message, $i_address_to, $i_address
 	$headers .=  "\r\n";
 
 	// Send the mail
-	if (mail($i_address_to, $i_email_subject, $i_email_message, $headers))
+	if (mail($i_address_to, $i_email_subject, $i_email_message, $headers) == true)
 	{
 		echo 'MailIsSent';	
 
-		debugAppend('sendEmail Enter. Email is sent to ' . $i_address_to, $i_file_debug);
+		debugAppend('sendEmail Exit. Email is sent to ' . $i_address_to, $i_file_debug);
 	}
 	else
 	{
 		echo 'MailIsNotSent';
 		
-		debugAppend('sendEmail Enter. Email is NOT sent to ' . $i_address_to, $i_file_debug);
+		debugAppend('sendEmail Exit. Email is NOT sent to ' . $i_address_to, $i_file_debug);
 	}
 
 } // sendEmail
@@ -310,7 +503,7 @@ function getSecureFileNamePath($i_file_debug)
 
   // https://clouddevs.com/php/file_exists-function/#:~:text=The%20file_exists()%20function%20in,various%20aspects%20of%20web%20development.
 
-  if (!file_exists($dir_name)) 
+  if (file_exists($dir_name) == false) 
   {
     mkdir($dir_name, 0777, true); 
 
