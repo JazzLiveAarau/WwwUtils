@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-11-08
+// Date: 2024-11-10
 // Author: Gunnar Lidén
 
 // File content
@@ -41,9 +41,6 @@ class UtilEmail
             return;
         }
 
-        // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
-        // i.e. for mutiple addresses separated with ;
-
         // ('https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSecure.php',
 
         $.post
@@ -62,11 +59,11 @@ class UtilEmail
               {
                     var b_ok = false;
                     var b_failure = false;
-                    if (data_send.indexOf("MailIsSent"))
+                    if (data_send.indexOf("MailIsSent") >= 0)
                     {
                         b_ok = true;
                     }
-                    if (data_send.indexOf("MailIsNotSent"))
+                    if (data_send.indexOf("MailIsNotSent") >= 0)
                     {
                         b_failure = true;
                     }
@@ -376,7 +373,7 @@ class UtilEmail
     {
         console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
 
-        alert("UtilEmail.sendCallbackSecure Failure sending mail. Subject= " + i_subject + ' status_copy= ' + i_status_copy);
+        alert("UtilEmail.sendCallbackSecure Failure sending mail. Subject= " + i_subject + ' status_copy= ' + i_status_send);
 
     } // sendError
 
@@ -411,7 +408,7 @@ class UtilEmail
         var b_send_success = false;
 
         // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
-        // i.e. for mutiple addresses separated with ;
+        // i.e. for mutiple addresses separated with ,
 
         await $.post
         ('https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSend.php',
@@ -428,11 +425,11 @@ class UtilEmail
               {
                     var b_ok = false;
                     var b_failure = false;
-                    if (data_send.indexOf("MailIsSent"))
+                    if (data_send.indexOf("MailIsSent") >= 0)
                     {
                         b_ok = true;
                     }
-                    if (data_send.indexOf("MailIsNotSent"))
+                    if (data_send.indexOf("MailIsNotSent") >= 0)
                     {
                         b_failure = true;
                     }
@@ -494,7 +491,7 @@ class UtilEmail
         }
 
         // TODO Check i_to E-Mail addresses with UtilString.validEmailAddress, 
-        // i.e. for mutiple addresses separated with ;
+        // i.e. for mutiple addresses separated with ,
 
         $.post
         ('https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSend.php',
@@ -511,11 +508,11 @@ class UtilEmail
               {
                     var b_ok = false;
                     var b_failure = false;
-                    if (data_send.indexOf("MailIsSent"))
+                    if (data_send.indexOf("MailIsSent") >= 0)
                     {
                         b_ok = true;
                     }
-                    if (data_send.indexOf("MailIsNotSent"))
+                    if (data_send.indexOf("MailIsNotSent") >= 0)
                     {
                         b_failure = true;
                     }
