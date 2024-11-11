@@ -645,7 +645,7 @@ function getIdDivElementUtilEmailResults()
 // /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
 function eventMergeFiles()
 {
-    var file_name = 'Utils_20241106.js';
+    var file_name = 'Utils_20241111.js';
 
     $.post
       ('PhpMerge/MergeFiles.php',
@@ -672,6 +672,7 @@ function eventMergeFiles()
 } // eventMergeFiles
 
 // Copy PHP files
+// Please not that UtilEmailSecure.php not is copied to JazzScripts/Php/
 function eventCopyPhpFiles()
 {
     var path_file_input = '';
@@ -685,6 +686,27 @@ function eventCopyPhpFiles()
         return;
     }
 
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilEmailSecure.php';
+
+    // Gives an error. It should be possible to set a parameter that the PHP file
+    // can be in any directory and with the absolute path as input. TODO Find out how
+    // But having it there might be the reason that it coul be used to send spam 
+    // path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSecure.php';
+
+    // Please note that if this function is used by another application, then the
+    // this file must also be copied to this application
+    path_file_output = 'https://jazzliveaarau.ch/Guestbook/Php/UtilEmailSecure.php';
+
+    var b_email_secure = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_email_secure)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    /* ///////////////////////////////////////////////////////////////////////////
+       Locked by the provider Hostpoint while the function was used to send spam
+       Please refer to saved email in the directory Description
     path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilEmailSend.php';
 
     path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSend.php';
@@ -695,17 +717,7 @@ function eventCopyPhpFiles()
     {
         alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
     }
-
-    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilEmailSecure.php';
-
-    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilEmailSecure.php';
-
-    var b_email_secure = UtilServer.copyFile(path_file_input, path_file_output);  
-
-    if (!b_email_secure)
-    {
-        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
-    }
+    ///////////////////////////////////////////////////////////////////////////// */
 
     path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilServerCopyFile.php';
 

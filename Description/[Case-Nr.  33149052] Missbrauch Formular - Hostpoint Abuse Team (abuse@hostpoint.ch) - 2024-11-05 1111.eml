@@ -1,0 +1,118 @@
+Return-Path: <abuse@hostpoint.ch>
+Delivered-To: gunnar.liden@jazzliveaarau.ch
+Received: from mail-lb1.adm.hostpoint.ch ([10.4.2.214])
+	by popimap047.mail.hostpoint.internal with LMTP
+	id aG3SAnXvKWcuCwAA9BAvQA:P1
+	(envelope-from <abuse@hostpoint.ch>)
+	for <gunnar.liden@jazzliveaarau.ch>; Tue, 05 Nov 2024 11:12:05 +0100
+Received: from mxin014.mail.hostpoint.ch ([10.4.2.214])
+	by mail-lb1.adm.hostpoint.ch with LMTP
+	id aG3SAnXvKWcuCwAA9BAvQA
+	(envelope-from <abuse@hostpoint.ch>)
+	for <gunnar.liden@jazzliveaarau.ch>; Tue, 05 Nov 2024 11:12:05 +0100
+Received: from mailnull by mxin014.mail.hostpoint.ch with local_accounts_spamscanned (Exim 4.97.1 (FreeBSD))
+	(envelope-from <abuse@hostpoint.ch>)
+	id 1t8GXc-00000000Ldn-3SbS
+	for gunnar.liden@jazzliveaarau.ch;
+	Tue, 05 Nov 2024 11:12:05 +0100
+X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
+	mxin014.mail.hostpoint.ch
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.3 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,HP_VS_LEGIT,SPF_HELO_PASS,SPF_PASS,
+	URIBL_AMI_WHITE autolearn=disabled version=4.0.1
+Received: from mail.adm.hostpoint.ch ([2a00:d70:0:a::e0])
+	by mxin014.mail.hostpoint.ch with esmtps  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.97.1 (FreeBSD))
+	(envelope-from <abuse@hostpoint.ch>)
+	id 1t8GXc-00000000Ldd-3CRu
+	for gunnar.liden@jazzliveaarau.ch;
+	Tue, 05 Nov 2024 11:12:04 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=hostpoint.ch; s=20221128-ticket-rsa-1024; h=To:Subject:Message-ID:Date:From
+	:MIME-Version:Content-Transfer-Encoding:Content-Type:From:Sender:Reply-To:
+	Subject:Date:Message-ID:To:Cc;
+	bh=ufIENlK7dOf+p/D5EKe1ra1e2P95o8GvIRpkixoQvXQ=; t=1730801524; x=1731665524; 
+	b=ih0034tkC5/6iY5/EVOJnDJbrwaptqNBWXVMLER+F4WcK7WI8Lwjvl6sYhgapeHZy5rfU4f67cF
+	UFZ6wi4tv7R1fw24tQJKqgiaC5C6JoCXmmJtRtmITEENC74R3tfnJDRWR/W7WGZHcNGwLMZsWqe5t
+	XHrq3LYlTTx7dBQy0dk=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=hostpoint.ch; s=20221128-ticket-rsa; h=To:Subject:Message-ID:Date:From:
+	MIME-Version:Content-Transfer-Encoding:Content-Type:From:Sender:Reply-To:
+	Subject:Date:Message-ID:To:Cc;
+	bh=ufIENlK7dOf+p/D5EKe1ra1e2P95o8GvIRpkixoQvXQ=; t=1730801524; x=1731665524; 
+	b=cbh9IKZizzMA03oSMvvoDRHAW8vuhoccLYpOIYL5PxPCUyNj3F3awVMR3LFwbMprkmdyesPF/iN
+	O5/j9juZ4rPIetw6vtL5cDeIhYOXPmQwd4Bezq1kUmzFBFN2EjB/UolhytItYw6IXP40msr1paWU7
+	Nenc0kQyfb3zJcjTQf1AIkRA2xFY+x6+JnxwfgMXiIRyoqjDXJoWBGz2f2l5agr3xvKLsrQhaUQVn
+	O8Cp7QEEu85EieuV6sgv281caVKk3WLac4L0F4QC/d8jtg77Ve5gCe2Us02rccAswsm0FVKvNcuZ/
+	XaOTykRhyZ2YbL8rmkYSTX2X4Aq2nf3QjYag==;
+DKIM-Signature: v=1; a=ed25519-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=hostpoint.ch; s=20221128-ticket-ed25519; h=To:Subject:Message-ID:Date:From:
+	MIME-Version:Content-Transfer-Encoding:Content-Type:From:Sender:Reply-To:
+	Subject:Date:Message-ID:To:Cc;
+	bh=ufIENlK7dOf+p/D5EKe1ra1e2P95o8GvIRpkixoQvXQ=; t=1730801524; x=1731665524; 
+	b=gcJxqtdcEgE/+0yGexbKhxlNjRYPKEIBCFT8uVxwslg+sYN5lumXd5fLWsQearK++4raHbvxoMV
+	CNhMHrdG9DQ==;
+Received: from otrs3 by mail.adm.hostpoint.ch with local (Exim 4.97.1 (FreeBSD))
+	(envelope-from <abuse@hostpoint.ch>)
+	id 1t8GXc-000000005Fq-2huy
+	for gunnar.liden@jazzliveaarau.ch;
+	Tue, 05 Nov 2024 11:12:04 +0100
+Content-Type: text/plain; charset="utf8"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+From: Hostpoint Abuse Team <abuse@hostpoint.ch>
+Date: Tue, 5 Nov 2024 11:11:38 +0100
+Organization: Hostpoint AG
+Message-ID: <1730801498.760743.675652185@ticket.hostpoint.internal>
+Subject: [Case-Nr.: 33149052] Missbrauch Formular
+To: gunnar.liden@jazzliveaarau.ch
+X-Whitelisted-By: dnswl.hostpoint.dnslist
+X-Vs-State: 0
+X-Hostpoint-Spambox: NO
+
+Sehr geehrte(r) Gunnar Lid=C3=A9n
+
+Wir haben festgestellt, dass ein Formular auf Ihrem Server "jazzliv1" f=C3=
+=BCr den Versand von Spam missbraucht wurde. Spamversand f=C3=BChrt dazu, d=
+ass Server in Blacklisten eingetragen und blockiert werden. Um dies zu verh=
+indern, haben wir die Datei, welche f=C3=BCr den Versand von Nachrichten =
+=C3=BCber Ihre Webseite ben=C3=B6tigt wird, vor=C3=BCbergehend blockiert:
+UtilEmailSend.php
+
+Das betreffende Formular finden Sie hier:
+https://jazzliveaarau.ch/Guestbook/Version_1/GuestbookUpload.htm
+
+Weiteres Vorgehen:
+- Bitte sichern Sie das Formular mit einem Captcha Code [1], damit es nicht=
+ mehr automatisch ausgef=C3=BCllt werden kann und vor sogenannten "Bots" ge=
+sch=C3=BCtzt ist.
+- Aktualisieren Sie alle Anwendungen auf Ihrem Server. Dies betrifft die We=
+bseiten selbst, die Themes und alle Erweiterungen (Plugins).
+
+Die Datei k=C3=B6nnen Sie anschliessend im Hostpoint Control Panel [2] unte=
+r "Services > =C3=96ffnen" im Register Explorer, wieder freigeben. Navigier=
+en Sie dazu ins Verzeichnis "www/JazzScripts/Php" und klicken Sie rechts de=
+r Datei "UtilEmailSend.php" auf '----------'. Hier k=C3=B6nnen Sie die Bere=
+chtigung auf 644 anpassen.
+
+Bei Fragen steht Ihnen unser Support gerne zur Verf=C3=BCgung.
+
+Vielen Dank f=C3=BCr Ihre Mitarbeit.
+
+[1] https://de.wikipedia.org/wiki/Captcha
+[2] https://admin.hostpoint.ch/customer/Auth/Login
+
+Freundliche Gr=C3=BCsse
+
+Abuse Desk
+Hostpoint
+
+
+--
+Bewertung abgeben: https://feedback.hostpoint.ch/eaykvjulwsv7a46gniiuvpv4lu
+
+Hostpoint AG
+Neue Jonastrasse 60 | 8640 Rapperswil-Jona | Schweiz
+Tel +41 844 040404 | www.hostpoint.ch=

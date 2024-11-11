@@ -66,7 +66,7 @@ $secure_to = $_POST['s_to'];
 $file_debug_rows = "";
 $file_debug_send = getDebugFileNamePath($file_debug_send);
 
-debugAppend('UtilEmailSecure.php Enter', $file_debug_send);
+// debugAppend('UtilEmailSecure.php Enter', $file_debug_send);
 
 // Secure file name
 $file_secure_time_stamps = getSecureFileNamePath($file_debug_send);
@@ -84,11 +84,7 @@ if ($b_spam_array[0] == false && $b_spam_array[1] == false && $b_spam_array[2] =
 {
   $email_message_lines = replaceHtmlRowEnds($email_message, $file_debug_rows);
 
-  //QQQQQ debugAppend('UtilEmailSecure.php No spam. Call function sendEmail', $file_debug_send);
-
   sendEmail($email_subject, $email_message_lines, $address_to, $address_from, $address_bcc, $file_debug_send);
-
-  //QQQQQ debugAppend('UtilEmailSecure.php Exit. No spam. Function sendEmail was called', $file_debug_send);
 }
 else if ($b_spam_array[0] == true)
 {
