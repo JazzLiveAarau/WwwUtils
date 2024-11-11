@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-11-08
+// Date: 2024-11-11
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -164,25 +164,28 @@ function testUtilEmailSecure()
         return;
     }
 
-    var n_adresses = UtilEmail.getNumberOfAdresses(email_to);
+    var n_adresses_to = UtilEmail.getNumberOfAdresses(email_to);
 
-    if (n_adresses > 2)
+    if (n_adresses_to > 1)
     {
-        alert("testUtilEmailSecure WARNING Too many addreses n_adresses= " + n_adresses.toString() + " Max is 2");
+        alert("testUtilEmailSecure WARNING Too many TO addreses n_adresses_to= " + n_adresses_to.toString() + " Max is one (1)");
     }
-
-    // email_to = 'gunnar.liden@viewsoncad.ch';
 	
 	var secure_to = 'guestbook@jazzliveaarau.ch';
     
     // To many email copies var email_bcc = 'guestbook@jazzliveaarau.ch';
     var email_bcc = '';
+     // email_bcc = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com, gunnar@jazzliveaarau.ch';
 
-    // email_bcc = '   gunnar.liden@viewsoncad.ch , gunnar@jazzliveaarau.ch,sven.gunnar.liden@gmail.com';
+    var n_adresses_bcc = UtilEmail.getNumberOfAdresses(email_bcc);
+
+    if (n_adresses_bcc > 2)
+    {
+        alert("testUtilEmailSecure WARNING Too many BCC addreses n_adresses_bcc= " + n_adresses_bcc.toString() + " Max is two (2)");
+    }
 
     var email_message_html = UtilString. rowEndsWindowsToHtml(email_message);
 
-    
     UtilEmail.sendSecureCallback(email_from, email_subject, email_message_html, email_to, email_bcc, secure_to, successfulSend);
 
 } // testUtilEmailSecure

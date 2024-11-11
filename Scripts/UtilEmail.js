@@ -1,5 +1,5 @@
 // File: UtilEmail.js
-// Date: 2024-11-10
+// Date: 2024-11-11
 // Author: Gunnar Lidén
 
 // File content
@@ -58,25 +58,60 @@ class UtilEmail
               if (status_send == "success")
               {
                     var b_ok = false;
-                    var b_failure = false;
+                    var b_failure_sent = false;
+                    var b_failure_too_many_calls = false;
+                    var b_failure_too_many_to_and_bcc = false;
+                    var b_failure_too_many_to = false;
+                    var b_failure_too_many_bcc = false;
                     if (data_send.indexOf("MailIsSent") >= 0)
                     {
                         b_ok = true;
                     }
                     if (data_send.indexOf("MailIsNotSent") >= 0)
                     {
-                        b_failure = true;
+                        b_failure_sent = true;
                     }
-                    
+                    if (data_send.indexOf("TooManyCalls") >= 0)
+                    {
+                        b_failure_too_many_calls = true;
+                    }
+                    if (data_send.indexOf("TooManyToAndBccAddresses") >= 0)
+                    {
+                        b_failure_too_many_to_and_bcc = true;
+                    }
+                    if (data_send.indexOf("TooManyToAddresses") >= 0)
+                    {
+                        b_failure_too_many_to = true;
+                    }
+                    if (data_send.indexOf("TooManyBccAddresses") >= 0)
+                    {
+                        b_failure_too_many_bcc = true;
+                    }                    
                     if (b_ok)			
                     {
                         console.log("UtilEmail.sendSecure Mail is sent to " + i_to);
 
                         i_callback_fctn();
                     }
-                    else if (b_failure)
+                    else if (b_failure_sent)
                     {
-                        UtilEmail.sendError(i_subject, data_send, status_send);
+                        UtilEmail.errorSent(i_subject, data_send, status_send);
+                    }
+                    else if (b_failure_too_many_calls)
+                    {
+                        UtilEmail.errorTooManyCalls(i_subject, data_send, status_send);
+                    }
+                    else if (b_failure_too_many_to_and_bcc)
+                    {
+                        UtilEmail.errorTooManyToAndBcc(i_subject, data_send, status_send);
+                    }
+                    else if (b_failure_too_many_to)
+                    {
+                        UtilEmail.errorTooManyTo(i_subject, data_send, status_send);
+                    }
+                    else if (b_failure_too_many_bcc)
+                    {
+                        UtilEmail.errorTooManyBcc(i_subject, data_send, status_send);
                     }
                     else 
                     {
@@ -376,6 +411,51 @@ class UtilEmail
         alert("UtilEmail.sendCallbackSecure Failure sending mail. Subject= " + i_subject + ' status_copy= ' + i_status_send);
 
     } // sendError
+
+    // Failure sending mail
+    static errorSent(i_subject, i_data_send, i_status_send)
+    {
+        console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
+
+        alert("UtilEmail.sendCallbackSecure Failure sending mail with subject " + i_subject);
+
+    } // sendError
+
+    // Failure too many calls within a sgort time
+    static errorTooManyCalls(i_subject, i_data_send, i_status_send)
+    {
+        console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
+
+        alert("E-Mail mit Betreff '" + i_subject + "' wurde nicht gesendet wegen Überbelastung. Bitte warte eine kurze Zeit und versuch wieder");
+
+    } // errorTooManyCalls
+
+    // Failure too many TO and BCC addresses
+    static errorTooManyToAndBcc(i_subject, i_data_send, i_status_send)
+    {
+        console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
+
+        alert("E-Mail mit Betreff '" + i_subject + "' wurde nicht gesendet. Zu viele To und BCC Adressen");
+
+    } // errorTooManyToAndBcc
+
+    // Failure too many TO addresses
+    static errorTooManyTo(i_subject, i_data_send, i_status_send)
+    {
+        console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
+
+        alert("E-Mail mit Betreff '" + i_subject + "' wurde nicht gesendet. Zu viele To Adressen");
+
+    } // errorTooManyTo
+
+    // Failure too many BCC addresses
+    static errorTooManyBcc(i_subject, i_data_send, i_status_send)
+    {
+        console.log(" UtilEmail.sendCallbackSecure failure. data_send= " + i_data_send + ' status_send= ' + i_status_send);
+
+        alert("E-Mail mit Betreff '" + i_subject + "' nicht gesendet. Zu viele BCC Adressen");
+
+    } // errorTooManyBcc
 
     // REMOVE UtilEmail.send and UtilEmail.sendCallback later REMOVE REMOVE 2024-11-06 REMOVE
 

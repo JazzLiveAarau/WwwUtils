@@ -1,10 +1,14 @@
 
 
 <?php
+// File: UtilEmailSecure.php
+// Date: 2024-11-11
+// Author: Gunnar Lidén
 
 // Sends an email
 // --------------
 //
+// 
 // This function is called from another HTML (or PHP) page this way:
 // $.post("UtilEmailSecure.php", {a_from: from_str, a_subject: subject_str, a_msg: msg_str, a_to: to_str, a_bcc: bcc_str, s_to: secure_to},function(data,status){alert(data);});
 //
@@ -69,9 +73,14 @@ $file_secure_time_stamps = getSecureFileNamePath($file_debug_send);
 
 secureAppendTimeStamp($address_to, $file_secure_time_stamps, $file_debug_send);
 
-$b_spam_use = usedForSpam($secure_to, $file_secure_time_stamps, $address_to, $address_bcc, $file_debug_send);
+$b_spam_array = usedForSpam($secure_to, $file_secure_time_stamps, $address_to, $address_bcc, $file_debug_send);
 
-if ($b_spam_use == false)
+if ($b_spam_array[0] == true || $b_spam_array[1] == true || $b_spam_array[2] == true)
+{
+  sendEmailSpam($email_subject, $secure_to, $address_from, $file_debug_send);
+}
+
+if ($b_spam_array[0] == false && $b_spam_array[1] == false && $b_spam_array[2] == false)
 {
   $email_message_lines = replaceHtmlRowEnds($email_message, $file_debug_rows);
 
@@ -81,11 +90,29 @@ if ($b_spam_use == false)
 
   //QQQQQ debugAppend('UtilEmailSecure.php Exit. No spam. Function sendEmail was called', $file_debug_send);
 }
-else
+else if ($b_spam_array[0] == true)
 {
-  debugAppend('UtilEmailSecure.php Exit. Spam. Email was not sent', $file_debug_send);
+  debugAppend('UtilEmailSecure.php Exit. Spam. Email was not sent. Too many calls within a short time period.', $file_debug_send);
 
-  echo 'MailIsNotSent';
+  echo 'TooManyCalls';
+}
+else if ($b_spam_array[1] == true && $b_spam_array[2] == true)
+{
+  debugAppend('UtilEmailSecure.php Exit. Spam. Email was not sent. To many TO and BCC adresses', $file_debug_send);
+
+  echo 'TooManyToAndBccAddresses';
+}
+else if ($b_spam_array[1] == true)
+{
+  debugAppend('UtilEmailSecure.php Exit. Spam. Email was not sent. To many TO adresses', $file_debug_send);
+
+  echo 'TooManyToAddresses';
+}
+else if ($b_spam_array[2] == true)
+{
+  debugAppend('UtilEmailSecure.php Exit. Spam. Email was not sent. To many BCC adresses', $file_debug_send);
+
+  echo 'TooManyBccAddresses';
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,12 +125,12 @@ function usedForSpam($i_secure_to, $i_file_secure_time_stamps, $i_address_to, $i
 {
   // debugAppend('usedForSpam Enter', $i_file_debug);
 
-	// Do nothing if the secure email address not is set
-	if (strlen($i_secure_to) <= 2)
-	{
-    debugAppend('usedForSpam Exit Mail address undefined', $i_file_debug);
-	  return false;
-	}
+	// Perhaps Do nothing if the secure email address not is set
+	// Perhaps if (strlen($i_secure_to) <= 2)
+	// Perhaps {
+  // Perhaps   debugAppend('usedForSpam Exit Mail address undefined', $i_file_debug);
+	// Perhaps   return false;
+	// Perhaps }
 
   $file_rows_array =  getAllFileRowsAsArray($i_file_secure_time_stamps, $i_file_debug);
 
@@ -117,38 +144,32 @@ function usedForSpam($i_secure_to, $i_file_secure_time_stamps, $i_address_to, $i
 
   $n_addresses_bcc = getNumberOfAddresses($i_address_bcc, $i_file_debug);
 
-  $b_spam = isSpam($i_secure_to, $time_stamp_int_array, $n_addresses_to, $n_addresses_bcc, $i_file_debug);
-
-  if ($b_spam)
-  {
-    debugAppend('usedForSpam Exit. SPAM!', $i_file_debug);
-  }
-  //else
-  //{
-  //  debugAppend('usedForSpam Exit. No spam', $i_file_debug);
-  //}
+  $b_spam_array = isSpam($i_secure_to, $time_stamp_int_array, $n_addresses_to, $n_addresses_bcc, $i_file_debug);
   
-  return $b_spam;
+  return $b_spam_array;
 
 } // usedForSpam
 
-// Returns true for spam use
+// Returns an arrays with booleans 
+// array[0] is true: Too many calls of this function within a short time
+// array[1] is true: Too many TO  adresses
+// array[2] is true: Too many BCC adresses
 function isSpam($i_secure_to, $i_time_stamp_int_array, $i_n_address_to, $i_n_address_bcc, $i_file_debug)
 {
   // debugAppend('isSpam Enter', $i_file_debug);
 
-  $ret_b_spam = false;
+  $ret_b_array = array(false, false, false);
 
-	// Do nothing if the secure email address not is set
-	if (strlen($i_secure_to) <= 2)
-	{
-    debugAppend('isSpam Exit Secure mail address undefined', $i_file_debug);
-	  return $ret_b_spam;
-	}
+	// Perhaps // Do nothing if the secure email address not is set
+	// Perhaps if (strlen($i_secure_to) <= 2)
+	// Perhaps {
+  // Perhaps   debugAppend('isSpam Exit Secure mail address undefined', $i_file_debug);
+	// Perhaps   return $ret_b_array;
+	// Perhaps }
 
-  $spam_criterion_n_address_to = 2;
+  $spam_criterion_n_address_to = 1;
 
-  $spam_criterion_n_address_bcc = 3;
+  $spam_criterion_n_address_bcc = 2;
 
   $spam_criterion_n_send_calls = 3;
 
@@ -158,23 +179,22 @@ function isSpam($i_secure_to, $i_time_stamp_int_array, $i_n_address_to, $i_n_add
   $b_n_calls = isSpamNumberOfCalls($i_time_stamp_int_array, $spam_criterion_n_send_calls_time, 
                 $spam_criterion_n_send_calls, $i_file_debug);
 
-  if ($b_n_calls || $i_n_address_to > $spam_criterion_n_address_to || $i_n_address_bcc > $spam_criterion_n_address_bcc)
+  if ($b_n_calls)
   {
-    $ret_b_spam = true;
+    $ret_b_array[0] = true;
   }
 
-  /* QQQQQQQQQQQQQQQQQQ
-  if ($ret_b_spam == true)
+  if ($i_n_address_to > $spam_criterion_n_address_to)
   {
-    debugAppend('isSpam Exit. Spam !!!!!!!!!!!!!!!!!!!!!!!!', $i_file_debug);
+    $ret_b_array[1] = true;
   }
-  else
-  {
-    debugAppend('isSpam Exit. No spam ', $i_file_debug);
-  }
-  QQQQQQQQQQQQQQQQQQQ */
 
-  return $ret_b_spam;
+  if ($i_n_address_bcc > $spam_criterion_n_address_bcc)
+  {
+    $ret_b_array[2] = true;
+  }
+
+  return $ret_b_array;
 
 } // isSpam
 
@@ -429,6 +449,33 @@ function sendEmail($i_email_subject, $i_email_message, $i_address_to, $i_address
 	}
 
 } // sendEmail
+
+// Send the email that the function was used for spam
+function sendEmailSpam($i_email_subject, $i_address_to, $i_address_from, $i_file_debug)
+{
+  if (strlen($i_address_to < 2))
+  {
+    return;
+  }
+
+	// Always set content-type when sending HTML email
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	// More headers
+	$headers .= 'From: ' . $i_address_from . "\r\n";
+	$headers .=  "\r\n";
+
+  $email_subject = "SPAM " . $i_email_subject;
+
+  $email_message = "SPAM was sent with UtilEmailSecure.php. Please refer to file " . $i_file_debug;
+
+	// Send the mail
+  mail($i_address_to, $email_subject, $email_message, $headers);
+
+  debugAppend('sendEmailSpam Exit. Secure email is sent to ' . $i_address_to, $i_file_debug);
+
+} // sendEmailSpam
 
 // Replace the HTML row ends <br> with ASCCI row ends \r\n
 function replaceHtmlRowEnds($i_email_message, $i_file_debug)
