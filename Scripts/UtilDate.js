@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2024-02-29
+// Date: 2024-12-20
 // Author: Gunnar Lidén
 
 // File content
@@ -105,6 +105,25 @@ class UtilDate
         return ret_iso_date_str;
     
     } // getIsoDateString
+
+    // Get the ISO reverse date string with points. Also standard in Switzerland
+    static getIsoReverseDateString(i_year, i_month, i_day)
+    {
+        var ret_iso_reverse_str = '';
+    
+        var month_formatted = UtilDate.getFormattedTenNumber(i_month);
+    
+        var day_formatted = UtilDate.getFormattedTenNumber(i_day);
+
+        ret_iso_reverse_str = ret_iso_reverse_str + day_formatted.toString() + '.';
+
+        ret_iso_reverse_str = ret_iso_reverse_str + month_formatted.toString() + '.';
+    
+        ret_iso_reverse_str = ret_iso_reverse_str + i_year.toString();
+        
+        return ret_iso_reverse_str;
+    
+    } // getIsoReverseDateString
 
     // Returns the date as an array from an ISO standard date string
     static getDateArrayFromIsoDateString(i_iso_date)
