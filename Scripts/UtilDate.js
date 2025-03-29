@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2024-12-20
+// Date: 2025-03-29
 // Author: Gunnar Lidén
 
 // File content
@@ -69,6 +69,33 @@ class UtilDate
         return days_difference;
 
     } // numberOfDaysToCurrentDate
+
+    // Calculates the number of days between two dates
+    static numberOfDaysBetweenTwoDates(i_year_one, i_month_one, i_day_one, i_year_two, i_month_two, i_day_two)
+    {
+       var compare_hours = 12;
+
+       var compare_minutes = 0;
+
+       var compare_seconds = 0;
+
+       // new Date(year, monthIndex, day, hours, minutes, seconds)
+       
+       var date_one = new Date(i_year_one, i_month_one - 1, i_day_one, 
+                               compare_hours, compare_minutes, compare_seconds);
+
+       var date_two = new Date(i_year_two, i_month_two - 1, i_day_two, 
+                               compare_hours, compare_minutes, compare_seconds);
+
+       var time_difference = date_two.getTime() - date_one.getTime();  
+ 
+       var days_difference_float = time_difference / (1000 * 60 * 60 * 24);   
+
+       var days_difference = Math.round(days_difference_float);
+
+       return days_difference;
+
+    } // numberOfDaysBetweenTwoDates 
 
     // Get the date string normally is used in Switzerland
     static getSwissDateString(i_year, i_month, i_day)
