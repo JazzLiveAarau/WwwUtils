@@ -1,5 +1,5 @@
 // File: UtilDate.js
-// Date: 2025-03-29
+// Date: 2025-03-30
 // Author: Gunnar Lidén
 
 // File content
@@ -70,32 +70,120 @@ class UtilDate
 
     } // numberOfDaysToCurrentDate
 
-    // Calculates the number of days between two dates
-    static numberOfDaysBetweenTwoDates(i_year_one, i_month_one, i_day_one, i_year_two, i_month_two, i_day_two)
+    // Returns an array of indices defining the date sorted array
+    static sortDateArray(i_sort_date_array)
     {
-       var compare_hours = 12;
+        var ret_array = [];
 
-       var compare_minutes = 0;
+        if (null == i_sort_date_array)
+        {
+            alert("UtilDate.sortDateArray Input array is null");
 
-       var compare_seconds = 0;
+            return null;
+        }
 
-       // new Date(year, monthIndex, day, hours, minutes, seconds)
-       
-       var date_one = new Date(i_year_one, i_month_one - 1, i_day_one, 
-                               compare_hours, compare_minutes, compare_seconds);
+        if (i_sort_date_array.length == 0)
+        {
+            alert("UtilDate.sortDateArray Input array is empty");
 
-       var date_two = new Date(i_year_two, i_month_two - 1, i_day_two, 
-                               compare_hours, compare_minutes, compare_seconds);
+            return ret_array;
+        }
 
-       var time_difference = date_two.getTime() - date_one.getTime();  
- 
-       var days_difference_float = time_difference / (1000 * 60 * 60 * 24);   
+        if (i_sort_date_array.length == 1)
+        {
+            ret_array[0] = 0;
 
-       var days_difference = Math.round(days_difference_float);
+            return ret_array;
+        }
 
-       return days_difference;
+        var n_records = i_sort_date_array.length;
 
-    } // numberOfDaysBetweenTwoDates 
+        var compare_date = new SortDate(1996, 1, 1);
+
+        var out_index = 0;
+
+        for (var index_rec = 0; index_rec < n_records; index_rec++)
+        {
+            var index_min = UtilDate.getMinSortDateArray(compare_date.getDate(), i_sort_date_array);
+
+            if (index_min >= 0)
+            {
+                ret_array[out_index] = index_min;
+
+                out_index = out_index + 1;
+
+                var change_rec =  i_sort_date_array[index_min];
+
+                change_rec.m_not_used = false;
+
+                i_sort_date_array[index_min] = change_rec;
+            }
+            else
+            {
+                // No alert because already in getMinSortDateArray
+                break;
+            } 
+
+        } // index_rec
+
+        return ret_array;
+
+    } // sortDateArray
+
+    // Returns the index for the minimum date record
+    static getMinSortDateArray(i_compare_date, i_sort_date_array)
+    {
+        var ret_min_index = -1;
+
+        var n_records = i_sort_date_array.length;
+
+        var min_days = 5000000;
+
+        for (var index_rec = 0; index_rec < n_records; index_rec++)
+        {
+            var current_rec = i_sort_date_array[index_rec];
+
+            if (current_rec.notUsed())
+            {
+                var current_date = current_rec.getDate();
+
+                var n_days = UtilDate.numberOfDaysBetweenTwoDates(i_compare_date, current_date);
+
+                if (n_days < min_days)
+                {
+                    min_days = n_days;
+
+                    ret_min_index = index_rec;
+                }
+
+            } // Record not used
+
+        } // index_rec
+
+        if (ret_min_index < 0)
+        {
+            alert("UtilDate.getMinSortDateArray Minimum not found");
+        }
+
+        return ret_min_index;
+
+    } // getMinSortDateArray
+
+   // Calculates the number of days between two dates
+   // From i_date_one to i_date_two
+   static numberOfDaysBetweenTwoDates(i_date_one, i_date_two)
+   {
+      // new Date(year, monthIndex, day, hours, minutes, seconds)
+
+      var time_difference = i_date_two.getTime() - i_date_one.getTime();  
+
+      var days_difference_float = time_difference / (1000 * 60 * 60 * 24);   
+
+      var days_difference = Math.round(days_difference_float);
+
+      return days_difference;
+
+   } // numberOfDaysBetweenTwoDates 
 
     // Get the date string normally is used in Switzerland
     static getSwissDateString(i_year, i_month, i_day)
@@ -420,3 +508,29 @@ class UtilDate
     } // getTimeStamp
 
 } // UtilDate
+
+// Class holding date data for sorting
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+class SortDate
+{
+    constructor(i_year, i_month, i_day)
+    {
+        // Hour=12, Minute=0, Second=0
+        this.m_date = new Date(i_year, i_month - 1, i_day, 12, 0, 0);
+
+        this.m_not_used = true;
+    }
+
+    // Returns the Date object
+    getDate()
+    {
+        return  this.m_date;
+    }
+
+    notUsed()
+    {
+        return this.m_not_used;
+
+    } // notUsed
+
+} // DateData
