@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2024-11-11
+// Date: 2025-04-06
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -645,7 +645,7 @@ function getIdDivElementUtilEmailResults()
 // /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
 function eventMergeFiles()
 {
-    var file_name = 'Utils_20241111.js';
+    var file_name = 'Utils_20250406.js';
 
     $.post
       ('PhpMerge/MergeFiles.php',
