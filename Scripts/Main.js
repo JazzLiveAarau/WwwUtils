@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2025-04-06
+// Date: 2025-04-19
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -26,6 +26,8 @@ var g_util_lock_object = null;
 // Main (onload) function for the test functions
 function initTestUtils()
 {
+    // testUtilSaveCallback();
+
     // testUtilEmailSecure()
 
     //testUtilEmail(); REMOVE later
@@ -53,6 +55,39 @@ function initTestUtils()
     // testUtilSearch();
 
 } // initTestControls
+
+// Test of UtilServer saveCallback
+function testUtilSaveCallback()
+{
+    var file_content_html = 'Test data for class UtilServer <br>' + 
+    'There is a directory for test data on the Server: <br>' +
+    '/www/UtilsTestData <br>' +
+    'There are subdirectories in this directory';
+
+    var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
+
+    // var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirSix/TestUtilServer.txt';
+
+    if (!UtilServer.execApplicationOnServer())
+    {
+        alert("testUtilSaveCallback Upload code to server and test there!");
+
+        return;
+    }
+
+    UtilServer.saveCallback(path_file_name, file_content_html, callbackTestFileSaved);  
+
+    // UtilServer.saveFileCallback(path_file_name, file_content_html, callbackTestFileSaved);  
+
+} // testUtilSaveCallback
+
+// Callback function for testUtilSaveCallback
+function callbackTestFileSaved()
+{
+    alert("testFileSaved Test file is saved");
+
+} // testFileSaved
+
 
 // Test of fullscreen functions
 function testFullScreen()
@@ -645,7 +680,7 @@ function getIdDivElementUtilEmailResults()
 // /www/JazzScripts/. This directory name is defined in file MergeFiles.php.
 function eventMergeFiles()
 {
-    var file_name = 'Utils_20250406.js';
+    var file_name = 'Utils_20250419.js';
 
     $.post
       ('PhpMerge/MergeFiles.php',
@@ -781,6 +816,17 @@ function eventCopyPhpFiles()
     var b_file_debug_append = UtilServer.copyFile(path_file_input, path_file_output);  
 
     if (!b_file_debug_append)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilSaveFile.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilSaveFile.php';
+
+    var b_save = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_save)
     {
         alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
     }

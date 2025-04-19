@@ -5,8 +5,8 @@
 // Saves a file on the server
 // ---------------------------
 //
-// This function is the same as UtilSaveFile.php except that there is a 
-// check and a failure retur if the file not exists
+// This function is the same as UtilServerSaveFile.php except that there is no 
+// check and failure if the file not existed
 //
 // Input data is the file name and the full content of the file
 // Please note that escape characters like \n not is allowed in the string
@@ -40,6 +40,7 @@
 // https://www.w3schools.com/jquery/jquery_ajax_get_post.asp
 // https://www.w3schools.com/jquery/jquery_get_started.asp
 // https://www.youtube.com/watch?v=jVAaxkbmCts
+// https://www.php.net/manual/de/function.dirname.php
 
 
 // Passed data from the calling function
@@ -54,17 +55,23 @@ fwrite($debug_file, "\r\n");
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-if (is_writable($file_name))
+$dir_name = dirname($file_name);
+
+fwrite($debug_file, "dir_name= \r\n");
+fwrite($debug_file, $dir_name);
+fwrite($debug_file, "\r\n");
+
+if (is_dir($dir_name))
 {
-    fwrite($debug_file, "File is writable \r\n");
+    fwrite($debug_file, "Directory exists \r\n");
 }
 else
 {
-    fwrite($debug_file, "File is NOT writable \r\n");
+    fwrite($debug_file, "Directory does NOT exist \r\n");
 
     fclose($debug_file);
 
-    exit("Unable_to_write_file_".error_get_last());
+    exit("Directory_is_missing_".error_get_last());
 }
 
 fclose($debug_file);

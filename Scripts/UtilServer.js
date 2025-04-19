@@ -1,5 +1,5 @@
 // File: UtilServer.js
-// Date: 2024-04-20
+// Date: 2025-04-19
 // Author: Gunnar Lidén
 
 // File content
@@ -111,6 +111,10 @@ class UtilServer
 
     // Save a file with the JQuery asynchronous function $.post and UtilServerSaveFile.php 
     // Input parameters
+	//
+	// This function is the same as SaveCallback except that there is a 
+	// check and failure if the file not exists
+	//
     // i_path_file_name: A relative or absolute URL for the created file
     // i_content_string: The content of the file. Row ends defined as \n are not allowed
     // i_callback_fctn:  The name of the callback function
@@ -146,17 +150,40 @@ class UtilServer
 
                     if (index_fail_open >= 0 || index_fail_write >= 0)
                     {
+
+                        if (index_fail_open >= 0 || index_fail_write >= 0)
+                        {
+                            var file_name = UtilServer.getFileName(rel_path_file_name);
+    
+                            var data_save_display = '';
+    
+                            if (index_fail_open >= 0)
+                            {
+                                data_save_display = 'Unable_to_open_file';
+                            }
+                            else if (index_fail_write >= 0)
+                            {
+                                data_save_display = 'File does not exist';
+                            }
+                            else
+                            {
+                                data_save_display = data_save.trim();
+                            }
+                        }
  
-                        UtilServer.saveFileError(rel_path_file_name, data_save, status_save);
+                        UtilServer.saveFileError(file_name, data_save_display, status_save);
+
+                        return;
                     }
 
-                    console.log(" UtilServer.saveFileCallback Filed is saved. data_save= " + data_save.trim());
+                    console.log(" UtilServer.saveFileCallback Saved file: " + rel_path_file_name);
+                    // console.log(" UtilServer.saveFileCallback Filed is saved. data_save= " + data_save.trim());
 
                     i_callback_fctn();
                 }
                 else
                 {
-                    UtilServer.saveFileError(rel_path_file_name, data_save, status_save);
+                    UtilServer.saveFileError(rel_path_file_name, data_save.trim(), status_save);
                 }  
 
             } // function
@@ -166,12 +193,93 @@ class UtilServer
        
     } // saveFileCallback
 
+    // Save a file with the JQuery asynchronous function $.post and UtilSaveFile.php 
+	//
+	// This function is the same as SaveFileCallback except that there is no 
+	// check and failure if the file not existed
+	//
+    // Input parameters
+    // i_path_file_name: A relative or absolute URL for the created file
+    // i_content_string: The content of the file. Row ends defined as \n are not allowed
+    // i_callback_fctn:  The name of the callback function
+    //
+    // For an error the function UtilServer.saveFileError will be called
+    static saveCallback(i_path_file_name, i_content_string, i_callback_fctn)
+    {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("saveCallback UtilSaveFile.php cannot be executed on the local (live) server");
+
+            return;
+        }
+
+        var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilSaveFile.php');
+    
+        $.post
+          (rel_path_file_php,
+            {
+              file_content: i_content_string,
+              file_name: rel_path_file_name
+            },
+            function(data_save, status_save)
+            {   
+                if (status_save == "success")
+                {
+                    // The PHP function returns succed for an opening failure. Therefore the returned
+                    // string Unable_to_open_file is used to handle this error.
+                    var index_fail_open = data_save.indexOf('Unable_to_open_file');
+                    var index_fail_dir = data_save.indexOf('Directory_is_missing');
+
+                    if (index_fail_open >= 0 || index_fail_dir >= 0)
+                    {
+                        var file_name = UtilServer.getFileName(rel_path_file_name);
+
+                        var data_save_display = '';
+
+                        if (index_fail_open >= 0)
+                        {
+                            data_save_display = 'Unable_to_open_file';
+                        }
+                        else if (index_fail_dir >= 0)
+                        {
+                            data_save_display = 'Directory_is_missing';
+                        }
+                        else
+                        {
+                            data_save_display = data_save.trim();
+                        }
+ 
+                        UtilServer.saveFileError(file_name, data_save_display, status_save);
+
+                        return;
+                    }
+
+                    console.log(" UtilServer.saveCallback Saved file: " + rel_path_file_name);
+                    // console.log(" UtilServer.saveCallback File is saved. data_save= " + data_save.trim());
+
+                    i_callback_fctn();
+                }
+                else
+                {
+                    UtilServer.saveFileError(rel_path_file_name, data_save.trim(), status_save);
+                }  
+
+            } // function
+        ); // post 
+
+        // console.log("saveCallback The function comes here, but without a return it won't come further");
+       
+    } // saveCallback
+
     // Failure saving file
-    static saveFileError(i_rel_path_file_name, i_data_save, i_status_save)
+    static saveFileError(i_file_name, i_data_save, i_status_save)
     {
         console.log(" UtilServer.saveFileCallback failure. data_save= " + i_data_save + ' status_save= ' + i_status_save);
+        console.log(" UtilServer.saveFileCallback failure. i_file_name= " + i_file_name);
 
-        alert("UtilServer.saveFileCallback Unable to create file " + i_rel_path_file_name + ' status_save= ' + i_status_save);
+        alert("UtilServer.saveFileCallback Unable to save file " + i_file_name + '. ' + i_data_save);
 
     } // saveFileError
 
