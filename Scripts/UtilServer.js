@@ -273,6 +273,91 @@ class UtilServer
        
     } // saveCallback
 
+
+
+
+    // Save a file with the JQuery asynchronous function $.post and UtilSaveDirFile.php 
+	// The directories (path) will be created if not existing
+	//
+    // Input parameters
+    // i_path_file_name: A relative or absolute URL for the created file
+    // i_content_string: The content of the file. Row ends defined as \n are not allowed
+    // i_callback_fctn:  The name of the callback function
+    //
+    // For an error the function UtilServer.saveFileError will be called
+    static saveDirFile(i_path_file_name, i_content_string, i_callback_fctn)
+    {
+        if (!UtilServer.execApplicationOnServer())
+        {
+            alert("saveDirFile UtilSaveFile.php cannot be executed on the local (live) server");
+
+            return;
+        }
+
+        var rel_path_file_name = UtilServer.replaceAbsoluteWithRelativePath(i_path_file_name);
+
+        var rel_path_file_php = UtilServer.getRelativeExecuteLevelPath('https://jazzliveaarau.ch/JazzScripts/Php/UtilSaveDirFile.php');
+    
+        $.post
+          (rel_path_file_php,
+            {
+              file_content: i_content_string,
+              file_name: rel_path_file_name
+            },
+            function(data_save, status_save)
+            {   
+                if (status_save == "success")
+                {
+                    // The PHP function returns succed for an opening failure. Therefore the returned
+                    // string Unable_to_open_file is used to handle this error.
+                    var index_fail_open = data_save.indexOf('Unable_to_open_file');
+                    
+
+                    if (index_fail_open >= 0)
+                    {
+                        var file_name = UtilServer.getFileName(rel_path_file_name);
+
+                        var data_save_display = '';
+
+                        if (index_fail_open >= 0)
+                        {
+                            data_save_display = 'Unable_to_open_file';
+                        }
+                        else
+                        {
+                            data_save_display = data_save.trim();
+                        }
+ 
+                        UtilServer.saveFileError(file_name, data_save_display, status_save);
+
+                        return;
+                    }
+
+                    console.log(" UtilServer.saveDirFile Saved file: " + rel_path_file_name);
+                    // console.log(" UtilServer.saveDirFile File is saved. data_save= " + data_save.trim());
+
+                    i_callback_fctn();
+                }
+                else
+                {
+                    UtilServer.saveFileError(rel_path_file_name, data_save.trim(), status_save);
+                }  
+
+            } // function
+        ); // post 
+
+        // console.log("saveDirFile The function comes here, but without a return it won't come further");
+       
+    } // saveDirFile
+
+
+
+
+
+
+
+
+
     // Failure saving file
     static saveFileError(i_file_name, i_data_save, i_status_save)
     {

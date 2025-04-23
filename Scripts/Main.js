@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2025-04-19
+// Date: 2025-04-23
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -64,9 +64,9 @@ function testUtilSaveCallback()
     '/www/UtilsTestData <br>' +
     'There are subdirectories in this directory';
 
-    var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
+    // var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirTwo/TestUtilServer.txt';
 
-    // var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirAlpha/DirSix/TestUtilServer.txt';
+    var path_file_name = 'https://jazzliveaarau.ch/WwwUtilsTestData/DirGamma/DirSix/TestUtilServer.txt';
 
     if (!UtilServer.execApplicationOnServer())
     {
@@ -75,7 +75,7 @@ function testUtilSaveCallback()
         return;
     }
 
-    UtilServer.saveCallback(path_file_name, file_content_html, callbackTestFileSaved);  
+    UtilServer.saveDirFile(path_file_name, file_content_html, callbackTestFileSaved);  
 
     // UtilServer.saveFileCallback(path_file_name, file_content_html, callbackTestFileSaved);  
 
@@ -823,6 +823,17 @@ function eventCopyPhpFiles()
     path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilSaveFile.php';
 
     path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilSaveFile.php';
+
+    var b_save = UtilServer.copyFile(path_file_input, path_file_output);  
+
+    if (!b_save)
+    {
+        alert("eventCopyPhpFiles UtilServer.copyFile failed for " + path_file_input);
+    }
+
+    path_file_input = 'https://jazzliveaarau.ch/WwwUtils/Php/UtilSaveDirFile.php';
+
+    path_file_output = 'https://jazzliveaarau.ch/JazzScripts/Php/UtilSaveDirFile.php';
 
     var b_save = UtilServer.copyFile(path_file_input, path_file_output);  
 
