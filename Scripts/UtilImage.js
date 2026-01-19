@@ -1,5 +1,5 @@
 // File: UtilImage.js
-// Date: 2025-04-07
+// Date: 2026-01-19
 // Author: Gunnar Lidén
 
 // File content
@@ -117,6 +117,83 @@ class UtilImage
         i_el_image_in_div.src = i_el_new_image.src; 
 
     } // callbackAfterLoad
+
+    // Returns a fitted (scaled) <img> element to a comtainer <div> element
+    // Returns null for failure
+    // i_image_el: An image <img> element 
+    // //          (Should have been fitted with UtilImage.fitImageToContainer)
+    // i_el_div_container: A container <div> element
+    static fitImageToContainer(i_image_el, i_el_div_container)
+    {
+        if (null == i_image_el)
+        {
+            alert("UtilImage.fitImageToContainer Input <img> is null");
+
+            return null;
+        }
+
+        if (null == i_el_div_container)
+        {
+            alert("UtilImage.fitImageToContainer Input container <div> is null");
+
+             return null;
+        }
+
+        var ret_image_el = i_image_el;
+
+        var scale_factor = UtilImage.getFitImageToDivScaleFactor(i_image_el, i_el_div_container);
+
+        console.log("UtilImage.fitImageToContainer scale_factor= " + scale_factor.toString());
+
+        var input_image_width = i_image_el.naturalWidth;
+    
+        var input_image_height = i_image_el.naturalHeight;
+
+        var ret_image_width_scaled = parseInt(input_image_width*scale_factor);
+
+        var ret_image_height_scaled = parseInt(input_image_height*scale_factor);
+
+        ret_image_el.style.width = ret_image_width_scaled.toString() + 'px';
+
+        ret_image_el.style.height = ret_image_height_scaled.toString() + 'px'
+    
+        return ret_image_el;
+
+    } // fitImageToContainer
+
+    // Fits (scales) an <img> element so that it fits to the <div> container,
+    // adds the <img> element to the <div container and returns the fitted
+    // (scaled) <img> element.
+    // Returns null for failure
+    // i_image_el: An image <img> element
+    // i_el_div_container: A container <div> element
+    static fitAddCenterImageInContainer(i_image_el, i_el_div_container)
+    {
+        if (null == i_image_el)
+        {
+            alert("UtilImage.fitImageToContainer Input <img> is null");
+
+            return null;
+        }
+
+        if (null == i_el_div_container)
+        {
+            alert("UtilImage.fitImageToContainer Input container <div> is null");
+
+             return null;
+        }
+
+        var fit_image_el = UtilImage.fitImageToContainer(i_image_el, i_el_div_container);
+
+        i_el_div_container.innerHTML = '';
+
+        i_el_div_container.appendChild(fit_image_el);
+
+        UtilImage.centerImage(fit_image_el, i_el_div_container);
+
+        return fit_image_el;
+       
+    } // fitAddCenterImageInContainer
 
     // Place the picture in the center. Vertically and horizontally
     // 1. Calculate vertical translation and transform the image
