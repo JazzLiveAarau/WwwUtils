@@ -35,7 +35,8 @@
 
 
 // Passed data from the calling function
-$file_name = $_POST['file_name'];
+$file_name      = $_POST['file_name'];
+$dir_name       = $_POST['dir_name'];
 
 $file_content = file_get_contents('../Scripts/UtilSearch.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilDate.js');
@@ -49,7 +50,7 @@ $file_content .= "\n" . file_get_contents('../Scripts/UtilLock.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilDevice.js');
 $file_content .= "\n" . file_get_contents('../Scripts/UtilQuery.js');
 
-$dir_name= '../../JazzScripts/';
+//QQ $dir_name= '../../JazzScripts/';
 
 $file_name_full = $dir_name . $file_name;
 
@@ -58,6 +59,7 @@ if(!$fp)
     die('Could not create / open js file for writing.');
 if(fwrite($fp, $file_content) === false)
     die('Could not write to js file.');
+fclose($fp);
 
 echo 'JavaScript files have been merged. ';
 echo $file_content;

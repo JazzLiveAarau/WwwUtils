@@ -1,5 +1,5 @@
 // File: Main.js
-// Date: 2026-01-19
+// Date: 2026-01-20
 // Author: Gunnar Lidén
 
 // Inhalt
@@ -682,10 +682,13 @@ function eventMergeFiles()
 {
     var file_name = 'Utils_20260119.js';
 
+    var dir_name = '../../JazzScripts/';
+
     $.post
       ('PhpMerge/MergeFiles.php',
         {
-          file_name: file_name
+          file_name: file_name,
+          dir_name: dir_name
         },
         function(data_save,status_save)
 		{
@@ -693,6 +696,39 @@ function eventMergeFiles()
             {
                 alert("JavaScript files merged to " + file_name + 
                 " saved to server directory /www/JavaScripts/.");
+
+                console.log(data_save);
+
+                copyLib(file_name);
+            }
+            else
+            {
+				alert("Execution of MergeControls.php failed");
+            }          
+        } // function
+
+      ); // post
+
+} // eventMergeFiles
+
+function copyLib(i_file_name)
+{
+   var file_name = i_file_name;
+
+    var dir_name = '../Libs/';
+
+    $.post
+      ('PhpMerge/MergeFiles.php',
+        {
+          file_name: file_name,
+          dir_name: dir_name
+        },
+        function(data_save,status_save)
+		{
+            if (status_save == "success")
+            {
+                alert("JavaScript files merged to " + file_name + 
+                " and saved as a copy (for GitHub and/or another applications) to server subdirectory ../Libs/.");
 
                 console.log(data_save);
             }
@@ -704,7 +740,8 @@ function eventMergeFiles()
 
       ); // post
 
-} // eventMergeFiles
+
+} // copyLib
 
 // Copy PHP files
 // Please not that UtilEmailSecure.php not is copied to JazzScripts/Php/
